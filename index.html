@@ -303,6 +303,14 @@
   .statrow{display:flex;justify-content:center;gap:24px 72px;flex-wrap:wrap;text-align:center}
   .stat b{display:block;font-family:var(--font-display);font-weight:600;font-size:46px;line-height:1.1;color:var(--ink)}
   .stat span{font-size:14.5px;color:#55524a}
+  /* stats: one row, two-line labels — user 05.09.2026
+     desktop: 4×210 + 3×72 = 1056 ≤ 1120 (.wrap content width), so the four
+     numbers never wrap; 210px makes every label break onto exactly 2 lines.
+     Below 960px the band keeps its previous wrapping behaviour (2×2 → stacked). */
+  @media (min-width:960px){
+    .statrow{flex-wrap:nowrap}
+    .stat{max-width:210px}
+  }
 
   /* ================= VOICES / TESTIMONIALS ================= */
   .voices{position:relative;isolation:isolate;overflow:hidden;padding:76px 0 82px;color:var(--cream)}
