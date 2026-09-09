@@ -418,7 +418,7 @@
   /* hero photo = community_fridge_banner-des.jpg (user-supplied 09.09.2026, same shoot as previous
      banner); identifiable face (Des Kay presumably) — Hugh to confirm for hero use; position
      65% 30% keeps the crate handoff right of the text block */
-  .fridgebanner{position:relative;background:url("assets/community_fridge_banner-des.jpg") 65% 30%/cover no-repeat;height:540px;display:flex;align-items:center}
+  .fridgebanner{position:relative;background:url("assets/community_fridge_banner-des.jpg") 65% 30%/cover no-repeat;height:600px;display:flex;align-items:center}
   .fridgebanner::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,28,26,.62) 0%,rgba(28,28,26,.40) 48%,rgba(28,28,26,.08) 78%)}
   .fridgebanner .wrap{width:100%;position:relative;z-index:2}
   .fb-stack{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
@@ -640,7 +640,7 @@
     /* the dropped search panel follows the narrower wrap padding */
     .hsearch-input{right:24px}
 
-    /* hero: the fixed 540px can't hold copy + widget once they stack */
+    /* hero: the fixed 600px can't hold copy + widget once they stack */
     .fridgebanner{height:auto;padding:48px 0}
     /* the 90deg wash is down to .05 by 72%, so full-width copy loses its scrim */
     .fridgebanner::before{background:linear-gradient(180deg,rgba(28,28,26,.62) 0%,rgba(28,28,26,.46) 50%,rgba(28,28,26,.62) 100%)}
@@ -898,12 +898,13 @@
           <b>Revive-all Repair Hub</b>
           <span class="tdesc">Free electrical repairs from our Revive-all team — you only pay for replacement parts.</span>
         </a>
-        <a class="tile t-blue c5" href="#" data-page="Prop Hire">
+        <!-- Hub rows unified 7+5 (left photos equal width) — user 09.09.2026 -->
+        <a class="tile t-blue c7" href="#" data-page="Prop Hire">
           <span class="tframe"><img class="tphoto" src="assets/tile-prophire.jpg" alt="Inside the warehouse — props, furniture and curiosities"></span>
           <b>Prop Hire</b>
           <span class="tdesc">Rent items you don't want to buy — our library of things, from furniture to one-off finds.</span>
         </a>
-        <a class="tile t-blue c7" href="#" data-page="Venue Hire">
+        <a class="tile t-blue c5" href="#" data-page="Venue Hire">
           <!-- tile-venue-hire.jpg = blog-archive workshop crop 04.09.2026, closes the Venue Hire
                photo duplicate open since 14.08; identifiable faces — Hugh to confirm consent before launch -->
           <span class="tframe"><img class="tphoto" src="assets/tile-venue-hire.jpg" alt="A community workshop in the hireable event space at the warehouse"></span>
@@ -927,12 +928,13 @@
           <b>Community Kitchen</b>
           <span class="tdesc">Our fully equipped 200&nbsp;sq&nbsp;ft kitchen hosts free cooking sessions like World on a Plate.</span>
         </a>
-        <a class="tile t-green c7" href="#" data-page="Community Fridge">
+        <!-- Food rows unified 5+7 (mirror of Hub's 7+5) — user 09.09.2026 -->
+        <a class="tile t-green c5" href="#" data-page="Community Fridge">
           <span class="tframe"><img class="tphoto" src="assets/tile-fridge.jpg" alt="Crates of rescued fresh food ready for the community fridge"></span>
           <b>Community Fridge</b>
           <span class="tdesc">Fresh surplus food rescued nightly from local retailers — free for anyone who needs it.</span>
         </a>
-        <a class="tile t-green c5" href="#" data-page="Square 1 Café">
+        <a class="tile t-green c7" href="#" data-page="Square 1 Café">
           <span class="tframe"><img class="tphoto" src="assets/tile-square1-pies.jpg" alt="Home-baked apple tarts at Square 1 Café"></span>
           <b>Square 1 Café</b>
           <span class="tdesc">A free, welcoming Saturday café at Kingston Environment Centre, New Malden — a warm space where everyone is welcome.</span>
@@ -1509,6 +1511,83 @@
     io.observe(el);   // anything already in view intersects on the first callback, so
                       // blocks in the first screen reveal immediately — no flash of hidden
   });
+})();
+
+// ---- impact numbers: count up when the stats band scrolls into view ----
+//      Pure enhancement on top of the static markup. The four <b> elements already hold
+//      their final values ("40+", "300&nbsp;m²") and NOTHING is written to them until the
+//      band is actually in view: with JS off, without IntersectionObserver, or under
+//      prefers-reduced-motion the numbers are ordinary text and can never be left at 0.
+//      The first zero is written inside the first animation frame, never before.
+//      The .stat blocks are also in the fade pass above — the two are independent and
+//      simply overlap (fade .6s, count 1.4s).
+//      No reduced-motion CSS is needed: the whole effect is gated in JS here.
+//      WIX: count-up needs Velo (a few lines) or a marketplace "Number Counter" widget —
+//      there is no native Wix animation for text counting. No-JS fallback = the static
+//      numbers exactly as authored.
+(function(){
+  if (!('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var row = document.querySelector('.statrow');
+  if (!row) return;
+
+  var DUR = 1400, STEP = 120;   // ms: length of one count, and the cascade between them
+
+  // Leading integer = the target, everything after it = a suffix carried verbatim
+  // ("+", " m²"). Each entry also keeps the ORIGINAL innerHTML: the closing frame
+  // restores that string instead of rebuilding it, so the end state is byte-identical to
+  // the authored markup — the NBSP in "300&nbsp;m²" included.
+  var items = [];
+  Array.prototype.forEach.call(row.querySelectorAll('.stat b'), function(el){
+    var m = /^(\d+)([\s\S]*)$/.exec(el.textContent);
+    if (!m) return;               // no leading integer: that one stays static
+    items.push({ el: el, target: +m[1], suffix: m[2], html: el.innerHTML, done: false });
+  });
+  if (!items.length) return;
+
+  function ease(t){ return 1 - Math.pow(1 - t, 3); }   // ease-out: fast start, soft landing
+
+  function run(){
+    var start = null;
+    items.forEach(function(it, i){
+      it.delay = i * STEP;
+      // Literata's figures are proportional, so a changing number would shuffle on its
+      // own centre line; lock the digits for the duration of the run only — the closing
+      // frame clears it again, leaving the static rendering untouched.
+      it.el.style.fontVariantNumeric = 'tabular-nums';
+    });
+    function frame(now){
+      if (start === null) start = now;
+      var live = false;
+      items.forEach(function(it){
+        if (it.done) return;
+        var t = (now - start - it.delay) / DUR;
+        if (t < 0){ live = true; return; }      // still waiting for its slot: untouched
+        if (t >= 1){
+          it.done = true;
+          it.el.innerHTML = it.html;            // exact original string back
+          it.el.removeAttribute('style');       // …and no leftover inline style
+          return;
+        }
+        live = true;
+        it.el.textContent = Math.round(ease(t) * it.target) + it.suffix;
+      });
+      if (live) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // threshold .3 — a third of the band is on screen before the count starts, so it is
+  // watched rather than half-missed; unobserve keeps it a one-shot.
+  var io = new IntersectionObserver(function(entries, obs){
+    entries.forEach(function(entry){
+      if (!entry.isIntersecting) return;
+      obs.unobserve(entry.target);
+      run();
+    });
+  }, { threshold: 0.3 });
+  io.observe(row);
 })();
 </script>
 
