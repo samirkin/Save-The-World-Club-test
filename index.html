@@ -94,6 +94,35 @@
   nav.main a.btn-donate,.btn-donate{font-weight:700;background:#FFB020;color:var(--ink);font-size:15px;padding:13px 30px;margin-left:6px;box-shadow:0 3px 10px rgba(255,176,32,.4)}
   .btn-donate:hover{background:#F09E00;color:var(--ink)}
 
+  /* header search — icon that expands an input. Neutral ink/blue only: the search is
+     not a money action, so it must never borrow the Donate amber. */
+  .hsearch{display:flex;align-items:center;gap:8px}
+  .hsearch-btn{background:none;border:0;cursor:pointer;padding:8px;color:var(--ink);display:flex;border-radius:6px;transition:color .15s}
+  .hsearch-btn:hover{color:var(--blue)}          /* same hover voice as the nav links */
+  .hsearch-input{width:180px;padding:9px 14px;border:1.5px solid var(--grey);border-radius:8px;background:#FFFEFB;font-family:var(--font-body);font-size:14px;color:var(--ink)}
+  .hsearch-input:focus{border-color:var(--blue)}
+  .hsearch-input::placeholder{color:#9a948a}
+
+  /* The icon + its gap add ~66px to the nav row. Tighten the row one step below
+     1000px so the nav still holds its single line down to ~890px — measured, the
+     same width at which it wrapped before the search was added; below that the
+     existing flex-wrap behaviour takes over as before. */
+  @media (max-width:1000px){
+    header.site .wrap{gap:24px}
+    nav.main{gap:0 22px}
+  }
+
+  /* Measured: below ~1180px the opened 180px field no longer fits on the nav line —
+     in flow it would wrap the row and grow the header by 18px on every open. So from
+     1180px down the field leaves the flow and drops under the whole header bar: the
+     nav never reflows and the panel can never sit on top of the Donate button.
+     Its horizontal inset follows the .wrap padding at each step (40 / 24 / 18). */
+  @media (max-width:1180px){
+    header.site .wrap{position:relative}
+    .hsearch{position:static}
+    .hsearch-input{position:absolute;top:100%;left:auto;right:40px;margin-top:8px;width:260px;z-index:60;box-shadow:0 6px 18px rgba(2,10,10,.14)}
+  }
+
   /* ================= UPCOMING EVENTS — static, Wix-Events-native =================
      No accordion (classic Wix cannot reproduce coordinated hover-expand without
      Velo). This layout maps 1:1 onto the official Wix Events app:
@@ -494,19 +523,59 @@
      position:sticky and so never leaves the viewport. No layout impact. */
   .totop-sentinel{position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none}
 
-  /* ================= PHOTO REVEAL ON SCROLL =================
-     Photos fade in once as they enter the viewport. Opacity ONLY — no transform:
-     the photos already carry a hover zoom on their inner element, and .sthumb uses
-     transform:translateY(-50%) for its centring, which a reveal transform would break.
-     Nothing here changes layout, so there is no shift when an element reveals.
+  /* ================= CONTENT REVEAL ON SCROLL =================
+     Whole content blocks fade in once as they enter the viewport — a card fades as
+     one unit (photo + title + description together), never word by word or part by
+     part. Opacity ONLY — no transform: the photos carry a hover zoom on their inner
+     element, .sthumb uses transform:translateY(-50%) for its centring, and a reveal
+     transform would fight both. Nothing here changes layout, so there is no shift
+     when an element reveals.
      Progressive enhancement: .rv (the hidden state) is added by JS at the bottom of
      the page and ONLY there — with JS off, or without IntersectionObserver, or under
-     prefers-reduced-motion, the class never appears and every photo is simply visible.
+     prefers-reduced-motion, the class never appears and the page renders complete.
      .rv.rv-in is (0,2,0) so the revealed state cannot lose to the hidden rule.
-     WIX: = Wix native "Fade In" on-scroll animation on each image element;
-     stagger = Wix's built-in delay field. */
+     WIX: = Wix native "Fade In" on-scroll animation, set on the strip or on the
+     individual element/box; stagger = Wix's built-in animation delay field. */
   .rv{opacity:0}
   .rv.rv-in{opacity:1;transition:opacity .6s ease}
+  /* `transition` is a shorthand: the cascade resolves it to ONE value per element,
+     it never merges two lists. .sidecard carries its own hover transition (box-shadow
+     + background), which .rv.rv-in (0,2,0) would otherwise replace — the hover plate
+     would then snap in on every revealed row. So the revealed row restates both, at
+     (0,3,0) and later in source, and wins outright. .sidecard is the only revealed
+     block with a transition of its own (the others declare theirs on a child:
+     .tframe .tphoto, .eb-photo, .sthumb::before), so nothing else needs this. */
+  .sidecard.rv.rv-in{transition:box-shadow .18s ease, background-color .18s ease, opacity .6s ease}
+
+  /* ================= HEADING WORD-RISE =================
+     A heading's words rise into place from below, one after the next, each starting
+     0.1s after the one before it. Every word sits in its own inline-block mask with
+     overflow:hidden; the mask is padded .22em at the foot and pulled back by the same
+     amount, so descenders (p, g, y) are not clipped while the box still ends on the
+     text baseline area and the word is hidden until it arrives.
+     SCOPE: the hero .fb-title (runs on load) and the four STANDALONE section headings
+     .wwd-intro h2, .wwd-title, .funders h2, .partners h2 (run on reveal, ≥900px only).
+     .ev-head / .v-head are rows — heading plus link — and keep the block fade above as
+     one unit; word-rising a heading inside a fading row would double the effect.
+     Progressive enhancement: the word markup and the classes below are built by JS and
+     nowhere else, so with JS off, without IntersectionObserver or under reduced motion
+     the headings are ordinary, fully visible text.
+     WIX: word-by-word rise = custom (Velo/embed needed); native Wix approximation =
+     the "Rise" text animation applied to the whole heading. */
+  .wr-word{display:inline-block;overflow:hidden;padding-bottom:.22em;margin-bottom:-.22em;vertical-align:bottom}
+  .wr-word > span{display:inline-block}
+  @keyframes word-rise{0%{transform:translateY(1.25em)}100%{transform:none}}
+  /* split and waiting (scroll headings between init and their reveal) */
+  .wr .wr-word > span{transform:translateY(1.25em)}
+  /* the run state is (0,3,1) — it cannot lose to the waiting rule — and `both` holds
+     the low start through the per-word delay and the final position afterwards */
+  .wr.wr-run .wr-word > span{transform:none;animation:word-rise .55s cubic-bezier(0.22,1,0.36,1) both}
+  /* hero only: .fb-title carries a 12px text-shadow for legibility over the photo, and
+     a mask that clips tight to the word would clip that halo into little rectangles.
+     The extra padding is cancelled by an identical negative margin, so the mask's
+     margin box — and therefore the line box and the hard line breaks — is exactly
+     as it was. The FOOT keeps the .22em of the base rule: that edge does the hiding. */
+  .fb-title .wr-word{padding:.34em .34em .22em;margin:-.34em -.34em -.22em}
 
   @media (prefers-reduced-motion: reduce){
     .btn,.plogo{transition:none}
@@ -514,6 +583,11 @@
        but if the preference is switched on after the reveal has started, the photos
        land visible and instantly. (0,2,0) + later in source, so it wins both ways. */
     .rv,.rv.rv-in{opacity:1;transition:none}
+    /* same belt and braces for the word-rise: the splitter refuses to run under reduced
+       motion, but if the preference is switched on after a heading has been split the
+       words sit where they belong, visible and still. The second selector matches the
+       (0,3,1) run rule above and, being later in source, switches it off too. */
+    .wr .wr-word > span,.wr.wr-run .wr-word > span{transform:none;animation:none}
     /* events: the hover zoom is dropped, the row hover plate stays but appears
        instantly. Only .sthumb::before is neutralised — .sthumb itself keeps its
        translateY(-50%) centring, which is layout, not motion. */
@@ -523,8 +597,9 @@
     .tile:hover .tframe .tphoto,.tile:focus-visible .tframe .tphoto,
     .lg-photo:hover .note-photo{transform:none}
     /* the row hover plate stays — a shadow is a state, not motion; only its
-       animation is dropped, so it appears instantly */
-    .sidecard{transition:none}
+       animation is dropped, so it appears instantly. The second selector matches the
+       (0,3,0) reveal override above and, being later in source, switches it off too. */
+    .sidecard,.sidecard.rv.rv-in{transition:none}
     .v-rail.is-rolling{overflow-x:auto}         /* no drift; the rail stays a row you can push */
     .v-rail.is-rolling .v-track{animation:none}
     /* the scroll-to-top jump (and every in-page anchor) lands instantly */
@@ -538,6 +613,9 @@
 
   @media (max-width:900px){
     .wrap{padding:0 24px}
+
+    /* the dropped search panel follows the narrower wrap padding */
+    .hsearch-input{right:24px}
 
     /* hero: the fixed 540px can't hold copy + widget once they stack */
     .fridgebanner{height:auto;padding:48px 0}
@@ -582,9 +660,15 @@
        be thrown away in the rebuild. */
     header.site .wrap{gap:16px;min-height:0}
     .logo img{height:48px}
-    nav.main{gap:0 18px}
+    /* 18px → 14px: measured, the search icon otherwise costs the wrapped nav a whole
+       extra row at 375px (header 144px → 185px). At 14px the phone header keeps the
+       same three rows and the same 144px it had before the search was added. */
+    nav.main{gap:0 14px}
     nav.main a{font-size:13.5px}
     nav.main a.btn-donate{font-size:13.5px;padding:11px 22px;margin-left:0}
+
+    /* on a phone the dropped panel takes the full column instead of 260px */
+    .hsearch-input{left:18px;right:18px;width:auto}
 
     /* hero */
     .fb-title{font-size:26px}
@@ -636,6 +720,14 @@
     <a href="#" data-page="Get involved — Volunteer · Donate goods · Food donations">Get involved</a>
     <a href="#" data-page="Contact us — map + contact form">Contact us</a>
     <a href="#" data-page="The founder — Des Kay">The founder</a>
+    <!-- = native Wix Site Search app (search bar element + results page); icon-expand is
+         optional in Wix — a permanently visible small search bar is the zero-effort
+         native form. Mockup only: with JS off the icon does nothing and the input
+         stays hidden; the real Wix element is a plain form and needs no script. -->
+    <div class="hsearch">
+      <button class="hsearch-btn" type="button" aria-label="Search the site" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="15.3" y1="15.3" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      <input class="hsearch-input" type="search" placeholder="Search…" aria-label="Search the site" hidden>
+    </div>
     <a class="btn btn-donate" href="#" data-page="Donate (call to action page)">Donate</a>
   </nav>
 </div></header>
@@ -822,7 +914,8 @@
         </a>
         <!-- deliberate negative space: the right 6 columns of this last row stay empty -->
         <a class="tile t-green c6" href="#" data-page="Surplus Food Event Catering (KICS)">
-          <span class="tframe"><img class="tphoto" src="assets/tile-kics-food.jpg" alt="Savoury pastries by KICS catering"></span>
+          <!-- user-supplied photo (donut.avif → tile-kics-donuts.jpg) 07.09.2026 -->
+          <span class="tframe"><img class="tphoto" src="assets/tile-kics-donuts.jpg" alt="Glazed mini donuts with rainbow sprinkles by KICS catering"></span>
           <b>Surplus Food Event Catering</b>
           <span class="tdesc">By our KICS team (Kingston Intercultural Catering Service) — every booking funds our community food projects.</span>
         </a>
@@ -1103,6 +1196,20 @@
   document.getElementById('nlform').addEventListener('submit', function(e){
     e.preventDefault(); show('Newsletter sign-up · mockup only');
   });
+
+  // ---- header search: icon expands the input; Enter reports the target page ----
+  var sBtn = document.querySelector('.hsearch-btn'), sIn = document.querySelector('.hsearch-input');
+  function sClose(){ sIn.hidden = true; sBtn.setAttribute('aria-expanded','false'); }
+  sBtn.addEventListener('mousedown', function(e){ if (!sIn.hidden) e.preventDefault(); });  // keep focus so the click can close
+  sBtn.addEventListener('click', function(){
+    if (sIn.hidden){ sIn.hidden = false; sBtn.setAttribute('aria-expanded','true'); sIn.focus(); }
+    else { sClose(); }
+  });
+  sIn.addEventListener('keydown', function(e){
+    if (e.key === 'Escape'){ sIn.value = ''; sClose(); sBtn.focus(); }
+    if (e.key === 'Enter'){ e.preventDefault(); if (sIn.value.trim()) show('Search results page — Wix Site Search opens here'); }
+  });
+  sIn.addEventListener('blur', function(){ if (!sIn.value.trim()) sClose(); });
 })();
 
 // ---- testimonials rail: a measured drift, not a carousel ----
@@ -1216,30 +1323,142 @@
   }).observe(sentinel);
 })();
 
-// ---- photo reveal on scroll: the photographs fade in as they come into view ----
-//      Scope is PHOTOS only — offer tiles, the events banner and its side thumbs,
-//      and the legacy note photo. Logos, avatars and the two background photos that
-//      carry text over them are deliberately left alone.
-//      Progressive enhancement: the hidden state (.rv) is added HERE and nowhere else,
-//      so with JS off — or without IntersectionObserver, or under prefers-reduced-motion
-//      — nothing is ever hidden and the page renders complete.
-//      WIX: = the native "Fade In" on-scroll animation on each image element;
-//      the stagger below = Wix's built-in animation delay field.
+// ---- headings: word-by-word rise ----
+//      Each word is wrapped in a mask and rises into place from below, 0.1s apart.
+//      SCOPE — headings only, and only where nothing else already animates them:
+//        · hero .fb-title — on load. It is above the fold and is deliberately outside
+//          the scroll-fade system, so there is nothing to double up with.
+//        · .wwd-intro h2, .wwd-title, .funders h2, .partners h2 — standalone section
+//          headings. They word-rise INSTEAD of the block fade: the splitter marks each
+//          one .wr and the fade pass below skips anything marked.
+//        · .ev-head and .v-head stay exactly as they were — those are rows (heading +
+//          "see all" link) and fade as one block, so their headings are NOT split.
+//      ≥900px ONLY for the four section headings: wrapping words in inline-blocks
+//      defeats text-wrap:balance, and "Working in partnership with" leans on balance to
+//      avoid a one-word last line in the 561–635px band. So the splitter reads
+//      matchMedia once, at init: narrower viewports never mark the headings .wr and
+//      they keep the plain block fade — nothing has to be added back. The hero has
+//      hard <br> line breaks doing that job and is split at every width.
+//      Progressive enhancement, same contract as the fade pass: the word markup and the
+//      low start state are created HERE and nowhere else, so with JS off, without
+//      IntersectionObserver, or under prefers-reduced-motion the headings are ordinary
+//      text — a heading can never be left hidden.
+//      WIX: word-by-word rise = custom (Velo/embed needed); native Wix approximation =
+//      the "Rise" text animation applied to the whole heading.
 (function(){
   if (!('IntersectionObserver' in window)) return;
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // .lg-photo (not the inner .note-photo): the legacy figure fades in as one piece,
-  // photo + overlay caption panel together
-  var els = document.querySelectorAll('.tframe, .event-banner, .sthumb, .lg-photo');
+  var STEP = 0.1;   // seconds between one word and the next
+
+  // Splits TEXT NODES only. The hero heading holds hard <br>s (three of them, four
+  // lines); they — and any other element child — are left untouched in place, so the
+  // line breaks survive exactly as authored.
+  // Returns the number of words wrapped (0 = nothing to animate).
+  function split(el){
+    var kids = Array.prototype.slice.call(el.childNodes), n = 0;
+    kids.forEach(function(node){
+      if (node.nodeType !== 3) return;                       // not text: leave it alone
+      var frag = document.createDocumentFragment();
+      // the capturing split keeps the whitespace runs as real text nodes, so word
+      // spacing and the natural wrap points between the masks are unchanged
+      node.nodeValue.split(/(\s+)/).forEach(function(part){
+        if (!part) return;
+        if (!/\S/.test(part)){ frag.appendChild(document.createTextNode(part)); return; }
+        var mask = document.createElement('span');
+        mask.className = 'wr-word';
+        var word = document.createElement('span');
+        word.textContent = part;
+        word.style.animationDelay = (n * STEP).toFixed(2) + 's';
+        n++;
+        mask.appendChild(word);
+        frag.appendChild(mask);
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+    return n;
+  }
+
+  // hero: split and start in the same task, so the low state is never painted on its own
+  var hero = document.querySelector('.fb-title');
+  if (hero && split(hero)) hero.classList.add('wr', 'wr-run');
+
+  if (!window.matchMedia || !window.matchMedia('(min-width:900px)').matches) return;
+
+  var heads = document.querySelectorAll(
+    '.wwd-intro h2, .wwd-title, .funders h2, .partners h2'
+  );
+  if (!heads.length) return;
+
+  // Same trigger depth as the block fade below, so a heading and the blocks around it
+  // come in on the same line and read as one movement.
+  var io = new IntersectionObserver(function(entries, obs){
+    entries.forEach(function(entry){
+      if (!entry.isIntersecting) return;
+      obs.unobserve(entry.target);
+      entry.target.classList.add('wr-run');
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -120px 0px' });
+
+  Array.prototype.forEach.call(heads, function(h){
+    if (!split(h)) return;
+    h.classList.add('wr');   // words down, and the fade pass below now skips this one
+    io.observe(h);           // anything already in view fires on the first callback
+  });
+})();
+
+// ---- content reveal on scroll: blocks fade in as they come into view ----
+//      Scope is WHOLE CONTENT BLOCKS, so a unit fades as one piece — an offer tile
+//      brings its photo, title and description in together, an event row brings its
+//      thumb and text, the legacy feature brings its text column and photo.
+//      Left alone on purpose: the header/nav, the hero (above the fold — fading it is
+//      noise, not polish), the footer, the toast and back-to-top controls, and the
+//      voices rail, which runs its own marquee.
+//      Progressive enhancement: the hidden state (.rv) is added HERE and nowhere else,
+//      so with JS off — or without IntersectionObserver, or under prefers-reduced-motion
+//      — nothing is ever hidden and the page renders complete.
+//      WIX: = the native "Fade In" on-scroll animation, applied to the strip or to the
+//      individual element/box; the stagger below = Wix's built-in animation delay field.
+(function(){
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Each selector is the OUTERMOST wrapper of its unit, never an inner photo:
+  // .tile (not .tframe) so the card's photo and text fade together, .sidecard (not
+  // .sthumb) for the whole event row, .wwd-note (not .lg-photo) for the legacy
+  // feature's text column and photo, .event-banner for the banner and its overlay.
+  // Every 42px section heading is in the list: .wwd-intro h2, .wwd-title, .ev-title (via
+  // its .ev-head row), .funders h2, .partners h2, .v-head h2 (via .v-head). The hero
+  // .fb-title and the footer headings stay out on purpose, and .lg-title rides along
+  // inside .wwd-note — so no heading is left behind while the block around it fades.
+  // The four standalone headings stay in the list, but the word-rise pass above claims
+  // them at ≥900px and marks them .wr; the filter then drops them here, so a heading
+  // either word-rises or block-fades, never both. Below 900px nothing is marked and the
+  // list is the original one.
+  var els = Array.prototype.filter.call(document.querySelectorAll(
+    '.tile, .event-banner, .sidecard, .ev-head, .wwd-intro h2, .wwd-sub, .wwd-note, ' +
+    '.wwd-title, .group-label, p.gdesc, .stat, .funders h2, .funderrow, ' +
+    '.partners h2, .logorow, .v-head'
+  ), function(el){ return !el.classList.contains('wr'); });
   if (!els.length) return;
 
-  var STEP = 70, CAP = 350;   // ms between photos that reveal together, and the ceiling
+  var STEP = 70, CAP = 350;   // ms between blocks that reveal together, and the ceiling
 
   function clearDelay(el){ el.style.transitionDelay = ''; }
 
+  // Trigger depth — threshold 0.15 means 15% of the block is enough to start it, and
+  // rootMargin shrinks the root's BOTTOM edge by 120px, so a block only counts as "in
+  // view" once it is ~120px inside the viewport. At the previous -40px a short block —
+  // a section heading — crossed the line while still on the very bottom edge and had
+  // finished its .6s fade before the eye reached it: the animation ran, but was never
+  // seen. 120px ≈ one heading's worth of lead-in, enough to watch the fade play without
+  // holding the content back. Safe at the foot of the page: the deepest revealed blocks
+  // (.partners h2, .logorow, .v-head) still have the voices rail and the whole footer
+  // below them — far more than 120px of remaining scroll — so they always reach the
+  // shrunk root and can never be left hidden.
+  // WIX: = the "offset / start animation" depth field on the native Fade In animation.
   var io = new IntersectionObserver(function(entries, obs){
-    // stagger only across the elements revealing in THIS callback, so a photo that
+    // stagger only across the elements revealing in THIS callback, so a block that
     // scrolls in on its own never waits
     var i = 0;
     entries.forEach(function(entry){
@@ -1258,12 +1477,12 @@
       });
       setTimeout(function(){ clearDelay(el); }, delay + 900);   // if transitionend never fires
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.15, rootMargin: '0px 0px -120px 0px' });
 
   Array.prototype.forEach.call(els, function(el){
     el.classList.add('rv');
     io.observe(el);   // anything already in view intersects on the first callback, so
-                      // above-the-fold photos reveal immediately — no flash of hidden
+                      // blocks in the first screen reveal immediately — no flash of hidden
   });
 })();
 </script>
