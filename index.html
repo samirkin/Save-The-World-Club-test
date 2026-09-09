@@ -306,9 +306,14 @@
   .gkey:hover{color:#00518d}
   .otiles{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:34px 22px}
   .tile{display:block;min-width:0;color:var(--ink)}
-  .tile .tphoto{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:6px;display:block}
-  /* the wide tiles of each row take the shallower crop, so the rhythm alternates */
-  .tile.c7 .tphoto{aspect-ratio:16/10}
+  /* uniform 320px photo height across all tiles — row alignment, user 09.09.2026
+     (was aspect 16/10 / 3/2 per span). With aspect ratios the photo height followed the
+     column span, so in a mixed span-7 + span-5 row the two photos were 402px and 302px
+     tall and the titles under them started on different lines. A fixed height makes every
+     tile in a row hand off to its title at the same y. Width still 100% of the span and
+     object-fit:cover re-crops, so the wide tiles simply take a wider slice of the same
+     photo. WIX: set the image element height to 320px and fit mode to "Fill". */
+  .tile .tphoto{width:100%;height:320px;object-fit:cover;border-radius:6px;display:block}
   /* hover zoom (03.09.2026) — same effect as the events banner: the photo scales
      inside a FIXED clipped frame, so the tile geometry never moves. An <img> can't
      clip its own transform, hence the .tframe wrapper. Radius moves to the frame. */
@@ -323,6 +328,19 @@
   .tile:is(:hover,:focus-visible) b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
   .t-blue:is(:hover,:focus-visible) b{text-decoration-color:var(--blue)}
   .t-green:is(:hover,:focus-visible) b{text-decoration-color:var(--green)}
+  /* tile titles get accent arrows (chosen over repeated "Read more" — user 09.09.2026);
+     WIX: append the arrow glyph to the title text, or add a small icon element after it.
+     content is declared twice on purpose: the plain string is the fallback for engines
+     without the alternative-text syntax (they drop that whole declaration), the
+     content:"→" / "" version gives the glyph an EMPTY alt text so screen readers
+     announce the title alone. No text-decoration guard is needed — the pseudo is an
+     inline-block, and a propagated underline is never drawn on atomic inline-level
+     boxes, so the hover underline stops at the end of the title text. Transform only,
+     so the nudge costs no layout; if a title wraps, the arrow rides the last word. */
+  .tile b::after{content:"→";content:"→" / "";display:inline-block;margin-left:8px;font-family:var(--font-body);transition:transform .18s ease}
+  .t-blue b::after{color:var(--blue)}
+  .t-green b::after{color:var(--green)}
+  .tile:is(:hover,:focus-visible) b::after{transform:translateX(4px)}
   .c5{grid-column:span 5} .c6{grid-column:span 6} .c7{grid-column:span 7}
 
   /* ================= STATS ================= */
@@ -397,7 +415,10 @@
 
   /* ================= DONATE BANNER ================= */
   /* two/three-line headline + top-anchor tried and reverted 04.09.2026 — v1 centred 4-line layout restored */
-  .fridgebanner{position:relative;background:url("assets/community_fridge_banner.jpg") 60% 28%/cover no-repeat;height:540px;display:flex;align-items:center}
+  /* hero photo = community_fridge_banner-des.jpg (user-supplied 09.09.2026, same shoot as previous
+     banner); identifiable face (Des Kay presumably) — Hugh to confirm for hero use; position
+     65% 30% keeps the crate handoff right of the text block */
+  .fridgebanner{position:relative;background:url("assets/community_fridge_banner-des.jpg") 65% 30%/cover no-repeat;height:540px;display:flex;align-items:center}
   .fridgebanner::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,28,26,.62) 0%,rgba(28,28,26,.40) 48%,rgba(28,28,26,.08) 78%)}
   .fridgebanner .wrap{width:100%;position:relative;z-index:2}
   .fb-stack{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
@@ -591,10 +612,12 @@
     /* events: the hover zoom is dropped, the row hover plate stays but appears
        instantly. Only .sthumb::before is neutralised — .sthumb itself keeps its
        translateY(-50%) centring, which is layout, not motion. */
-    .eb-photo,.sthumb::before,.tframe .tphoto,.lg-photo .note-photo{transition:none;transform:none}
+    .eb-photo,.sthumb::before,.tframe .tphoto,.lg-photo .note-photo,
+    .tile b::after{transition:none;transform:none}
     .event-banner:hover .eb-photo,.event-banner:focus-within .eb-photo,
     .sidecard:hover .sthumb::before,.sidecard:focus-visible .sthumb::before,
     .tile:hover .tframe .tphoto,.tile:focus-visible .tframe .tphoto,
+    .tile:is(:hover,:focus-visible) b::after,
     .lg-photo:hover .note-photo{transform:none}
     /* the row hover plate stays — a shadow is a state, not motion; only its
        animation is dropped, so it appears instantly. The second selector matches the
@@ -635,7 +658,9 @@
     /* offers: one tile per row — every group tempo collapses to a single column */
     .otiles{grid-template-columns:minmax(0,1fr);gap:30px}
     .c5,.c6,.c7{grid-column:auto}
-    .tile.c7 .tphoto{aspect-ratio:3/2}
+    /* the c7 aspect reset that used to live here is gone with the aspect ratios
+       (uniform 320px photo height, user 09.09.2026): the single column inherits the
+       same 320px, which also fixes the old 558px-tall stacked photos. */
 
     /* legacy feature: one column — copy first, photo (with its caption panel) below */
     .wwd-note{grid-template-columns:minmax(0,1fr);gap:28px}
@@ -924,7 +949,7 @@
 
     <div class="ogroup">
       <h3 class="group-label">Environment</h3>
-      <p class="gdesc">Our Environment projects are all about <a class="gkey" href="#" data-page="Environment — landing page (SEO key phrase link)">Orchard and Gardening in Kingston</a>. We grow food, skills and friendships.</p>
+      <p class="gdesc">Our Environment projects are all about <a class="gkey" href="#" data-page="Environment — landing page (SEO key phrase link)">Orchard and Gardening in Kingston</a>.<br>We grow food, skills and friendships.</p>
       <div class="otiles">
         <a class="tile t-green c6" href="#" data-page="Kingston Orchard">
           <span class="tframe"><img class="tphoto" src="assets/tile-orchard.jpg" alt="Young trees and a spade at the Kingston Orchard"></span>
@@ -949,7 +974,7 @@
           <span class="tdesc">300&nbsp;m² of community-made mosaics across Kingston — join a workshop or walk the mosaic trail.</span>
         </a>
         <a class="tile t-blue c5" href="#" data-page="Music Rehearsal Studio">
-          <!-- tile photo = hero-3-jam.jpg (uncropped landscape source, fits the 3/2 frame);
+          <!-- tile photo = hero-3-jam.jpg (uncropped landscape source, fits the 320px frame);
                identifiable faces — Hugh to confirm consent before launch -->
           <span class="tframe"><img class="tphoto" src="assets/hero-3-jam.jpg" alt="People playing guitars at the warehouse jam session"></span>
           <b>Music Rehearsal Studio</b>
