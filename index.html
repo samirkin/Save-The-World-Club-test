@@ -5,7 +5,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<!-- OG/social meta — mockup uses relative image path; on Wix the og:image URL must be ABSOLUTE (https://www.savetheworldclub.org/...) and is set via Wix SEO settings per page -->
+<!-- OG/social meta — mockup uses relative image path; on Wix the og:image URL must be ABSOLUTE and set via Wix SEO settings -->
 <meta property="og:site_name" content="Save The World Club">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Save The World Club — Kingston community charity">
@@ -16,724 +16,686 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
-<title>Save The World Club — Homepage Mockup v1 (hybrid events+offer)</title>
-<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Lora:wght@600;700&family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700&family=Poppins:wght@600;700&family=Literata:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<!-- Fontshare — Cabinet Grotesk trial; not on Google Fonts; on Wix it would need woff2 upload (Wix Premium custom fonts) -->
-<!-- unused since Lora final — remove at hand-off -->
-<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@600,700,1&display=swap" rel="stylesheet">
+<title>Save The World Club — Homepage Mockup v1 — Style A2 · Studio Dark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=League+Spartan:wght@700;900&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<!-- STYLE VARIANT A2 — "STUDIO DARK" -------------------------------------
+     Restyle of the homepage mockup. Copy, section order, markup and JavaScript
+     are byte-identical to the previous A2 file (and to index.html apart from two
+     presentational <span>s inside .fb-title, class hw-g / hw-b). Those two spans
+     are kept in the markup but NEUTRALISED here: colour:inherit, no decoration —
+     nothing in this skin colours single words.
+
+     ART DIRECTION — a studio-portfolio rhythm (dark bands + tight uppercase
+     micro-type + one grotesque at an extreme scale range), adapted to the STWC
+     design system:
+     · ONE typeface: Inter, weights 400 / 500 / 700 / 900. No serif, no second
+       family, no italics anywhere.
+     · NEGATIVE tracking everywhere — the signature move. Display -.03em,
+       section headings -.04em, micro-labels -.02em. Micro-labels are UPPERCASE
+       but TIGHT, never letter-spaced out.
+     · Extreme scale range: 10–11px uppercase labels against a 64px display and
+       96px impact numerals, with a 22–24px light intro paragraph between them.
+     · BAND RHYTHM is the structure. Five full-width Rich Black bands cut the
+       Light Grey page: header, upcoming events, impact numbers, voices, footer.
+       Everything else sits on Light Grey. No rules, no shadows, no decorative
+       pseudo-element graphics.
+     · Geometry: border-radius 0 on EVERYTHING — buttons, inputs, amount chips,
+       social chips, avatars, the toast. Nothing is rounded.
+     · Cards are tone-on-tone: the same background as the band they sit on, plus
+       a 1px hairline border (10% ink on light, 12% white on dark).
+     · Buttons are transparent rectangles with a 1px 30% border and 11px tight
+       uppercase text; hover fills them (ink on light, white on dark).
+     · CSS counters number the four offer groups 01–04 next to the existing
+       green/blue group squares — presentational only, no markup added.
+
+     COLOUR
+     · page Light Grey #EFF0F2, ink Rich Black #020a0a,
+       five inverted Rich Black bands with white text.
+     · Accent = brand blue, used sparingly: #0195FE for NON-TEXT markers and
+       hovers only (nav underline, tile border on hover) — it measures 2.7:1 on
+       the page and must never carry text; #005FA3 for blue TEXT on light;
+       #7CC7FF for blue text on the dark bands. Green #21BD52 appears only on
+       the four group squares (set inline in the markup).
+     · Secondary text #4A5252 on light, #9aa4a4 for labels on the dark bands,
+       #cdd3d3 for body copy on the dark bands.
+
+     MONEY COLOUR — READ THIS: money controls (nav .btn-donate, .btn-donate2,
+     .btn-donate2 hero CTA) are the money-orange (see --amber) with Rich
+     Black text. Client-confirmed canonical rule 2026-09-03: Donate is ALWAYS
+     amber, and amber appears nowhere else on the page. The newsletter "Sign up"
+     is NOT a money action, so it is a link-blue rectangle.
+
+     CONTRAST (measured, WCAG 2.1):
+     · ink #020a0a on Light Grey #EFF0F2 ........... 17.5:1
+     · #4A5252 secondary text on Light Grey ........ 7.0:1
+     · #005FA3 links on Light Grey ................. 5.8:1
+     · white on ink (5 dark bands) ................. 20.0:1
+     · #cdd3d3 body copy on ink .................... 13.4:1
+     · #d6dada banner copy over the photo gradient . 14.5:1 (≥12:1 at the caption)
+     · #9aa4a4 11px labels + legal on ink .......... 7.8:1  (weight 500)
+     · #7CC7FF links on ink ........................ 10.9:1
+     · #8b9a9c (inline colour in the markup) on ink  6.9:1
+     · #9aa4a4 placeholder on the #101717 input .... 7.1:1
+     · ink on amber #FFB020 ........................ 10.9:1
+     · white on the #005FA3 Sign up rectangle ...... 6.6:1
+     · #0195FE on Light Grey ....................... 2.7:1 → NON-TEXT ONLY
+     · #21BD52 group squares on Light Grey ......... 2.3:1 → NON-TEXT ONLY
+     All 10–11px type is ≥7:1 and weight ≥400.
+
+     WIX EDITOR HAND-OFF
+     · The whole skin is strips + type + whitespace, all native in the classic
+       Editor: full-width black strips, Light Grey strips, text boxes with
+       Inter weights, and 1px-bordered containers. Nothing needs Velo.
+     · The header logo is inverted here with a CSS filter because the mockup
+       only ships the colour SVG. IN WIX USE THE WHITE ASSET —
+       assets/stwc-logo-white.svg — in the header as well as the footer. Do not
+       reproduce the filter.
+     · Buttons are rectangles: Wix corner radius 0, transparent fill, 1px border
+       at 30% of the text colour, 11px uppercase label; hover = solid fill.
+       Money buttons: amber fill, black text, no border, radius 0.
+     · The 01–04 group numbers are CSS counters here. In Wix simply type them
+       into the group heading text box ("01  Our Hub").
+     · Events are STATIC and map onto the official Wix Events app: banner =
+       featured-event widget (auto next event, 4:5 image frame for the
+       Instagram-sourced photos); side column = event list widget, side-by-side
+       layout (4:5 thumb + date + title), placed on a black strip.
+     · Amber #FFB020 is reserved for the Donate button and the donation widget.
+       Do not restyle it in the Editor, even if a template offers a theme colour.
+     · Funder and partner logos use mix-blend-mode: multiply, which only works
+       on a light background — both bands are deliberately Light Grey. If a
+       logo band is ever moved onto black, swap in white-on-transparent PNGs.
+     · Offer tiles are a photo with a caption underneath inside a 1px-bordered
+       box. The white circle icons of the earlier skin stay in the markup
+       (<span class="ico">) but render nothing.
+     · Hover states are a colour swap plus the built-in Wix "zoom on hover"
+       image effect, switched off under prefers-reduced-motion.
+     · Inter is in the Wix font picker; enable weights 400, 500, 700 and 900.
+       No italic is used anywhere.
+-->
 <style>
+  /* ============================================================
+     STYLE A2 · STUDIO DARK (2026-09-07)
+     One grotesque (Inter 400/500/700/900), negative tracking,
+     Light Grey page cut by five full-width Rich Black bands,
+     zero border-radius, tone-on-tone bordered cards, amber money.
+     ============================================================ */
   :root{
-    --blue:#0195FE; --blue-link:#005FA3; --green:#21BD52; --ink:#2C2C2C; --grey:#EAE3D6;
-    --cream:#FFFCF6; --beige:#F7F2E9; --beige2:#F0EADF; --tan:#EEDDC9;
-    /* page ground trials, in order: var(--cream) -> #F5F1E7 (04.09.2026)
-       -> #F4F0E6 -> #F7F4EC (both tried 05.09.2026, reverted)
-       -> #F5F1E7 (current, re-confirmed).
-       --cream stays untouched: it is also the text colour on dark grounds and the fill
-       of the light cards. */
-    --page:#F5F1E7;
-    /* sand = the events band ground (a real step down from the page ground).
-       Re-darkened with the trial: on #F5F1E7 the old #F2EADB was only 1.06:1, so the
-       band disappeared; #ECE2C9 restored the step the band had on cream (1.17:1).
-       Now #E9E1D2: events band tone from user swatch 04.09.2026 (sampled estimate —
-       exact hex may follow). Warmer-neutral greige, much less yellow than the old sand
-       (C* 8.3 vs 13.5) at the same lightness, so the step off the page ground holds:
-       1.15:1 vs the current #F5F1E7 --page. */
-    --sand:#E9E1D2;
-    /* heading font experiment 03.09.2026 (user request), in order:
-         Literata (original)  ->  'Literata',Georgia,serif
-         Plus Jakarta Sans    ->  'Plus Jakarta Sans',Arial,sans-serif
-         Playfair Display     ->  'Playfair Display',Georgia,serif
-         Lora                 ->  'Lora',Georgia,serif
-         Playfair Display     ->  'Playfair Display',Georgia,serif (re-selected once)
-         Tenor Sans           ->  'Tenor Sans',Arial,sans-serif
-         Lora                 ->  CHOSEN by the user, 03.09.2026
-                              ->  Cabinet Grotesk (variable)
-                                  'Cabinet Grotesk',Arial,sans-serif — Fontshare (ITF),
-                                  loaded from a separate <link>, NOT Google Fonts.
-                                  NB: the family has NO static 600 (statics are 100-500,
-                                  700-900). The ",1" in the Fontshare link loads the
-                                  VARIABLE face (weight 100-900), which is what renders
-                                  headings at a genuine 600 — drop it and 600 falls back
-                                  to the 700 static, i.e. noticeably heavier.
-                              ->  Literata (re-trial — the original family, but at
-                                  600 vs v1's 400) -> 'Literata',Georgia,serif
-                              ->  Lora — FINAL user pick, 03.09.2026
-                                  'Lora',Georgia,serif at 600 / -0.01em.
-       All Google families stay in the Google Fonts link, and the Fontshare link is kept
-       too, so revisiting any of the trials is a one-line change to this token.
-       Both are due a cleanup at hand-off — see the note by the Fontshare link. */
-    --font-display:'Lora',Georgia,serif; --font-body:'Inter',Arial,sans-serif;
+    --paper:#EFF0F2;                            /* STWC Light Grey — the page */
+    --ink:#020a0a;                              /* Rich Black — ink and the dark bands */
+    --blue:#0033CC;                             /* transform9 ultramarine — markers + text on LIGHT (10.4:1) */
+    --green:#A2FA8E;                            /* transform9 neon mint — accents on the DARK bands (15:1 on ink) */
+    --blue-link:#0033CC;                        /* ultramarine text on light */
+    --blue-d:#A2FA8E;                           /* mint text/accents on the dark bands */
+    --muted:#4A5252;                            /* secondary text on light */
+    --muted-d:#9aa4a4;                          /* labels + legal on the dark bands */
+    --body-d:#cdd3d3;                           /* body copy on the dark bands */
+    --line:rgba(2,10,10,.1);                    /* card hairline on light */
+    --line-s:rgba(2,10,10,.3);                  /* button border on light */
+    --line-d:rgba(255,255,255,.12);             /* card hairline on dark */
+    --line-ds:rgba(255,255,255,.3);             /* button border on dark */
+    --amber:#FFB020; --amber-h:#F09E00;         /* money only — canonical amber (orange experiment reverted 07.09) */
+    --font:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;
+    --font-display:'League Spartan',var(--font);  /* display experiment 09.09 (was Inter) */
+    --font-body:var(--font);
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--page);font-size:17px;line-height:1.6}
-  /* weight 600 + slight negative tracking, set with the heading font change
-     (03.09.2026): the original 400 was tuned for Literata and reads weak in Lora. */
-  h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;line-height:1.15;margin:0}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--paper);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:var(--font-display);font-weight:700;line-height:1.04;letter-spacing:-.04em;margin:0}
   a{color:var(--blue-link);text-decoration:none}
-  a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--blue-link);outline-offset:2px}
   img{max-width:100%}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-  .skip{position:fixed;top:-60px;left:16px;z-index:200;background:var(--ink);color:var(--cream);font-weight:700;font-size:14px;padding:10px 18px;border-radius:0 0 8px 8px;transition:top .15s}
+  .skip{position:fixed;top:-60px;left:16px;z-index:200;background:var(--ink);color:#fff;font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:-.02em;padding:12px 20px;border-radius:0;transition:top .15s}
   .skip:focus{top:0}
-  .wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px}
 
-  /* ================= HEADER ================= */
-  /* frosted bar matches the page ground (--page) so the sticky header dissolves into it */
-  header.site{position:sticky;top:0;z-index:50;background:rgba(245,241,231,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--grey)}
-  header.site .wrap{display:flex;align-items:center;gap:36px;min-height:92px;padding-top:8px;padding-bottom:8px}
+  /* ---- the two type extremes -------------------------------------------- */
+  /* section headings: 36–44px, 700, UPPERCASE, tightly tracked */
+  .wwd-intro h2,.funders h2,.partners h2,.ev-title,.wwd-title,.v-head h2{
+    font-family:var(--font-display);font-weight:700;font-size:clamp(30px,3.2vw,44px);
+    line-height:1.0;letter-spacing:-.04em;text-transform:uppercase}
+  /* micro-labels: 11px UPPERCASE, TIGHT tracking — the signature, not spaced out */
+  .sec-eyebrow,.nl-label,.stat span,.event-banner .chip,.sidecard .sdate,
+  .btn,nav.main a{
+    font-family:var(--font-body);font-weight:500;text-transform:uppercase;
+    font-size:11px;letter-spacing:-.02em;line-height:1.5}
+
+  /* ================= 1 · HEADER — DARK BAND ================= */
+  /* white backing under the logo (user 07.09) — the colour logo returns unfiltered */
+  header.site{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+  header.site .wrap{display:flex;align-items:center;gap:36px;min-height:88px;padding-top:8px;padding-bottom:8px}
   .logo{flex-shrink:0}
-  .logo img{height:68px;max-width:none;display:block}
-  nav.main{display:flex;flex-wrap:wrap;gap:0 30px;margin-left:auto;flex:1;min-width:0;align-items:center;justify-content:flex-end}
-  nav.main a{font-size:15px;font-weight:600;color:var(--ink);padding:10px 2px;position:relative}
-  nav.main a:not(.btn-donate)::after{content:"";position:absolute;left:0;right:100%;bottom:4px;height:3px;background:var(--blue);border-radius:2px;transition:right .22s}
+  /* MOCKUP ONLY: the colour SVG inverted to white. In Wix place stwc-logo-white.svg. */
+  .logo img{height:60px;max-width:none;display:block}
+  nav.main{display:flex;flex-wrap:wrap;gap:0 26px;margin-left:auto;flex:1;min-width:0;align-items:center;justify-content:flex-end}
+  /* header nav a touch larger than the 11px micro-labels (user 09.09) */
+  nav.main a{color:var(--ink);padding:10px 2px;position:relative;font-size:13px}
+  /* the accent in its marker role: a blue rule, never blue text */
+  nav.main a:not(.btn-donate)::after{content:"";position:absolute;left:0;right:100%;bottom:2px;height:2px;background:var(--blue);transition:right .18s}
   nav.main a:not(.btn-donate):hover::after{right:0}
-  nav.main a:hover{color:var(--blue)}
-  .btn{display:inline-block;font-family:var(--font-body);font-weight:600;border-radius:10px;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s,background .15s}
-  .btn:hover{transform:translateY(-1px)}
-  nav.main a.btn-donate,.btn-donate{font-weight:700;background:#FFB020;color:var(--ink);font-size:15px;padding:13px 30px;margin-left:6px;box-shadow:0 3px 10px rgba(255,176,32,.4)}
-  .btn-donate:hover{background:#F09E00;color:var(--ink)}
+  header.site a:focus-visible{outline-color:var(--blue-d)}
 
-  /* header search — icon that expands an input. Neutral ink/blue only: the search is
-     not a money action, so it must never borrow the Donate amber. */
-  .hsearch{display:flex;align-items:center;gap:8px}
-  .hsearch-btn{background:none;border:0;cursor:pointer;padding:8px;color:var(--ink);display:flex;border-radius:6px;transition:color .15s}
-  .hsearch-btn:hover{color:var(--blue)}          /* same hover voice as the nav links */
-  .hsearch-input{width:180px;padding:9px 14px;border:1.5px solid var(--grey);border-radius:8px;background:#FFFEFB;font-family:var(--font-body);font-size:14px;color:var(--ink)}
-  .hsearch-input:focus{border-color:var(--blue)}
-  .hsearch-input::placeholder{color:#9a948a}
+  /* transparent rectangles, 1px 30% border, filled on hover */
+  .btn{display:inline-block;border-radius:0;cursor:pointer;
+    background:transparent;color:var(--ink);border:1px solid var(--line-s);padding:16px 32px;
+    transition:background .15s,color .15s,border-color .15s}
+  .btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+  /* MONEY: always amber, always a rectangle */
+  nav.main a.btn-donate,.btn-donate{background:var(--amber);border:1px solid var(--amber);color:var(--ink);font-weight:700;padding:14px 28px;margin-left:6px}
+  /* header site search — compact field with an inline magnifier icon */
+  .nav-search{position:relative;display:flex;align-items:center;margin-left:6px}
+  .nav-search input{width:150px;padding:11px 12px 11px 34px;border:1px solid var(--line-s);border-radius:3px;background:#fff;
+    font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:-.01em;color:var(--ink)}
+  .nav-search input::placeholder{color:var(--muted);text-transform:uppercase;font-size:10px;letter-spacing:-.02em}
+  .nav-search .ns-ico{position:absolute;left:10px;width:16px;height:16px;fill:var(--muted);pointer-events:none}
+  .nav-search input:focus-visible{outline:3px solid var(--blue-link);outline-offset:1px}
+  .btn-donate:hover{background:var(--amber-h);border-color:var(--amber-h);color:var(--ink)}
 
-  /* The icon + its gap add ~66px to the nav row. Tighten the row one step below
-     1000px so the nav still holds its single line down to ~890px — measured, the
-     same width at which it wrapped before the search was added; below that the
-     existing flex-wrap behaviour takes over as before. */
-  @media (max-width:1000px){
-    header.site .wrap{gap:24px}
-    nav.main{gap:0 22px}
-  }
-
-  /* Measured: below ~1180px the opened 180px field no longer fits on the nav line —
-     in flow it would wrap the row and grow the header by 18px on every open. So from
-     1180px down the field leaves the flow and drops under the whole header bar: the
-     nav never reflows and the panel can never sit on top of the Donate button.
-     Its horizontal inset follows the .wrap padding at each step (40 / 24 / 18). */
-  @media (max-width:1180px){
-    header.site .wrap{position:relative}
-    .hsearch{position:static}
-    .hsearch-input{position:absolute;top:100%;left:auto;right:40px;margin-top:8px;width:260px;z-index:60;box-shadow:0 6px 18px rgba(2,10,10,.14)}
-  }
-
-  /* ================= UPCOMING EVENTS — static, Wix-Events-native =================
-     No accordion (classic Wix cannot reproduce coordinated hover-expand without
-     Velo). This layout maps 1:1 onto the official Wix Events app:
-       · banner  = "featured event" widget set to auto-show the NEXT upcoming
-         event, image frame 4:5 (event images come from Instagram posts at 4:5,
-         so the photo shows uncropped);
-       · side column = event list widget, "side by side" layout (4:5 thumbnail +
-         date + title per row), upcoming-only so past events drop off automatically.
-     Hover feedback = the Wix Events widget's own native image hover zoom (the photo
-     scales inside a fixed frame, transform .5s — the effect the live /events page
-     already runs today), plus an "invisible card" row hover: the row reveals itself
-     as a lifted plate (shadow only, no contour, no lift/transform). Both are native
-     classic-Wix hover states — image zoom on the gallery/list widget and a container
-     hover state with a shadow and no border. No Velo needed. */
-  /* the events band sits on sand so it separates from the cream sections above and
-     below; the section is a body-wide block, so the ground runs edge to edge on its own */
-  .events-hero{padding:64px 0 72px;background:var(--sand)}
-  /* heading left, "All events →" hard right on the same baseline — the same head row
-     the voices section uses (.v-head). The 26px that used to sit under the link is now
-     carried by the row itself, so the gap down to the banner is unchanged. */
-  .ev-head{display:flex;align-items:baseline;justify-content:space-between;gap:28px;margin-bottom:26px}
-  .ev-title{font-size:42px}   /* SYNC: section-heading size, see the .wwd-intro h2 rule */
-  .ev-all{flex-shrink:0;font-family:var(--font-body);font-weight:700;font-size:14.5px;color:var(--blue-link);text-decoration:underline;text-underline-offset:3px}
-  .ev-all:hover{color:#00518d}
-  /* 13px (was 12): the chip is a date, not an eyebrow, so it sits just under the
-     14px date voice of the side rows — the pill has to stay one line inside the
-     448px banner, which is what keeps it off the 14px step. Padding unchanged:
-     7px on 13px text is .54em, still inside the .5–.6em pill band. */
-  .chip{display:inline-block;font-family:var(--font-body);font-weight:600;text-transform:uppercase;font-size:13px;letter-spacing:.08em;padding:7px 16px;border-radius:8px;margin-bottom:16px}
-  .events-split{display:grid;grid-template-columns:448px minmax(0,1fr);gap:22px;align-items:stretch}
-  .event-side{display:flex;flex-direction:column;min-width:0}
-  /* featured banner: fixed 4:5 frame (448×560) */
-  .event-banner{position:relative;width:448px;height:560px;border-radius:6px;overflow:hidden;background:var(--ink);color:var(--cream);display:flex;align-items:flex-end}
-  /* banner back to event-studio.jpg per user 04.09.2026 */
-  .event-banner .eb-photo{position:absolute;inset:0;width:100%;height:100%;background:url("assets/event-studio.jpg") center/cover no-repeat;transition:transform .5s ease}
-  .event-banner:hover .eb-photo,.event-banner:focus-within .eb-photo{transform:scale(1.1)}
-  /* the gradient sits on the banner, not on the photo, so the zoom cannot scale it away.
-     Stacking: .eb-photo (auto) < ::after gradient (1) < .eb-inner text (2). */
-  .event-banner::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(28,28,26,0) 35%,rgba(28,28,26,.9) 100%)}
-  .eb-inner{position:relative;z-index:2;padding:0 32px 30px}
-  .event-banner .chip{background:rgba(255,252,246,.14);color:var(--cream)}
-  .event-banner h3{font-size:32px;font-weight:600;text-wrap:balance}
-  .event-banner p{font-size:18px;margin:10px 0 20px;color:#d8d3c8}
-  .slide-link{font-family:var(--font-body);font-weight:700;font-size:17px;color:var(--cream);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
-  .slide-link:hover{color:var(--green)}
-  /* side events: hairline rows, no card box at rest — 4:5 photo thumb + date + title
-     + one line of description. flex:1 makes the three rows share the banner's 560px
-     height (560/3 ≈ 186.7px per row).
-     Row track 2 is an empty 1fr spacer: the date is pinned to the top of the row and
-     the title + description sit together at the bottom, whatever height the row gets.
-     The thumb is taken OUT of the grid (absolute, vertically centred) so its 148px
-     cannot inflate the tracks: the 26px insets then apply to the text only and the
-     three rows add up to the banner height again. Column 1 stays in the template as
-     the empty 118px reserve that keeps the text clear of the thumb; the thumb may
-     overhang the text block into the padding, which is intended.
-     The 14px horizontal padding is what keeps the thumb off the plate's left edge on
-     hover — real padding on the row, reproducible as a Wix container inset. It does
-     not change any height, so the three rows still add up to 560px. */
-  .sidecard{position:relative;flex:1;display:grid;grid-template-columns:118px minmax(0,1fr);grid-template-rows:auto 1fr auto auto;column-gap:18px;padding:26px 14px;border-top:1px solid var(--grey);border-radius:6px;color:var(--ink);transition:box-shadow .18s ease, background-color .18s ease}
-  /* on the sand ground the --grey hairline is all but invisible (1.02:1), so the rows
-     take a darker sand rule (1.28:1, the same weight the hairline had on cream).
-     Re-tuned with the 04.09.2026 greige sand: the old #D6C9AE kept its weight
-     (1.26:1) but was now +6.8 C* MORE saturated than the ground it sits on, so it
-     read as a yellow/tan line across a greige band. #D2C8B6 restores the original
-     relationship — very slightly LESS chromatic than the ground (-2.0 C*, the old
-     pairing was -1.7) at the same 8.8 dL* step.
-     This must stay ABOVE the :hover rule below: both are (0,2,0), so source order
-     decides which border-top-color wins on hover. */
-  .events-hero .sidecard{border-top-color:#D2C8B6}
-  /* the first row's rule would draw a stray line level with the banner's top edge, so
-     it is hidden — the hairlines are separators BETWEEN rows, not a top frame. Colour
-     only: the 1px border-top stays in the box so all three rows keep equal heights and
-     still add up to the banner's 560px. (0,3,0) beats the hover rules below, but they
-     set transparent on this row too, so there is no conflict to lose. */
-  .events-hero .sidecard:first-of-type{border-top-color:transparent}
-  /* hover = lifted plate: the row reveals itself as a cream card on the sand ground
-     (the fill is required anyway — an outer shadow reads as a smudge through a
-     transparent element). The hairline of the hovered row and of the row below it
-     step aside so no rule cuts through the plate. */
-  .sidecard:hover,.sidecard:focus-visible{background:var(--cream);box-shadow:0 10px 26px rgba(44,44,44,.14);border-top-color:transparent}
-  .sidecard:hover + .sidecard,.sidecard:focus-visible + .sidecard{border-top-color:transparent}
-  /* the thumb is a real element, not a pseudo: only a box with its own overflow
-     can clip the inner image while it zooms. It is inset from the border box, so it
-     needs the row's 14px padding spelled out; the text picks it up automatically. */
-  .sthumb{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:118px;height:148px;border-radius:6px;overflow:hidden}
-  .sthumb::before{content:"";display:block;width:100%;height:100%;background:center/cover no-repeat;transition:transform .5s ease}
-  .sidecard:hover .sthumb::before,.sidecard:focus-visible .sthumb::before{transform:scale(1.1)}
-  .sidecard .sdate,.sidecard b{grid-column:2;min-width:0}
-  .event-side .sidecard:nth-of-type(1) .sthumb::before{background-image:url("assets/ev-orchard.jpg")}
-  .event-side .sidecard:nth-of-type(2) .sthumb::before{background-image:url("assets/ev-wtc.jpg")}
-  .event-side .sidecard:nth-of-type(3) .sthumb::before{background-image:url("assets/tile-square1-pies.jpg")}
-  /* two lines: date, then venue (the <br> in the markup). 1.5 keeps the pair
-     readable at 14px uppercase without letting it crowd the title below — the
-     extra ~42px comes out of the flexible row-2 spacer, so the three rows still
-     add up to the banner's 560px.
-     14px (was 12) per the client-side type spec, which puts dates in the 14–18
-     band. Each line grows 18px → 21px, so the two-line block is 42px and the
-     row's fixed content is ~147px against the 186.7px each row gets on desktop —
-     the 1fr spacer absorbs the +6px and no row is forced to grow. */
-  .sidecard .sdate{grid-row:1;display:block;font-family:var(--font-body);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;line-height:1.5;color:#55524a}
-  .sidecard b{grid-row:3;display:block;font-family:var(--font-display);font-weight:600;font-size:18px;line-height:1.3;align-self:start}
-  .sidecard .sdesc{grid-row:4;grid-column:2;min-width:0;display:block;font-size:14px;line-height:1.45;color:#55524a;margin-top:8px;align-self:start}
-
-  /* ================= WHAT WE DO ================= */
-  section.wwd{padding:56px 0 86px}
-  .sec-eyebrow{font-family:var(--font-body);font-weight:600;text-transform:uppercase;font-size:12.5px;letter-spacing:.14em;color:#8a6f57;margin-bottom:10px}
-  /* one section-heading size for the whole page. Scale trial 04.09.2026, reconciled
-     with the client-side type spec applied 04.09.2026 (the spec is the source for the
-     sizes below; the remaining deltas it asked for were the intro paragraph 19→18, the
-     eyebrow weight 700→600 at 1.5px tracking, event dates 12→14, the banner chip 12→13
-     and the widget CTA 13.5→14):
-     sections 42 Lora 600 / group subheads 28 Lora 600 / body paragraphs 18 Inter 400 /
-     dates 14 / eyebrows 12 Inter 600 uppercase; hero 38.
-     Deliberately left outside the spec bands, as agreed: nav 15, widget amounts and
-     frequency 14, .don-note 11.5 (fine print), tile descriptions 17, .sdesc 14, footer.
-     The hero .fb-title (38px) now sits a step under the section heads, and the
-     legacy .lg-title (34px) stays below both, so the legacy block still reads as
-     subordinate to a section head. Mobile (≤560) holds the old 32px — see the guard in
-     the ≤560 block.
-     SYNC: this size is repeated in .ev-title, .v-head h2 and .funders h2 — change all four. */
-  .wwd-intro h2,.funders h2,.partners h2,.ev-title,.wwd-title{font-size:42px}
-  .wwd-title{margin-bottom:26px}
-  /* 18px/400 — the page's reading-paragraph size (weight comes from body: Inter 400) */
-  .wwd-sub{font-size:18px;color:#55524a;margin:14px 0 18px}
-  /* ---- Legacy feature (layout per user reference, 04.09.2026) ----------------
-     Two-column feature: copy left, photo right with an overlay caption panel.
-     NEW COPY (eyebrow, heading, caption, link wording) is PENDING CLIENT SIGN-OFF,
-     like all copy on this page.
-     WIX: a two-column strip — text column + image column with a text box pinned to
-     the right edge of the image. Standard Wix Editor, no Velo, no app. */
-  .wwd-note{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px;align-items:center;margin:40px 0 18px}
-  /* the page's eyebrow voice: Inter 600, uppercase, 12px, 1.5px tracking (client-side
-     type spec, 04.09.2026 — was 700 / .05em ≈ 0.6px, which read as a bold caption
-     rather than a tracked label). Since 04.09.2026 it is the only eyebrow left —
-     .group-label was promoted to a 28px subhead — so this is the small-label size for
-     the page and the tier below the offer group subheads. Fixed px tracking, not em:
-     the size is fixed at every breakpoint, so the two are equivalent here. */
-  .lg-eyebrow{font-family:var(--font-body);font-weight:600;text-transform:uppercase;font-size:12px;letter-spacing:1.5px;color:#55524a;margin-bottom:14px}
-  /* short dash after the label: the label ink at .4 so it reads as a mark, not a rule */
-  .lg-eyebrow::after{content:"";display:inline-block;width:32px;height:1px;background:rgba(85,82,74,.4);vertical-align:middle;margin-left:12px}
-  /* family/weight/tracking come from the global h1,h2,h3 rule — size only here */
-  .lg-title{font-size:34px;color:var(--ink);margin-bottom:16px}
-  .wwd-note p{margin:0;font-size:18px;line-height:1.6;color:#55524a}
-  /* the link is now a standalone line under the paragraph, not a sentence tail */
-  .wwd-note .sub-more{display:inline-block;margin-top:18px}
-  .lg-photo{position:relative;margin:0;border-radius:6px;overflow:hidden}
-  /* hover zoom (05.09.2026) — same effect as the events banner and the offer tiles:
-     the photo scales inside the fixed clipped frame (the figure already carries
-     overflow:hidden + the radius), so the frame never moves. .lg-cap is a SIBLING of
-     the img, not a child, so the caption panel stays put while the photo grows behind
-     it. Hover only, no focus variant: the figure is not a link and holds nothing
-     focusable — same as the events banner article.
-     WIX: same native image hover zoom ("Zoom in") as the other photos. */
-  .lg-photo .note-photo{display:block;width:100%;height:auto;transition:transform .5s ease}
-  .lg-photo:hover .note-photo{transform:scale(1.1)}
-  /* Overlay caption panel on the right band of the photo — the subjects sit centre-left,
-     so nothing that matters is covered. Same scrim ink as the hero (rgba(28,28,26,…));
-     cream on it stays ≥9:1 even where the photo underneath is white. Green accent bar:
-     brand green, NOT amber — amber is money actions only. */
-  .lg-cap{position:absolute;right:0;top:0;bottom:0;width:150px;background:rgba(28,28,26,.82);color:var(--cream);padding:20px 16px;font-family:var(--font-display);font-weight:600;font-size:18px;line-height:1.35;display:flex;flex-direction:column;justify-content:center}
-  .lg-cap::after{content:"";display:block;width:40px;height:3px;background:var(--green);margin-top:12px}
-  .sub-more{color:var(--blue-link);font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
-  .sub-more:hover{color:var(--ink)}
-  /* Offer tiles are typographic: a photo, a title and a line of text sitting
-     directly on the ground — no card box, no border, no shadow, no icon.
-     Each group runs its own grid tempo on the shared 12-column track set.
-     WIX: one strip/section per group, tile widths set by the column spans below. */
-  .tilegrid{display:block}
-  /* group separator lines removed, spacing carries the break — user 04.09.2026 */
-  .ogroup + .ogroup{margin-top:64px}
-  /* group labels are subheads, not eyebrows (scale trial 04.09.2026): 28px Lora 600 in
-     ink, sentence/title case straight from the markup — no uppercasing, no eyebrow
-     tracking, so they take the same voice as the section heads one step down.
-     Scale trial ladder in this section (04.09.2026): group subhead 28 Lora 600 →
-     group paragraph 18 Inter → tile title 20 Lora 600 → tile description 17 Inter.
-     Each step is visible: titles sit clearly below the 28px subheads, descriptions
-     clearly below the 18px reading paragraphs. */
-  .group-label{font-family:var(--font-display);font-weight:600;font-size:28px;letter-spacing:-0.01em;line-height:1.2;color:var(--ink);margin:0 0 10px}
-  p.gdesc{margin:0 0 26px;font-size:18px;font-weight:400;color:#55524a;line-height:1.55;max-width:62ch}
-  .gkey{color:var(--blue-link);font-weight:600;text-decoration:underline;text-underline-offset:3px}
-  .gkey:hover{color:#00518d}
-  .otiles{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:34px 22px}
-  .tile{display:block;min-width:0;color:var(--ink)}
-  /* uniform 320px photo height across all tiles — row alignment, user 09.09.2026
-     (was aspect 16/10 / 3/2 per span). With aspect ratios the photo height followed the
-     column span, so in a mixed span-7 + span-5 row the two photos were 402px and 302px
-     tall and the titles under them started on different lines. A fixed height makes every
-     tile in a row hand off to its title at the same y. Width still 100% of the span and
-     object-fit:cover re-crops, so the wide tiles simply take a wider slice of the same
-     photo. WIX: set the image element height to 320px and fit mode to "Fill". */
-  .tile .tphoto{width:100%;height:320px;object-fit:cover;border-radius:6px;display:block}
-  /* focal-point nudge for photos whose subject sits below centre (same pattern as the
-     retired .tp-face): shifts the 320px cover window down so the crates stay whole
-     instead of being cut by the frame. WIX: set the image focal point to 50% / 55%. */
-  .tile .tphoto.tp-low{object-position:50% 55%}
-  /* hover zoom (03.09.2026) — same effect as the events banner: the photo scales
-     inside a FIXED clipped frame, so the tile geometry never moves. An <img> can't
-     clip its own transform, hence the .tframe wrapper. Radius moves to the frame. */
-  .tframe{display:block;overflow:hidden;border-radius:6px}
-  .tframe .tphoto{border-radius:0;display:block;transition:transform .5s ease}
-  .tile:hover .tframe .tphoto,.tile:focus-visible .tframe .tphoto{transform:scale(1.1)}
-  /* hover photo shadows tried and reverted 04.09.2026 */
-  /* title 20 / description 17 — scale trial 04.09.2026, see the ladder note above.
-     Grid rows stay auto (no tile min-height anywhere), so taller text just grows the row. */
-  .tile b{display:block;font-family:var(--font-display);font-weight:600;font-size:20px;line-height:1.3;margin-top:18px}
-  .tile .tdesc{display:block;margin-top:4px;font-size:17px;line-height:1.5;color:#55524a}
-  .tile:is(:hover,:focus-visible) b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
-  .t-blue:is(:hover,:focus-visible) b{text-decoration-color:var(--blue)}
-  .t-green:is(:hover,:focus-visible) b{text-decoration-color:var(--green)}
-  /* tile titles get accent arrows (chosen over repeated "Read more" — user 09.09.2026);
-     WIX: append the arrow glyph to the title text, or add a small icon element after it.
-     content is declared twice on purpose: the plain string is the fallback for engines
-     without the alternative-text syntax (they drop that whole declaration), the
-     content:"→" / "" version gives the glyph an EMPTY alt text so screen readers
-     announce the title alone. No text-decoration guard is needed — the pseudo is an
-     inline-block, and a propagated underline is never drawn on atomic inline-level
-     boxes, so the hover underline stops at the end of the title text. Transform only,
-     so the nudge costs no layout; if a title wraps, the arrow rides the last word. */
-  .tile b::after{content:"→";content:"→" / "";display:inline-block;margin-left:8px;font-family:var(--font-body);transition:transform .18s ease}
-  .t-blue b::after{color:var(--blue)}
-  .t-green b::after{color:var(--green)}
-  .tile:is(:hover,:focus-visible) b::after{transform:translateX(4px)}
-  .c5{grid-column:span 5} .c6{grid-column:span 6} .c7{grid-column:span 7} .c12{grid-column:span 12}
-
-  /* ================= STATS ================= */
-  /* on the --page ground the old --beige band was LIGHTER than the page and inverted;
-     --grey is the existing token that still reads as a band (1.13:1) */
-  .stats{background:var(--grey);padding:56px 0}
-  .statrow{display:flex;justify-content:center;gap:24px 72px;flex-wrap:wrap;text-align:center}
-  .stat b{display:block;font-family:var(--font-display);font-weight:600;font-size:46px;line-height:1.1;color:var(--ink)}
-  .stat span{font-size:14.5px;color:#55524a}
-  /* stats: one row, two-line labels — user 05.09.2026
-     desktop: 4×210 + 3×72 = 1056 ≤ 1120 (.wrap content width), so the four
-     numbers never wrap; 210px makes every label break onto exactly 2 lines.
-     Below 960px the band keeps its previous wrapping behaviour (2×2 → stacked). */
-  @media (min-width:960px){
-    .statrow{flex-wrap:nowrap}
-    .stat{max-width:210px}
-  }
-
-  /* ================= VOICES / TESTIMONIALS ================= */
-  .voices{position:relative;isolation:isolate;overflow:hidden;padding:76px 0 82px;color:var(--cream)}
-  .voices .vbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;z-index:-2}
-  /* three stops, not a flat wash — the middle of the band stays lighter so the kitchen is still readable */
-  .voices::before{content:"";position:absolute;inset:0;z-index:-1;
-    background:linear-gradient(180deg,rgba(28,28,26,.93) 0%,rgba(28,28,26,.76) 46%,rgba(28,28,26,.95) 100%)}
-  .voices .wrap{position:relative;z-index:1}
-  .v-head{display:flex;align-items:center;justify-content:space-between;gap:28px;margin-bottom:32px}
-  /* SYNC: section-heading size */
-  .v-head h2{font-size:42px;color:var(--cream);text-wrap:balance;text-shadow:0 1px 12px rgba(28,28,26,.5)}
-  .v-all{flex-shrink:0;font-family:var(--font-body);font-weight:700;font-size:15px;color:var(--cream);
-    text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;text-shadow:0 1px 8px rgba(28,28,26,.5)}
-  .v-all:hover{color:var(--green)}
-
-  /* the rail runs the full window, not the 1200px column, so cards continue rather than look clipped */
-  .v-rail{margin-inline:calc(50% - 50vw);overflow-x:auto;scrollbar-width:none;
-    padding-block:.5rem 2.5rem;margin-block:-.5rem -2.5rem;  /* room for the 35px card shadow, then taken back */
-    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
-    mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
-  .v-rail::-webkit-scrollbar{display:none}
-  .v-rail.is-rolling{overflow:hidden}          /* only once the script has taken over */
-  .v-track{display:flex;gap:20px;width:max-content}
-  .v-rail:not(.is-rolling) .v-track{padding-inline:40px}
-  .v-rail.is-rolling .v-track{animation:v-roll var(--roll-time,40s) linear infinite;will-change:transform}
-  .v-rail.is-rolling:hover .v-track,
-  .v-rail.is-rolling:focus-within .v-track{animation-play-state:paused}
-  @keyframes v-roll{from{transform:translate3d(0,0,0)}to{transform:translate3d(calc(var(--roll) * -1),0,0)}}
-
-  .vcard{flex:0 0 344px;width:344px;background:var(--cream);border:1px solid #EDE5D6;border-radius:6px;
-    padding:20px 22px 22px;box-shadow:0 14px 35px rgba(2,10,10,.30);color:var(--ink);
-    display:flex;flex-direction:column;gap:13px}
-  .v-top{display:flex;align-items:center;gap:.8rem}
-  /* initial in the circle, photo absolutely on top of it — a missing photo leaves a letter, not a broken icon */
-  .v-av{position:relative;width:2.6rem;height:2.6rem;flex-shrink:0;border-radius:50%;overflow:hidden;
-    background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;line-height:1}
-  .v-av.v-green{background:var(--green)}
-  .v-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .v-id{flex:1;min-width:0}
-  .v-name{display:block;font-weight:500;font-size:15.5px;line-height:1.35}
-  /* ink, not amber: amber is reserved for money actions (approved 14.08.2026) */
-  .v-stars{display:flex;gap:.16em;font-size:.82em;line-height:1;color:var(--ink)}
-  .v-stars .v-off{color:rgba(44,44,44,.2)}
-  .v-thumb{width:3.1rem;height:3.1rem;flex-shrink:0;object-fit:cover;display:block}
-  .vcard blockquote{margin:0;font-size:15.5px;line-height:1.7;color:#55524a}
-
-  @media (max-width:900px){
-    .v-head{display:block}
-    .v-head .v-all{display:inline-block;margin-top:14px}
-  }
-  @media (max-width:560px){
-    .voices{padding:56px 0 62px}
-    .vcard{flex-basis:284px;width:284px}   /* so the end fades don't eat a full-bleed card */
-  }
-
-  /* ================= DONATE BANNER ================= */
-  /* two/three-line headline + top-anchor tried and reverted 04.09.2026 — v1 centred 4-line layout restored */
-  /* hero photo = community_fridge_banner-des.jpg (user-supplied 09.09.2026, same shoot as previous
-     banner); identifiable face (Des Kay presumably) — Hugh to confirm for hero use; position
-     65% 30% keeps the crate handoff right of the text block */
-  .fridgebanner{position:relative;background:url("assets/community_fridge_banner-des.jpg") 65% 30%/cover no-repeat;height:600px;display:flex;align-items:center}
-  .fridgebanner::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,28,26,.62) 0%,rgba(28,28,26,.40) 48%,rgba(28,28,26,.08) 78%)}
+  /* ================= 1b · HERO — LIGHT ================= */
+  /* HERO = transform9 gradient (ultramarine → azure) with the animated dotted
+     GLOBE (the STWC logo motif, ElevenLabs-style) instead of a photo.
+     Wix hand-off: gradient strip is native; the globe = Lottie/looped video embed. */
+  /* HERO — option C ("type as image"): full-viewport photo, headline spans the
+     full width over it, sub + CTAs live in an ink base-strip. The dark header
+     above and the strip below frame the photo deliberately. */
+  .fridgebanner{position:relative;overflow:hidden;background:url("assets/community_fridge_banner-des.png") 55% 38%/cover no-repeat #020a0a;min-height:calc(100svh - 89px);display:flex;align-items:stretch;padding:0}
+  /* the photo returns as a translucent layer UNDER the gradient's colour:
+     luminosity blend = the gradient tints the photo blue (transform9's own trick);
+     the browsers-without-blend fallback is a plain low-opacity photo. */
+  /* edge-duotone vignette: ink-green edges, natural centre — no flat scrim */
+  .fridgebanner::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(90deg,rgba(2,10,10,.48) 0%,rgba(2,10,10,.2) 36%,rgba(2,10,10,0) 60%),
+      radial-gradient(130% 130% at 50% 42%,rgba(2,10,10,0) 52%,rgba(4,34,22,.62) 100%)}
+  /* the ink base-strip the sub + CTAs sit on */
+  /* translucent base-strip: the photo shows through (user 09.09) */
+  .fridgebanner::after{content:"";position:absolute;left:0;right:0;bottom:0;height:116px;background:rgba(2,10,10,.62);z-index:1}
   .fridgebanner .wrap{width:100%;position:relative;z-index:2}
-  .fb-stack{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
-  /* hero font trials (PJS 700, Poppins 700) reverted to Lora 04.09.2026; strengthened
-     scrim kept; Poppins+PJS parked in the fonts link. */
-  .fb-copy{max-width:460px}
-  /* tighter leading than the global h1,h2,h3 1.15 — hero only, 05.09.2026. Measured on
-     Lora 600: worst pair is "things" (g, -0.271em) over "and support local" (d, 0.755em),
-     leaving 2.05px clearance at 38px/1.08. Do not go below 1.08 at this size. */
-  .fb-title{font-size:38px;line-height:1.08;letter-spacing:-0.02em;color:var(--cream);text-wrap:balance;text-shadow:0 1px 12px rgba(28,28,26,.45)}
-  .fb-sub{margin:12px 0 0;font-size:14.5px;font-weight:600;color:#e8e3d7;letter-spacing:.02em;text-shadow:0 1px 8px rgba(28,28,26,.5)}
-  .wwd-intro{padding:72px 0 48px}
-  /* row gap 18px (was 14) and amount gap 12px (was 10) — more air between the widget's
-     controls, user 04.09.2026. The freq track keeps its tight inner 4px gap: that is
-     what makes the pair read as one segmented unit. */
-  .minidon{width:460px;flex-shrink:0;background:rgba(255,252,246,.96);border-radius:6px;padding:24px;box-shadow:0 12px 32px rgba(44,44,44,.22);display:flex;flex-direction:column;gap:18px}
-  .mini-amounts{display:flex;flex-wrap:nowrap;gap:12px;margin-bottom:0}
-  .mini-amounts .amt{width:auto;flex:1 1 0;min-width:0;padding:10px 0;font-size:14px;border-radius:6px}
-  /* 14px matches the base .btn-donate2 (bottom of the spec's button band); kept
-     explicit so the hero CTA cannot drift if the base button size is retuned */
-  .minidon .btn-donate2{display:block;width:100%;text-align:center;padding:14px 0;font-size:14px}
-  .minidon .don-note{margin:4px 0 0;font-size:10.5px}
+  .fb-copy{display:contents}
+  .fb-stack{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:1fr 116px;column-gap:48px;min-height:calc(100svh - 89px);max-width:none}
+  /* headline sits LOW over the photo, just above the translucent strip */
+  .fb-title{grid-column:1/-1;grid-row:1;align-self:end;padding-bottom:44px;width:100%}
+  /* sub sits LEFT on the translucent strip, sharing the title's left edge; CTAs right */
+  .fb-sub{grid-column:1;grid-row:2;align-self:center;margin:0}
+  .fb-cta{grid-column:2;grid-row:2;align-self:center}
+  /* over the busy photo the 30% ghost border is too faint next to solid amber */
+  .fb-cta .btn-ghost{border-color:rgba(255,255,255,.55)}
+  .fb-title{font-family:var(--font-display);font-weight:900;text-transform:uppercase;
+    font-size:clamp(44px,6.4vw,92px);line-height:.98;letter-spacing:-.03em;color:#fff;text-shadow:0 2px 28px rgba(2,10,10,.45)}
+  /* accent words in transform9 mint, like the reference's "Forever." line */
+  .fb-title .hw-g{color:inherit;background:none;padding:0}
+  .fb-title .hw-b{color:#fff;background:none;padding:0} /* option C: ONE green word — Community. */
+  .fb-sub{margin:0;font-family:var(--font-body);font-weight:400;font-size:18px;line-height:1.6;color:rgba(255,255,255,.92);max-width:480px;text-align:left}
+  /* hero entrance: words rise in one after another (pure CSS — no JS gate, so the
+     text can never be stranded invisible). Wix: whole-title "Rise" reveal is the
+     native fallback; per-word needs Velo/manual spans. */
+  .fb-title .w{display:inline-block;opacity:0;animation:heroLineL .7s cubic-bezier(.22,.61,.36,1) forwards}
+  .fb-title .w:nth-of-type(3),.fb-title .w:nth-of-type(4){animation-name:heroLineR}
+  .fb-title .w:nth-of-type(1){animation-delay:.05s}
+  .fb-title .w:nth-of-type(2){animation-delay:.15s}
+  .fb-title .w:nth-of-type(3){animation-delay:.25s}
+  .fb-title .w:nth-of-type(4){animation-delay:.35s}
+  .fb-title .w:nth-of-type(5){animation-delay:.45s}
+  .fb-title .w:nth-of-type(6){animation-delay:.55s}
+  .fb-sub,.fb-cta{opacity:0;animation:heroFade .7s ease-out forwards}
+  .fb-sub{animation-delay:.75s}
+  .fb-cta{animation-delay:.9s}
+  @keyframes heroLineL{from{transform:translateX(-44px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes heroLineR{from{transform:translateX(44px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes heroFade{to{opacity:1}}
 
-  /* ================= DONATE WIDGET ================= */
-  /* reference-CSS restyle tried and reverted 04.09.2026 */
-  /* selections amber per user decision; ink-selection experiment reverted 03.09.2026.
-     The freq row matches .mini-amounts .amt exactly (6px radius, 10px padding,
-     14px text), so the two rows read as one family.
-     Focus: the old 2px ink override is gone and the global ring (3px var(--blue),
-     2px offset) governs, EXCEPT on the .sel states — blue on the #FFE7B8 wash is only
-     2.6:1, so those keep a 2px ink ring (11.6:1 on the wash, 13.6:1 on the card). */
-  /* freq pair on a beige track = one segmented unit — user 04.09.2026.
-     Radius nests optically: 6px button + 4px track padding = 10px.
-     Only the selected half carries chrome: the unselected one sits bare on the track
-     (transparent fill AND transparent border, but the 1.5px border-WIDTH is kept so
-     nothing resizes when the selection moves). Hover on the bare half is a soft
-     #FFFEFB fill instead of a border darkening.
-     The amounts row deliberately keeps its trackless look, its white buttons and its
-     10px gap. */
-  .don-freq{display:flex;gap:4px;background:#F1ECE2;padding:4px;border-radius:10px}
-  .don-freq .freq{flex:1;font-family:var(--font-body);font-weight:700;font-size:14px;letter-spacing:.02em;color:var(--ink);background:transparent;border:1.5px solid transparent;border-radius:6px;padding:10px 0;cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}
-  .don-freq .freq:hover{background:#FFFEFB}
-  /* selected = pale amber wash #FFE7B8 + amber border; CTA keeps the only saturated
-     amber fill — approved 04.09.2026 */
-  .don-freq .freq.sel{background:#FFE7B8;border-color:#FFB020;color:var(--ink)}
-  .amt{font-family:var(--font-body);font-weight:700;font-size:16px;color:var(--ink);background:#FFFEFB;border:1.5px solid var(--grey);border-radius:8px;padding:11px 0;width:86px;cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}
-  .amt:hover{border-color:#F09E00}
-  .amt.sel{background:#FFE7B8;border-color:#FFB020;color:var(--ink)}
-  .amt.sel:focus-visible,.don-freq .freq.sel:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  .btn-donate2{display:inline-block;background:#FFB020;color:var(--ink);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:12px 26px;white-space:nowrap}
-  .btn-donate2:hover{background:#F09E00;color:var(--ink)}
-  .don-note{display:flex;align-items:center;gap:5px;justify-content:center;font-size:11.5px;color:#7a7466;margin:8px 0 0}
-  .don-note svg{width:12px;height:12px;fill:#7a7466;flex-shrink:0}
+  /* ================= DONATE WIDGET (amber = money, canonical) ================= */
+  /* the widget sits on the gradient: white-line system, amber money unchanged */
+  /* hero CTAs (widget removed 09.09): money button orange, ghost = white outline */
+  .fb-cta{display:flex;flex-wrap:wrap;gap:16px}
+  .btn-donate2{display:inline-block;background:var(--amber);border:1px solid var(--amber);color:var(--ink);font-weight:700;font-size:16px;padding:17px 40px}
+  .btn-donate2:hover{background:var(--amber-h);border-color:var(--amber-h);color:var(--ink)}
+  .btn-ghost{display:inline-block;background:transparent;border:1px solid rgba(255,255,255,.7);color:#fff;font-weight:500;font-size:16px;padding:17px 34px;transition:background .15s,color .15s}
+  .btn-ghost:hover{background:#fff;color:var(--ink)}
 
-  /* ================= FUNDERS ================= */
-  .funders{padding:64px 0 60px;border-top:1px solid var(--grey);text-align:center}
-  .funders h2{font-size:42px;margin-bottom:36px}   /* SYNC: section-heading size */
-  .funderrow{display:flex;gap:22px;justify-content:center}
-  .flogo-tile{background:var(--cream);border:1px solid var(--grey);border-radius:6px;padding:14px;width:150px;height:150px;display:flex;align-items:center;justify-content:center;transition:transform .15s,box-shadow .15s}
-  .flogo-tile:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(2,10,10,.10)}
+  /* ================= 1c · WHAT WE DO — INTRO (LIGHT) ================= */
+  /* editorial spread: intro column left, legacy figure right (photo with its
+     note underneath, framed by hairlines) */
+  .wwd-intro{padding:112px 0 88px}
+  /* composition (07.09, redone): the intro is a full-width STATEMENT paragraph —
+     no side column, no void; the legacy note becomes a horizontal media band
+     underneath (photo left, text vertically centred beside it), framed by
+     hairlines like a deliberate section footnote. */
+  .wwd-intro .wrap{display:block}
+  .wwd-intro h2{grid-column:1/-1;margin-bottom:8px}
+  /* the big light paragraph voice */
+  .wwd-sub{font-family:var(--font-body);font-weight:400;font-size:clamp(21px,2.2vw,30px);line-height:1.4;letter-spacing:-.02em;color:var(--ink);margin:26px 0 0;max-width:none}
+  /* legacy note = a distinct white panel on the grey page (user 09.09) */
+  .wwd-note{display:grid;grid-template-columns:300px 1fr;column-gap:56px;align-items:center;max-width:none;margin:64px 0 0;background:#fff;border:none;padding:40px 48px 40px 40px;box-shadow:0 1px 2px rgba(2,10,10,.05),0 10px 26px rgba(2,10,10,.12)}
+  .wwd-note .note-photo{width:300px;height:225px;object-fit:cover;display:block;margin:0;border-radius:0;grid-row:1/3}
+  /* handwritten sign-off (user 09.09): Caveat, ragged-right under the text */
+  .wwd-note .note-sign{grid-column:2;justify-self:end;margin:14px 0 0;font-family:'Caveat',cursive;font-weight:600;font-size:32px;line-height:1.1;color:var(--ink);transform:rotate(-2deg);max-width:720px}
+  .wwd-note p{margin:0;font-family:var(--font-body);font-weight:400;font-size:16.5px;line-height:1.7;color:var(--ink);max-width:720px}
+  .sub-more{color:var(--blue-link);font-weight:500;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+  .sub-more:hover{color:var(--ink)}
+
+  /* ================= 2 · UPCOMING EVENTS — LIGHT BAND (white, 09.09) ======= */
+  .events-hero{position:relative;background:#fff;padding:112px 0 120px;color:var(--ink)}
+  .events-hero .wrap{position:relative;z-index:1}
+  .events-hero h2{color:var(--ink)}
+  .event-banner h3{color:#fff} /* the banner card stays a dark photo card */
+  .events-hero a:focus-visible{outline-color:var(--blue-link)}
+  .ev-title{margin-bottom:38px}
+  /* STATIC layout, Wix-Events-native (the former CSS accordion was removed
+     03.09.2026 — classic Wix cannot do coordinated hover-expand without Velo).
+     Banner = featured-event widget with a 4:5 image frame; side column = event
+     list widget, "side by side" layout (4:5 thumb + date + title). */
+  /* mirrored split: the list reads first on the left, the banner anchors right */
+  .events-split{display:grid;grid-template-columns:1fr 480px;gap:32px;align-items:stretch}
+  .event-banner{grid-column:2;grid-row:1}
+  .event-side{grid-column:1;grid-row:1;display:flex;flex-direction:column;gap:0;min-width:0}
+  /* the banner stretches to the height of the event list beside it */
+  .event-banner{position:relative;width:480px;height:auto;min-height:460px;border-radius:0;overflow:hidden;background:#000;color:#fff;display:flex;align-items:flex-end}
+  .event-banner .eb-photo{position:absolute;inset:0;width:100%;height:100%;background:url("assets/event-studio.jpg") center/cover no-repeat}
+  .event-banner .eb-photo::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,10,10,0) 35%,rgba(2,10,10,.92) 100%)}
+  .eb-inner{position:relative;z-index:2;padding:0 30px 30px}
+  .event-banner .chip{display:block;color:#fff;margin-bottom:14px}
+  .event-banner h3{font-family:var(--font-display);font-weight:700;font-size:clamp(26px,2.4vw,34px);line-height:1.02;letter-spacing:-.04em;text-transform:uppercase;text-wrap:balance}
+  .event-banner p{font-size:15.5px;line-height:1.55;margin:12px 0 22px;color:#d6dada}
+  /* on dark: transparent rectangle with a 30% white border, fills white on hover */
+  .slide-link{font-family:var(--font-body);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:-.02em;color:#fff;background:transparent;border:1px solid var(--line-ds);border-radius:0;padding:15px 30px;display:inline-block;transition:background .15s,color .15s,border-color .15s}
+  .slide-link:hover{background:#fff;color:var(--ink);border-color:#fff}
+  .slide-link:focus-visible{outline:3px solid var(--blue-d);outline-offset:2px}
+  /* side events: an editorial LIST — white hairline rows, 4:5 thumb, quiet date */
+  /* photo inset from the block edge; hover = the shared soft shadow, nothing else (user 09.09) */
+  .sidecard{flex:1;display:grid;grid-template-columns:110px 1fr;grid-template-rows:1fr auto auto;column-gap:24px;background:#fff;border:none;border-radius:0;padding:22px 24px;color:var(--ink);transition:box-shadow .18s}
+  .sidecard:hover,.sidecard:focus-visible{box-shadow:0 1px 2px rgba(2,10,10,.05),0 10px 26px rgba(2,10,10,.12)}
+  .sidecard::before{content:"";grid-column:1;grid-row:1/4;align-self:center;width:110px;height:138px;border-radius:0;background:center/cover no-repeat}
+  .event-side .sidecard:nth-of-type(1)::before{background-image:url("assets/ev-orchard.jpg")}
+  .event-side .sidecard:nth-of-type(2)::before{background-image:url("assets/ev-wtc.jpg")}
+  .event-side .sidecard:nth-of-type(3)::before{background-image:url("assets/tile-square1-pies.jpg")}
+  /* date on two lines, pinned top; title+description pinned to the bottom (user 09.09) */
+  .sidecard .sdate{grid-column:2;justify-self:start;align-self:start;display:block;color:var(--muted);background:none;border-radius:0;padding:0;margin-bottom:10px;white-space:normal}
+  .sidecard .svenue{display:block}
+  .sidecard b{grid-column:2;min-width:0;align-self:end;display:block;font-family:var(--font-body);font-weight:700;font-size:20px;line-height:1.2;letter-spacing:-.03em;color:var(--ink);max-width:26ch}
+  .sidecard .sdesc{grid-column:2;min-width:0;display:block;font-size:14.5px;line-height:1.5;color:var(--muted);margin-top:8px;align-self:end}
+  .side-all{position:absolute;top:12px;right:40px;font-family:var(--font-body);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:-.02em;color:var(--blue-link);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+  .side-all:hover{color:var(--ink)}
+
+  /* ================= 3 · WHAT WE OFFER — LIGHT ================= */
+  section.wwd{padding:112px 0 124px}
+  .wwd-title{margin-bottom:12px}
+  .sec-eyebrow{color:var(--muted);margin-bottom:10px}
+  .tilegrid{display:block}
+  /* one chapter = one continuous WHITE slab: head + tiles + all gutters (user 09.09) */
+  /* the same soft shadow as the logo/voice cards — one shadow system (user 09.09) */
+  .chapter{background:#fff;display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:112px;box-shadow:0 1px 2px rgba(2,10,10,.05),0 10px 26px rgba(2,10,10,.12);
+    background-image:linear-gradient(90deg,#0195FE,#21BD52);background-size:100% 4px;
+    background-position:top;background-repeat:no-repeat;padding-top:4px}
+  /* blue->green gradient top stripe on every slab (user 10.09, replaces the
+     alternating solid stripes); drawn as a background layer so the 3px corner
+     radius still clips it cleanly */
+  .chapter:first-of-type{margin-top:24px}
+  /* plain text group headers: square · name · hairline to the right edge.
+     The negative bottom margins offset the 28px grid gap so the header stack
+     reads tight: name → ~14px → description → ~18px → photos */
+  /* checkerboard category heads (user ref 09.09): white text card ↔ photo,
+     alternating sides per group; the group's tiles follow underneath */
+  /* min-height was sized for the photo-era heads; text-only heads hug content (user 09.09) */
+.group-head{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;margin:0;min-height:0}
+  /* head text sits on the same 24px axis as the tile photos below */
+  .ghead-text{background:#fff;padding:48px 24px 0;display:flex;flex-direction:column;justify-content:center}
+  .chapter:nth-of-type(even) .ghead-text{order:2}
+  .ghead-photo{min-height:360px;background:center/cover no-repeat}
+  /* Our Hub head is text-only too (user 09.09) — also removes the former
+     tile-warehouse duplication with the Charity Shop tile */
+  .chapter:nth-of-type(1) .ghead-photo{display:none}
+  .chapter:nth-of-type(1) .group-head{grid-template-columns:1fr;min-height:0}
+    /* Food head text-only too (user 09.09) */
+  .chapter:nth-of-type(2) .ghead-photo{display:none}
+  .chapter:nth-of-type(2) .group-head{grid-template-columns:1fr;min-height:0}
+  .chapter:nth-of-type(2) .ghead-text{order:0}
+  /* Environment head is text-only (user 09.09): no photo cell */
+  .chapter:nth-of-type(3) .ghead-photo{display:none}
+  .chapter:nth-of-type(3) .group-head{grid-template-columns:1fr;min-height:0}
+    /* Art head text-only as well — all four chapter heads are now uniform */
+  .chapter:nth-of-type(4) .ghead-photo{display:none}
+  .chapter:nth-of-type(4) .group-head{grid-template-columns:1fr;min-height:0}
+  .chapter:nth-of-type(4) .ghead-text{order:0}
+  .group-label{display:block;margin:0;color:var(--ink);padding:0}
+  .group-label .grow{display:flex;align-items:center;gap:14px}
+  .group-label .gtxt{font-family:var(--font-display);font-weight:700;font-size:clamp(28px,3vw,40px);line-height:1.04;letter-spacing:-.04em;text-transform:uppercase}
+  .group-label .gdot{display:none} /* removed per user 09.09 */
+  p/* full measure across the panel (user 09.09, was 520px) */
+  .gdesc{margin:16px 0 0;padding:0;font-size:16px;color:var(--muted);line-height:1.6;max-width:none}
+  .gkey{color:var(--blue-link);font-weight:500;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+  .gkey:hover{color:var(--ink)}
+  /* .t-blue / .t-green stay in the markup but carry no styling in this skin.
+     Food has 5 tiles — the 5th spans the full row so the grid stays gapless
+     (a dangling half-width cell would let dense packing pull the next group's
+     description into the hole) */
+  
+  /* tone-on-tone card: same background as the band, 1px 10% border */
+  /* white blocks matching the chapter head panels (user 09.09): photo full-bleed
+     on top, caption padded inside the white like the head's text */
+  .tile{display:flex;flex-direction:column;background:#fff;border:none;border-radius:0;overflow:hidden;color:var(--ink);position:relative;padding:0}
+    /* photo inset to align with the caption's text edge (user 09.09) */
+    .tile .tphoto{width:calc(100% - 48px);margin:24px 24px 0;height:300px;object-fit:cover;display:block;border-radius:0}
+  /* ---- four groups, four layout tempos (composition pass, 07.09) ----
+     Hub (tiles 1-4): calm 2×2 baseline.
+     Food (5-9): tile 5 (Community Fridge) is a full-row FEATURE with a taller
+       photo; the remaining four sit 2×2 under it.
+     Environment (10-11): an airier pair — taller photos.
+     Art (12-13): a staggered pair — the second card drops 64px, ragged bottom. */
+  .tilegrid > a.tile:nth-of-type(5){grid-column:1/-1}
+  /* Food chapter resolves even: its first tile is a full-row panoramic feature */
+  .chapter:nth-of-type(2) > a.tile:first-of-type{grid-column:1/-1}
+  .chapter:nth-of-type(2) > a.tile:first-of-type .tphoto{height:300px}
+  /* captions flush with the photo's left edge (user 09.09) */
+  /* roomier bottom: text sits clear of the slab edge (user 09.09) */
+  .tile .tbody{position:relative;flex:1;display:block;padding:18px 24px 40px;max-width:none}
+  /* the reference has no icons — the markup keeps them, the skin hides them */
+  .tile .tbody span.ico{display:none}
+  .tile b{display:block;font-family:var(--font-body);font-weight:700;font-size:20px;line-height:1.2;letter-spacing:-.03em;margin-bottom:8px;color:var(--ink);transition:color .15s}
+  .tile b::after{content:" →" / "";font-weight:500}
+  .tile:hover b,.tile:focus-visible b{color:var(--blue-link)}
+  .tile .tbody span{font-size:15px;line-height:1.55;color:var(--muted);display:block}
+  .tile .tbody span.go{display:none} /* arrow now docks to the title via ::after */
+
+  /* ================= 3b · IMPACT NUMBERS — DARK BAND ================= */
+  /* bright gradient band + semi-transparent logo globe (user 09.09).
+     Lesson 07.09 applies: the gradient stays BRIGHT and the text flips to ink —
+     never darken a bright swatch to fit white text. Globe = assets/globe.svg
+     (the logo mark, #0195FE) at low opacity, bleeding off the right edge.
+     Wix: section background gradient + the globe SVG as a decorative image. */
+  /* dark graphite band (user 10.09) — echoes the footer greys; white text,
+     mint numerals, globe watermark re-tinted grey to sit in tone. */
+  .stats{position:relative;overflow:hidden;background:linear-gradient(115deg,#549fe3 0%,#2f86dd 50%,#1a6cc2 100%);color:var(--ink);padding:120px 0 126px}
+  .stats::before{content:"";position:absolute;top:50%;right:-140px;width:700px;height:700px;transform:translateY(-50%);background:url("assets/globe.svg") center/contain no-repeat;opacity:.22;pointer-events:none}
+  .stats .wrap{position:relative;z-index:1}
+  /* asymmetric: numerals rank flush-left under the heading, not centred */
+  /* 2×2 in the black zone left of the globe, dotted rules like the reference */
+  .statrow{display:flex;justify-content:flex-start;gap:56px 0;flex-wrap:wrap;text-align:left;max-width:660px}
+  .stat{flex:0 0 50%;border-left:1px dotted rgba(2,10,10,.4);padding-left:30px}
+  .stat b{display:block;font-family:var(--font-display);font-weight:900;font-size:clamp(38px,3.9vw,60px);line-height:.92;letter-spacing:-.03em;color:#fff}
+  .stat span{color:var(--ink);display:block;max-width:240px;font-size:14px;line-height:1.5;margin:14px 0 0}
+
+  /* ================= 4a · FUNDERS — LIGHT (multiply needs a light band) ====== */
+  /* funders: centred, on a pale azure band (user 09.09) — light enough for the
+     logos' mix-blend multiply */
+  .funders{background:#fff;padding:104px 0 96px;text-align:center}
+  .funders h2{margin-bottom:44px}
+  .funderrow{display:flex;gap:48px;justify-content:center;flex-wrap:wrap}
+  .flogo-tile{background:#fff;border:none;padding:20px;width:150px;height:150px;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 1px 2px rgba(2,10,10,.05),0 10px 26px rgba(2,10,10,.12)}
   .flogo-tile img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 
-  /* ================= PARTNERS ================= */
-  .partners{background:var(--grey);padding:72px 0 80px;text-align:center}
-  /* balance keeps "Working in partnership with" as two even lines in the 561-602px
-     band instead of orphaning "with"; no effect at widths where it fits one line */
-  .partners h2{margin-bottom:40px;text-wrap:balance}
-  .partners a.becomelink{font-weight:700;font-size:16px}
-  .partners a.becomelink:hover{text-decoration:underline}
-  .becomewrap{margin:40px 0 0}
-  .logorow{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
-  .plogo{background:#fff;border-radius:6px;padding:14px;width:150px;height:150px;display:flex;align-items:center;justify-content:center;transition:transform .15s,box-shadow .15s}
-  .plogo:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(44,44,44,.10)}
-  .plogo img{width:100%;height:100%;object-fit:contain}
+  /* ================= 4b · PARTNERS — LIGHT (multiply needs a light band) ==== */
+  .partners{background:var(--paper);padding:100px 0 118px;color:var(--ink)}
+  .partners h2{margin-bottom:44px;text-align:center}
+  .partners a.becomelink{font-family:var(--font-body);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:-.02em;color:var(--blue-link);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+  .partners a.becomelink:hover{color:var(--ink)}
+  .becomewrap{margin:44px 0 0;text-align:center}
+  /* partner logo marquee — drifts left, seamless via the duplicated aria-hidden set.
+     WIX: needs Velo or a marquee app; native fallback = static wrapped row (the
+     reduced-motion state below is exactly that). */
+  .logoclip{overflow:hidden;margin-inline:calc(50% - 50vw);
+    /* vertical padding so the card shadows aren't clipped by overflow:hidden */
+    padding-block:32px;margin-block:-32px;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .logorail{display:flex;width:max-content;gap:16px;animation:logoRoll 34s linear infinite}
+  .logoclip:hover .logorail{animation-play-state:paused}
+  .logoset{display:flex;flex-wrap:nowrap;gap:16px}
+  @keyframes logoRoll{to{transform:translateX(calc(-50% - 8px))}}
+  /* white cards with soft shadows (user 09.09). Wix: container box, white fill,
+     radius 0, "soft" shadow preset. multiply blend needs the white fill. */
+  .plogo{background:#fff;border:none;border-radius:0;padding:20px;width:150px;height:150px;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 1px 2px rgba(2,10,10,.05),0 10px 26px rgba(2,10,10,.12)}
+  .plogo img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 
-  /* ================= FOOTER ================= */
-  footer.site{background:var(--ink);color:#cfc9bd;font-size:14.5px}
-  footer.site .cols{display:grid;grid-template-columns:1.35fr 1fr 1.15fr 1.5fr;gap:48px;padding:64px 0 48px}
-  footer.site h3{color:var(--cream);font-family:var(--font-body);font-weight:600;text-transform:uppercase;font-size:13px;letter-spacing:.12em;margin-bottom:18px}
-  footer.site .flogo{height:52px;margin-bottom:16px}
-  footer.site p{margin:0 0 14px;line-height:1.65}
+  /* ================= 4c · VOICES — LOGO-BLUE BAND (user 09.09) ==============
+     logo blue #0195FE is BRIGHT: white text on it is only 3.1:1, so the band
+     text flips to ink (the 07.09 lesson — keep the swatch bright, ink text). */
+/* ================= 4c · VOICES — LIGHT 3-UP SLIDER (user 10.09) =========
+     Reference: centred heading, three plain quotes per view (no card boxes),
+     round avatars, side arrows, dot pagination.
+     Wix: native testimonial slider / repeater with arrows + dots. */
+  .voices{position:relative;isolation:isolate;overflow:hidden;padding:112px 0 118px;color:var(--ink);background:#fff}
+  .voices .vbg{display:none}
+  .voices .wrap{position:relative;z-index:1}
+  .voices a:focus-visible,.voices button:focus-visible{outline-color:var(--blue-link)}
+  .v-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;margin-bottom:48px}
+  .v-head h2{color:var(--ink);text-wrap:balance}
+  .v-all{flex-shrink:0;font-family:var(--font-body);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:-.02em;color:var(--blue-link);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+  .v-all:hover{color:var(--ink)}
+  .v-rail{overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory}
+  .v-rail::-webkit-scrollbar{display:none}
+  .v-track{display:flex;gap:72px}
+  /* plain quotes, no card box (reference 10.09); three per view */
+  .vcard{flex:0 0 calc((100% - 144px)/3);background:transparent;border:none;border-radius:0;
+    padding:0;box-shadow:none;color:var(--ink);scroll-snap-align:start;
+    display:flex;flex-direction:column;gap:14px}
+  .voices .v-av{border-radius:50%}
+  .v-nav{position:absolute;top:58%;transform:translateY(-50%);z-index:2;width:40px;height:40px;
+    border:none;background:transparent;color:var(--ink);font-size:24px;line-height:1;padding:0;cursor:pointer}
+  .v-prev{left:-8px}
+  .v-next{right:-8px}
+  .v-nav:hover{color:var(--blue-link)}
+  .v-dots{display:flex;justify-content:center;gap:8px;margin-top:40px}
+  .v-dot{width:7px;height:7px;border-radius:50%;border:none;padding:0;background:rgba(2,10,10,.25);cursor:pointer}
+  .v-dot.on{background:var(--ink)}
+  .v-top{display:flex;align-items:center;gap:.8rem}
+  .v-av{position:relative;width:2.6rem;height:2.6rem;flex-shrink:0;border-radius:0;overflow:hidden;
+    background:#0195FE;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;letter-spacing:-.02em;line-height:1}
+  /* alternate the initial circles through the two logo colours (user 10.09) */
+  .vcard:nth-child(even) .v-av{background:#21BD52}
+  /* green is reserved for the four group squares — the avatar tint is neutral here */
+  /* .v-green neutralised — alternation is positional now */
+  .v-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .v-id{flex:1;min-width:0}
+  .v-name{display:block;font-weight:700;font-size:15px;letter-spacing:-.02em;line-height:1.35;color:var(--ink)}
+  /* white, not amber: amber is reserved for money actions */
+  .v-stars{display:flex;gap:.16em;font-size:.82em;line-height:1;color:var(--ink)}
+  .v-stars .v-off{color:rgba(2,10,10,.25)}
+  .v-thumb{width:3.1rem;height:3.1rem;flex-shrink:0;object-fit:cover;display:block;border-radius:0}
+  .vcard blockquote{margin:0;font-size:15.5px;line-height:1.6;color:var(--muted)}
+
+  /* ================= 5 · FOOTER — DARK BAND ================= */
+  /* blue-black, darker than the first navy try (user 09.09): reads as black
+     with a clear blue undertone. Subtle top-to-bottom deepening. */
+  /* same graphite family as the stats band (user 10.09) */
+  footer.site{background:#1b1e24;color:#fff;font-size:14.5px}
+  footer.site .cols{display:grid;grid-template-columns:1.35fr 1fr 1.15fr 1.5fr;gap:44px;padding:96px 0 56px}
+  footer.site h3{color:#fff;margin-bottom:20px;font-family:var(--font-body);font-weight:500;text-transform:uppercase;font-size:11px;letter-spacing:-.02em;line-height:1.5}
+  /* the markup carries the WHITE logo — on Rich Black it works as-is, no filter */
+  footer.site .flogo{height:52px;margin-bottom:18px}
+  footer.site p{margin:0 0 14px;line-height:1.65;color:var(--body-d)}
   footer.site ul{list-style:none;margin:0;padding:0}
   footer.site li{margin-bottom:10px}
-  footer.site a{color:#7CC7FF;font-weight:600}
-  footer.site a:hover{text-decoration:underline}
-  footer.site a.plain{color:#cfc9bd;font-weight:400}
-  footer.site a.plain:hover{color:var(--cream);text-decoration:none}
-  /* footer Donate = amber button, mirrors header CTA — user 05.09.2026.
-     Amber is the money-action colour (project rule); proportions are the header
-     .btn-donate (15px / 13px 30px) scaled down one step for the footer column. */
-  footer.site a.fdonate{display:inline-block;background:#FFB020;color:var(--ink);font-weight:700;font-size:14px;padding:10px 24px;border-radius:10px;margin-top:4px}
-  footer.site a.fdonate:hover{background:#F09E00;color:var(--ink);text-decoration:none}
-  .socials{display:flex;gap:12px;margin-top:18px}
-  .socials a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;transition:background .15s}
-  .socials a:hover{background:var(--blue)}
+  /* footer links are WHITE (user 10.09) except the two exceptions below:
+     Donate = amber (money), the phone + contact links = light blue */
+  footer.site a{color:#fff;font-weight:400;text-decoration:underline;text-underline-offset:3px}
+  footer.site a:hover{color:#7CC7FF}
+  footer.site a[href^="tel:"],footer.site a[data-page="Contact us"]{color:#7CC7FF}
+  footer.site a[href^="tel:"]:hover,footer.site a[data-page="Contact us"]:hover{color:#fff}
+  /* the money action is a full amber BUTTON in the footer (user 10.09) */
+  footer.site a[data-page="Donate"]{display:inline-block;background:var(--amber);border:1px solid var(--amber);
+    color:var(--ink);font-weight:700;font-family:var(--font-body);font-size:11px;text-transform:uppercase;
+    letter-spacing:-.02em;padding:12px 24px;margin-top:4px;text-decoration:none;border-radius:3px}
+  footer.site a[data-page="Donate"]:hover{background:var(--amber-h);border-color:var(--amber-h);color:var(--ink)}
+  footer.site a.plain{color:#fff;font-weight:400;text-decoration:none}
+  footer.site a.plain:hover{color:#7CC7FF;text-decoration:underline}
+  footer.site a:focus-visible,footer.site button:focus-visible,footer.site input:focus-visible{outline:3px solid var(--blue-d)}
+  /* square social chips — no circles anywhere in this skin */
+  .socials{display:flex;gap:10px;margin-top:20px}
+  .socials a{width:42px;height:42px;border-radius:0;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;transition:background .15s}
+  .socials a:hover{background:rgba(255,255,255,.2)}
   .socials svg{width:18px;height:18px;fill:#fff}
-  .nl-label{display:block;font-size:13px;color:#cfc9bd;margin-bottom:6px}
-  .nl input{width:100%;padding:13px 16px;border-radius:6px;border:1px solid #4a463e;background:#3a3a36;color:var(--cream);font-family:var(--font-body);font-size:15px;margin-bottom:12px}
-  .nl input::placeholder{color:#9a948a}
-  .btn-nl{background:var(--blue-link);color:#fff;font-size:13.5px;padding:12px 26px}
-  .btn-nl:hover{background:#00518d}
-  footer.site p.nl-note{font-size:12.5px;color:#9a948a;margin:18px 0 0}
-  .legal{border-top:1px solid #444039;padding:22px 0 26px;display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:#9a948a;align-items:center}
+  /* newsletter: a plain column on the black footer, no card */
+  .nl{background:none;border:0;border-radius:0;padding:0;color:#fff}
+  .nl-label{display:block;color:var(--muted-d);margin-bottom:8px}
+  .nl input{width:100%;padding:14px 16px;border-radius:0;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);color:#fff;font-family:var(--font-body);font-size:15px;letter-spacing:-.01em;margin-bottom:12px}
+  .nl input::placeholder{color:var(--muted-d)}
+  /* Sign up is NOT a money action: link blue, never amber */
+  /* Sign up = logo blue #0195FE (user 10.09). It is a BRIGHT swatch, so the
+     label is ink (white on it is only 3.1:1); hover lightens, stays ink. */
+  .btn-nl{background:#0195FE;border:1px solid #0195FE;color:var(--ink);padding:15px 30px}
+  .btn-nl:hover{background:#45ABFE;border-color:#45ABFE;color:var(--ink)}
+  footer.site p.nl-note{font-size:12.5px;color:var(--muted-d);margin:18px 0 0}
+  .legal{border-top:1px solid var(--line-d);padding:24px 0 28px;display:flex;flex-wrap:wrap;gap:8px 26px;font-size:12px;color:var(--muted-d);align-items:center}
+  /* the copyright rides the right edge (user 10.09) */
+  .legal span:last-child{margin-left:auto}
 
-  /* [bg decor motifs removed 03.09.2026 — user request (hybrid variant); v1 original keeps them] */
-
-  /* toast for mockup links */
-  #toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:99;box-shadow:0 8px 24px rgba(2,10,10,.35)}
+  /* toast for mockup links — a rectangle like everything else */
+  #toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:14px 24px;border-radius:0;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:99;border:1px solid var(--line-ds)}
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-  /* scroll to top: a fixed circle bottom-right (circles are page language, cf. the
-     socials), revealed once the header is out of view. No amber — this is navigation,
-     not a money action; it takes the global 3px blue focus ring like any other button.
-     Progressive enhancement: with JS off it keeps [hidden] and the page is unaffected.
-     WIX: Wix has a native Back-to-Top button element — use it in the rebuild; this is
-     the mockup equivalent. */
-  .totop{position:fixed;right:24px;bottom:24px;z-index:90;display:flex;align-items:center;justify-content:center;width:48px;height:48px;padding:0;border-radius:50%;background:var(--cream);border:1.5px solid var(--grey);color:var(--ink);box-shadow:0 2px 8px rgba(44,44,44,.14);cursor:pointer;opacity:0;transition:opacity .2s,border-color .15s}
-  .totop[hidden]{display:none}   /* display:flex above would otherwise defeat the UA rule */
-  .totop.show{opacity:1}
-  .totop:hover{border-color:var(--ink)}
-  /* the sentinel sits at the top of the hero, i.e. at the document position just below
-     the sticky header; the observer watches it instead of the header itself, which is
-     position:sticky and so never leaves the viewport. No layout impact. */
-  .totop-sentinel{position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none}
-
-  /* ================= CONTENT REVEAL ON SCROLL =================
-     Whole content blocks fade in once as they enter the viewport — a card fades as
-     one unit (photo + title + description together), never word by word or part by
-     part. Opacity ONLY — no transform: the photos carry a hover zoom on their inner
-     element, .sthumb uses transform:translateY(-50%) for its centring, and a reveal
-     transform would fight both. Nothing here changes layout, so there is no shift
-     when an element reveals.
-     Progressive enhancement: .rv (the hidden state) is added by JS at the bottom of
-     the page and ONLY there — with JS off, or without IntersectionObserver, or under
-     prefers-reduced-motion, the class never appears and the page renders complete.
-     .rv.rv-in is (0,2,0) so the revealed state cannot lose to the hidden rule.
-     WIX: = Wix native "Fade In" on-scroll animation, set on the strip or on the
-     individual element/box; stagger = Wix's built-in animation delay field. */
-  .rv{opacity:0}
-  .rv.rv-in{opacity:1;transition:opacity .6s ease}
-  /* `transition` is a shorthand: the cascade resolves it to ONE value per element,
-     it never merges two lists. .sidecard carries its own hover transition (box-shadow
-     + background), which .rv.rv-in (0,2,0) would otherwise replace — the hover plate
-     would then snap in on every revealed row. So the revealed row restates both, at
-     (0,3,0) and later in source, and wins outright. .sidecard is the only revealed
-     block with a transition of its own (the others declare theirs on a child:
-     .tframe .tphoto, .eb-photo, .sthumb::before), so nothing else needs this. */
-  .sidecard.rv.rv-in{transition:box-shadow .18s ease, background-color .18s ease, opacity .6s ease}
-
-  /* ================= HEADING WORD-RISE =================
-     A heading's words rise into place from below, one after the next, each starting
-     0.1s after the one before it. Every word sits in its own inline-block mask with
-     overflow:hidden; the mask is padded .22em at the foot and pulled back by the same
-     amount, so descenders (p, g, y) are not clipped while the box still ends on the
-     text baseline area and the word is hidden until it arrives.
-     SCOPE: the hero .fb-title (runs on load) and the four STANDALONE section headings
-     .wwd-intro h2, .wwd-title, .funders h2, .partners h2 (run on reveal, ≥900px only).
-     .ev-head / .v-head are rows — heading plus link — and keep the block fade above as
-     one unit; word-rising a heading inside a fading row would double the effect.
-     Progressive enhancement: the word markup and the classes below are built by JS and
-     nowhere else, so with JS off, without IntersectionObserver or under reduced motion
-     the headings are ordinary, fully visible text.
-     WIX: word-by-word rise = custom (Velo/embed needed); native Wix approximation =
-     the "Rise" text animation applied to the whole heading. */
-  .wr-word{display:inline-block;overflow:hidden;padding-bottom:.22em;margin-bottom:-.22em;vertical-align:bottom}
-  .wr-word > span{display:inline-block}
-  @keyframes word-rise{0%{transform:translateY(1.25em)}100%{transform:none}}
-  /* split and waiting (scroll headings between init and their reveal) */
-  .wr .wr-word > span{transform:translateY(1.25em)}
-  /* the run state is (0,3,1) — it cannot lose to the waiting rule — and `both` holds
-     the low start through the per-word delay and the final position afterwards */
-  .wr.wr-run .wr-word > span{transform:none;animation:word-rise .55s cubic-bezier(0.22,1,0.36,1) both}
-  /* hero only: .fb-title carries a 12px text-shadow for legibility over the photo, and
-     a mask that clips tight to the word would clip that halo into little rectangles.
-     The extra padding is cancelled by an identical negative margin, so the mask's
-     margin box — and therefore the line box and the hard line breaks — is exactly
-     as it was. The FOOT keeps the .22em of the base rule: that edge does the hiding. */
-  .fb-title .wr-word{padding:.34em .34em .22em;margin:-.34em -.34em -.22em}
-
+  /* ===== photo hover zoom: slow scale-in on hover, back on leave.
+     Tiles/banner clip via overflow:hidden + transform; sidecard thumbs are
+     bare pseudo-elements (nothing to clip against), so they zoom via an
+     animatable background-size instead. Wix: "zoom on hover" image effect. */
+  .tile .tphoto{transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+  .tile:hover .tphoto,.tile:focus-visible .tphoto{transform:scale(1.05)}
+  .event-banner .eb-photo{transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+  .event-banner:hover .eb-photo,.event-banner:focus-within .eb-photo{transform:scale(1.05)}
+    
   @media (prefers-reduced-motion: reduce){
-    .btn,.plogo{transition:none}
-    /* belt and braces: the script already refuses to add .rv under reduced motion,
-       but if the preference is switched on after the reveal has started, the photos
-       land visible and instantly. (0,2,0) + later in source, so it wins both ways. */
-    .rv,.rv.rv-in{opacity:1;transition:none}
-    /* same belt and braces for the word-rise: the splitter refuses to run under reduced
-       motion, but if the preference is switched on after a heading has been split the
-       words sit where they belong, visible and still. The second selector matches the
-       (0,3,1) run rule above and, being later in source, switches it off too. */
-    .wr .wr-word > span,.wr.wr-run .wr-word > span{transform:none;animation:none}
-    /* events: the hover zoom is dropped, the row hover plate stays but appears
-       instantly. Only .sthumb::before is neutralised — .sthumb itself keeps its
-       translateY(-50%) centring, which is layout, not motion. */
-    .eb-photo,.sthumb::before,.tframe .tphoto,.lg-photo .note-photo,
-    .tile b::after{transition:none;transform:none}
-    .event-banner:hover .eb-photo,.event-banner:focus-within .eb-photo,
-    .sidecard:hover .sthumb::before,.sidecard:focus-visible .sthumb::before,
-    .tile:hover .tframe .tphoto,.tile:focus-visible .tframe .tphoto,
-    .tile:is(:hover,:focus-visible) b::after,
-    .lg-photo:hover .note-photo{transform:none}
-    /* the row hover plate stays — a shadow is a state, not motion; only its
-       animation is dropped, so it appears instantly. The second selector matches the
-       (0,3,0) reveal override above and, being later in source, switches it off too. */
-    .sidecard,.sidecard.rv.rv-in{transition:none}
-    .v-rail.is-rolling{overflow-x:auto}         /* no drift; the rail stays a row you can push */
+    .logorail{animation:none;width:auto;flex-wrap:wrap;justify-content:center}
+    .logoset{flex-wrap:wrap;justify-content:center}
+    .logoset[aria-hidden]{display:none}
+    .logoclip{margin-inline:0;-webkit-mask-image:none;mask-image:none}
+    .fb-title .w,.fb-sub,.fb-cta{animation:none;opacity:1;transform:none}
+    .skip,.btn,.tile,.plogo,.sidecard,.sidecard b,.slide-link,.socials a,
+    nav.main a:not(.btn-donate)::after,#toast,
+    .tile .tbody span.go,.tile .tphoto,.event-banner .eb-photo,.sidecard::before{transition:none}
+    .tile:hover .tphoto,.tile:focus-visible .tphoto,
+    .event-banner:hover .eb-photo,.event-banner:focus-within .eb-photo{transform:none}
+        .v-rail.is-rolling{overflow-x:auto}
     .v-rail.is-rolling .v-track{animation:none}
-    /* the scroll-to-top jump (and every in-page anchor) lands instantly */
-    html{scroll-behavior:auto}
-    .totop{transition:none}
   }
 
   /* ================= RESPONSIVE — TABLET ≤900 / MOBILE ≤560 =================
-     Additive only: nothing above this line is edited, so >900px is unchanged.
-     Same two breakpoints the voices rail already uses. */
-
+     The dark bands hold at every width; only the columns stack. */
   @media (max-width:900px){
     .wrap{padding:0 24px}
+    .v-head{display:block}
+    .v-head .v-all{display:inline-block;margin-top:16px}
 
-    /* the dropped search panel follows the narrower wrap padding */
-    .hsearch-input{right:24px}
+    /* hero: the photo becomes a plain full-width band above the copy, still sharp */
+    /* hero C on tablet/mobile: photo + title fill the screen, the ink strip is
+       assembled from the sub and CTA rows below the fold line */
+    .fridgebanner{min-height:100svh;padding:0}
+    .fridgebanner::after{display:none}
+    .fb-stack{grid-template-columns:1fr;grid-template-rows:1fr auto auto;column-gap:0;min-height:100svh}
+    .fb-title{grid-row:1}
+    .fb-sub{grid-column:1;grid-row:2;background:rgba(2,10,10,.62);margin:0 -24px;padding:22px 24px 6px;max-width:none}
+    .fb-cta{grid-column:1;grid-row:3;background:rgba(2,10,10,.62);margin:0 -24px;padding:12px 24px 26px}
+    .fb-stack{max-width:100%}
+    .fb-copy{max-width:100%}
+    .fb-title{font-size:clamp(40px,8.5vw,72px)}
+    .fb-cta .btn{flex:1 1 auto;text-align:center}
 
-    /* hero: the fixed 600px can't hold copy + widget once they stack */
-    .fridgebanner{height:auto;padding:48px 0}
-    /* the 90deg wash is down to .05 by 72%, so full-width copy loses its scrim */
-    .fridgebanner::before{background:linear-gradient(180deg,rgba(28,28,26,.62) 0%,rgba(28,28,26,.46) 50%,rgba(28,28,26,.62) 100%)}
+    /* intro spread stacks: text first, legacy figure below it */
+    .wwd-sub{max-width:none}
+    /* legacy band stacks: photo above text */
+    .wwd-note{grid-template-columns:1fr;row-gap:24px;margin-top:44px;padding:24px}
+    .wwd-note .note-photo{grid-row:auto}
+    .wwd-note .note-sign{grid-column:1;margin-top:4px}
+    .wwd-note .note-photo{width:100%;max-width:400px;height:auto}
 
-    /* events: single column — the 4:5 banner keeps its frame, the rows follow
-       underneath and already fit, so they are left alone */
-    .events-split{grid-template-columns:minmax(0,1fr)}
-    .event-banner{width:100%;max-width:448px;height:auto;aspect-ratio:4/5}
-    /* stacked, the rows are no longer stretched to the banner and are sized by their
-       own text (two-line date, the rest one line); since the thumb is out of the
-       tracks it can no longer
-       hold them apart, so reserve its height: 148 + 2×26 insets + 1px hairline */
-    .sidecard{min-height:201px}
+    /* events: single column — banner keeps its 4:5 frame, list rows follow */
+    .events-split{grid-template-columns:1fr}
+    .event-banner{width:100%;max-width:480px;height:auto;aspect-ratio:4/5}
+    .side-all{position:static;display:block;margin-top:18px;text-align:right}
 
-    /* offers: one tile per row — every group tempo collapses to a single column */
-    .otiles{grid-template-columns:minmax(0,1fr);gap:30px}
-    .c5,.c6,.c7,.c12{grid-column:auto}
-    /* the c7 aspect reset that used to live here is gone with the aspect ratios
-       (uniform 320px photo height, user 09.09.2026): the single column inherits the
-       same 320px, which also fixes the old 558px-tall stacked photos. */
+    .chapter{grid-template-columns:1fr;gap:20px;margin-top:64px}
+    .group-head{grid-template-columns:1fr;min-height:0}
+    .ghead-photo{order:-1;min-height:240px}
+    .chapter:nth-of-type(even) .ghead-text{order:0}
+    .ghead-text{padding:28px 20px}
+    .group-label .gtxt{font-size:24px}
+    .tile .tphoto{width:calc(100% - 40px);margin:20px 20px 0;height:260px}
+    /* tempo variations collapse in the single column */
+    .chapter:nth-of-type(2) > a.tile:first-of-type .tphoto{height:300px}
+    /* mirrored events split returns to a plain stack */
+    .event-banner{grid-column:1;grid-row:auto}
+    .event-side{grid-column:1;grid-row:auto}
+    .tile .tbody{padding:16px 20px 32px}
+    .tile .tbody span.go{right:20px;bottom:20px}
 
-    /* legacy feature: one column — copy first, photo (with its caption panel) below */
-    .wwd-note{grid-template-columns:minmax(0,1fr);gap:28px}
-
-    /* 150px tiles must wrap rather than squash */
-    .funderrow{flex-wrap:wrap}
-
+    .funderrow{flex-wrap:wrap;gap:32px}
     footer.site .cols{grid-template-columns:1fr 1fr;gap:36px}
   }
 
   @media (max-width:560px){
     .wrap{padding:0 18px}
-
-    /* section headings hold the pre-04.09.2026 32px on phones: 42px is oversized on a
-       339px column ("Working in partnership with" would break badly). Only tablet and
-       desktop take the larger size. Listed AFTER .funders h2 / .v-head h2 above, so
-       the equal-specificity rules lose on source order — no !important needed. */
-    .wwd-intro h2,.funders h2,.partners h2,.ev-title,.wwd-title,.v-head h2{font-size:32px}
-
-    /* Header keeps every link visible and lets the nav wrap — no hamburger here.
-       Wix supplies its own mobile menu on the real site, so a custom burger would
-       be thrown away in the rebuild. */
     header.site .wrap{gap:16px;min-height:0}
-    .logo img{height:48px}
-    /* 18px → 14px: measured, the search icon otherwise costs the wrapped nav a whole
-       extra row at 375px (header 144px → 185px). At 14px the phone header keeps the
-       same three rows and the same 144px it had before the search was added. */
+    .logo img{height:46px}
     nav.main{gap:0 14px}
-    nav.main a{font-size:13.5px}
-    nav.main a.btn-donate{font-size:13.5px;padding:11px 22px;margin-left:0}
+    nav.main a{font-size:10px}
+    nav.main a.btn-donate{font-size:10px;padding:12px 20px;margin-left:0}
+    .nav-search{display:none}
 
-    /* on a phone the dropped panel takes the full column instead of 260px */
-    .hsearch-input{left:18px;right:18px;width:auto}
+    .wwd-intro h2,.funders h2,.partners h2,.ev-title,.wwd-title,.v-head h2{font-size:28px}
 
-    /* hero */
-    .fb-title{font-size:26px}
-    .fb-copy{max-width:100%}
-    .minidon{width:100%}
-    /* 5 fixed 70px buttons + gaps overflow the widget; flexible basis gives 3 + 2 */
-    .mini-amounts .amt{width:auto;flex:1 1 30%;min-width:0}
+    .fridgebanner{padding:36px 0 52px}
+    .fb-title{font-size:clamp(34px,11.5vw,44px)}
+    .fb-sub{margin:0 -18px;padding:20px 18px 4px}
+    .fb-cta{margin:0 -18px;padding:12px 18px 24px}
+    .fb-cta{gap:12px}
+    .fb-cta .btn{width:100%;padding:15px 20px}
 
-    /* legacy feature: nothing to override — the ≤900 single-column rule already
-       stacks it, and the photo + caption panel scale with the column */
+    .wwd-sub{font-size:19px}
+    .wwd-note .note-photo{width:100%;height:auto;max-width:400px;margin-bottom:18px}
 
-    /* events — the 4:5 banner frame shrinks with the column; smaller type + thumbs */
-    /* "Upcoming events" (Lora 600 32px ≈ 253px) + "All events →" (≈ 84px) + the 28px
-       gap needs ≈ 365px, more than the 339px column at 375px, so the head row stacks
-       and the link keeps its right edge under the heading. */
-    .ev-head{display:block}
-    .ev-all{display:block;text-align:right;margin-top:8px}
-    .event-banner{max-width:none}
-    .event-banner h3{font-size:24px}
-    .event-banner p{font-size:15.5px}
-    .eb-inner{padding:0 22px 22px}
-    .sidecard{grid-template-columns:96px minmax(0,1fr);column-gap:14px;min-height:173px}
-    .sthumb{width:96px;height:120px}   /* reserve above: 120 + 2×26 + 1 */
-    .sidecard b{font-size:16px}
+    .event-banner{height:auto;min-height:260px}
+    .event-banner h3{font-size:26px}
+    .event-banner p{font-size:15px}
+    .eb-inner{max-width:100%;padding:0 22px 24px}
 
-    .statrow{gap:20px 36px}
-    .stat b{font-size:32px}
+    .sidecard{grid-template-columns:90px 1fr;column-gap:14px;padding:18px 16px}
+    .sidecard::before{width:90px;height:113px}
+    .sidecard b{font-size:18px}
 
-    footer.site .cols{grid-template-columns:1fr;gap:28px;padding:44px 0 36px}
+    .tile .tphoto{width:calc(100% - 36px);margin:18px 18px 0;height:220px}
+    .tile .tbody{padding:14px 18px 28px}
+    .tile b{font-size:18px}
+    .tile .tbody span.go{right:18px;bottom:18px}
+    .chapter{margin-top:48px}
+    p.gdesc{font-size:15.5px}
 
-    /* mockup toast labels are longer than a 375px screen */
+    /* small screens: scrim the whole photo, stats go single column full width */
+    .stats{padding:72px 0 80px}
+    .stats::before{width:420px;height:420px;right:-160px}
+    .statrow{gap:36px 0;max-width:none}
+    .stat{flex:0 0 100%;padding-left:24px}
+    .stat b{font-size:46px}
+
+    /* mobile keeps air but not the desktop's 112px caverns */
+    .wwd-intro,.events-hero,section.wwd,.stats,.funders,.partners{padding-top:68px;padding-bottom:76px}
+    .chapter{margin-top:44px}
+    .chapter:first-of-type{margin-top:20px}
+    .ghead-photo{min-height:200px}
+    .ghead-text{padding:24px 18px}
+
+    .voices{padding:68px 0 76px}
+    .vcard{flex:0 0 100%}
+    .v-nav{display:none}
+
+    footer.site .cols{grid-template-columns:1fr;gap:28px;padding:48px 0 36px}
     #toast{max-width:calc(100% - 32px);text-align:center;line-height:1.45}
-
-    /* scroll to top keeps its 48px touch target, closer to the corner */
-    .totop{right:16px;bottom:16px}
   }
+
+  /* ============================================================
+     CORNER RADIUS 3px (user 09.09) — client override of the skin's
+     "radius 0 everywhere" rule, applied to PHOTOS, white CARDS,
+     BUTTONS and the newsletter input.
+     Wix: set corner radius 3 on image frames and card containers.
+     ============================================================ */
+  .tile .tphoto,.wwd-note .note-photo,.sidecard::before,.event-banner .eb-photo,
+  .v-thumb,.v-av,.ghead-photo,
+  .wwd-note,.chapter,.plogo,.flogo-tile,.vcard,.sidecard,.event-banner,
+  .btn,nav.main a.btn-donate,.nl input,#toast{
+    border-radius:3px}
+  /* the chapter's white children (head text, tiles) painted over its rounded
+     corners — clip them to the radius */
+  .chapter,.event-banner{overflow:hidden}
 </style>
 </head>
 <body>
@@ -749,14 +711,11 @@
     <a href="#" data-page="Get involved — Volunteer · Donate goods · Food donations">Get involved</a>
     <a href="#" data-page="Contact us — map + contact form">Contact us</a>
     <a href="#" data-page="The founder — Des Kay">The founder</a>
-    <!-- = native Wix Site Search app (search bar element + results page); icon-expand is
-         optional in Wix — a permanently visible small search bar is the zero-effort
-         native form. Mockup only: with JS off the icon does nothing and the input
-         stays hidden; the real Wix element is a plain form and needs no script. -->
-    <div class="hsearch">
-      <button class="hsearch-btn" type="button" aria-label="Search the site" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="15.3" y1="15.3" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-      <input class="hsearch-input" type="search" placeholder="Search…" aria-label="Search the site" hidden>
-    </div>
+    <!-- site search (user 10.09). Wix: the native Site Search bar element. -->
+    <form class="nav-search" role="search" aria-label="Site search">
+      <svg class="ns-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2a8 8 0 1 0 4.9 14.32l5.39 5.38 1.41-1.41-5.38-5.39A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg>
+      <input type="search" name="q" placeholder="Search" aria-label="Search the site">
+    </form>
     <a class="btn btn-donate" href="#" data-page="Donate (call to action page)">Donate</a>
   </nav>
 </div></header>
@@ -766,30 +725,17 @@
 
 <!-- ================= 1b · DONATE BANNER ================= -->
 <section class="fridgebanner" id="main" aria-label="Make a donation">
-  <!-- scroll-to-top trigger point: 1px marker at the top of the hero, watched by the
-       observer (the header above is sticky, so it never scrolls out of view itself) -->
-  <span class="totop-sentinel" aria-hidden="true"></span>
   <div class="wrap">
     <div class="fb-stack">
     <div class="fb-copy">
-      <h2 class="fb-title">We rescue food,<br>repair and reuse things<br>and support local<br>community in Kingston</h2>
+      <h2 class="fb-title"><span class="w">Rescue</span> <span class="w hw-g">Food.</span><br><span class="w">Reuse</span> <span class="w hw-g">Things.</span><br><span class="w">Support</span> <span class="w hw-b">Community.</span></h2>
+      <p class="fb-sub">We rescue food, repair and reuse things and support local community in Kingston.</p>
     </div>
-    <div class="minidon">
-      <!-- ['Choose your impact' label removed 03.09.2026 — designer pass, user-approved; v1 original keeps it] -->
-      <div class="don-freq" role="group" aria-label="Donation frequency">
-        <button class="freq sel" data-freq="once" aria-pressed="true">One-time</button>
-        <button class="freq" data-freq="monthly" aria-pressed="false">Monthly</button>
-      </div>
-      <!-- Wix hand-off: build as two linked toggle buttons (or Wix multi-state box). Monthly requires PayPal recurring donations to be enabled on the STWC PayPal charity account — mockup only here. -->
-      <div class="mini-amounts">
-        <button class="amt" data-amt="5">£5</button>
-        <button class="amt" data-amt="10">£10</button>
-        <button class="amt sel" data-amt="25">£25</button>
-        <button class="amt" data-amt="50">£50</button>
-        <button class="amt" data-amt="other">Other</button>
-      </div>
-      <a class="btn btn-donate2" href="#" id="donGo" data-page="Donate £25 — PayPal payment flow">Donate with PayPal</a>
-      <p class="don-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 0 1 6 0v3H9z"/></svg>Secure PayPal checkout. No account needed.</p>
+    <!-- widget removed 09.09 (design exploration): hero CTAs instead; the donate
+         flow lives on the Donate page. Wix: two buttons, money one amber/orange. -->
+    <div class="fb-cta">
+      <a class="btn btn-donate2" href="#" data-page="Donate (call to action page)">Donate</a>
+      <a class="btn btn-ghost" href="#" data-page="Get involved — Volunteer · Donate goods · Food donations">How can I help?</a>
     </div>
     </div>
   </div>
@@ -799,87 +745,62 @@
 <section class="wwd-intro"><div class="wrap">
   <h2>What we do</h2>
   <p class="wwd-sub">At Save The World Club, we help our community thrive. We rescue fresh food and share it with neighbours who need it, give unwanted things a second life, help our spaces work for the whole community in an eco-friendly way, and make everyday sustainable living easier. Whatever we do, everyone's welcome — and the planet always comes first. <a class="sub-more" href="#" data-page="About us">More...</a></p>
-  <!-- Legacy feature layout per user reference 04.09.2026 — NEW COPY (eyebrow, heading,
-       caption, link wording) pending client sign-off, like all copy on this page.
-       WIX: two-column strip + an overlay text box pinned to the right edge of the image. -->
   <div class="wwd-note">
-    <div class="lg-text">
-      <div class="lg-eyebrow">Leave a lasting impact</div>
-      <h3 class="lg-title">Leaving a legacy</h3>
-      <p>We rent our warehouse in Kingston, and we're raising the money to buy it. If that isn't possible, we'll buy another building nearby, so the work stays in Kingston either way. Much of that money will come from gifts left in wills. If you're writing yours, please think of us.</p>
-      <a class="sub-more" href="#" data-page="Legacies">Find out more about leaving a legacy →</a>
-    </div>
-    <figure class="lg-photo">
-      <!-- [[PLACEHOLDER PHOTO — AI/stock image, breaches the STWC brand guide's ban on third-party imagery. Client-approved for the mockup only (2026-09-02) to show the layout. MUST be replaced with a real STWC photograph before launch, and given descriptive alt text at that point.]] -->
-      <img class="note-photo" src="assets/legacy-placeholder.jpg" alt="" width="400" height="300">
-      <figcaption class="lg-cap">A fairer, greener Kingston for future generations.</figcaption>
-    </figure>
+    <!-- Des and Tarik — client-supplied photo (10.09), replaces the legacy placeholder. Give it descriptive alt text once names/roles are confirmed. -->
+    <img class="note-photo" src="assets/Des-and-tarik.png" alt="" width="1448" height="1086">
+    <p>We rent our warehouse in Kingston, and we're raising the money to buy it. If that isn't possible, we'll buy another building nearby, so the work stays in Kingston either way. Much of that money will come from gifts left in wills. If you're writing yours, please think of us. <a class="sub-more" href="#" data-page="Legacies">Leaving a legacy →</a></p>
+    <!-- DRAFT signature — name/wording pending STWC sign-off. Wix: text box, Caveat font. -->
+    <p class="note-sign" aria-hidden="true">Des Kay, Founder</p>
   </div>
 </div></section>
 
-<!-- ================= 2 · UPCOMING EVENTS: BANNER + SIDE ROWS ================= -->
-<!--
-  Events display rules for the split layout (fix in the Wix hand-off; mockup shows the 4-events state).
-  "All events →" always sits under the heading, left-aligned, in every state:
-    4+ events: banner (nearest event) + 3 side rows
-    3 events:  banner + 2 side rows (stretch to fill the column height)
-    2 events:  banner + 1 side row
-    1 event:   banner full-width; no side column
-    0 events:  the whole block disappears
 
-  Side-row meta is TWO lines — date on line 1, venue on line 2 (the <br> in .sdate).
-  This maps 1:1 onto the Wix Events list widget, which exposes the date and the
-  location as separate fields: stack the two fields in the repeater item instead of
-  concatenating them into one string, and no separator character is needed.
-  The banner chip stays ONE line ("date · venue") and keeps the middot.
+<!-- ================= 2 · UPCOMING EVENTS: BANNER + CARDS ================= -->
+<!--
+  Events display rules for the split layout (fix in the Wix hand-off; mockup shows the 4-events state):
+    4+ events: banner (nearest event) + 3 side cards + "All events →" at the bottom of the column
+    3 events:  banner + 2 side cards (stretch to fill the column height) + "All events →"
+    2 events:  banner + 1 side card + "All events →"
+    1 event:   banner full-width, "All events →" inside the banner; no side column
+    0 events:  the whole block disappears
 -->
 <section class="events-hero" aria-label="Upcoming events"><div class="wrap">
 
-  <!-- Wix: one standard strip with two text elements — the heading pinned left, the
-       "All events →" link pinned right on the same row. No app or Velo needed. -->
-  <div class="ev-head">
-    <h2 class="ev-title">Upcoming events</h2>
-    <a class="ev-all" href="#" data-page="Events — all events">All events →</a>
-  </div>
-
+  <h2 class="ev-title">Upcoming events</h2>
   <div class="events-split">
 
     <article class="event-banner">
-      <div class="eb-photo"></div>
-      <div class="eb-inner">
-        <span class="chip">Fri 14 Aug · 18 Southsea Rd</span>
-        <h3>Jam Sessions</h3>
-        <p>Bring an instrument or just yourself — an open community jam at the warehouse, every Friday.</p>
-        <a class="slide-link" href="#" data-page="Events — Jam Sessions event page" aria-label="More about Jam Sessions">More...</a>
-      </div>
-    </article>
+    <div class="eb-photo"></div>
+    <div class="eb-inner">
+      <span class="chip">Fri 14 Aug · 18 Southsea Rd</span>
+      <h3>Jam Sessions</h3>
+      <p>Bring an instrument or just yourself — an open community jam at the warehouse, every Friday.</p>
+      <a class="slide-link" href="#" data-page="Events — Jam Sessions event page" aria-label="More about Jam Sessions">More...</a>
+    </div>
+  </article>
 
     <div class="event-side">
       <a class="sidecard" href="#" data-page="Events — Kingston Orchard weekly session">
-        <span class="sthumb" aria-hidden="true"></span>
-        <span class="sdate">Sun 16 Aug<br>Knollmead Allotments</span>
+        <span class="sdate">Sun 16 Aug<span class="svenue">Knollmead Allotments</span></span>
         <b>Weekly Session at Kingston Orchard Project</b>
         <span class="sdesc">Hands-on gardening at the community orchard, tools provided.</span>
       </a>
       <a class="sidecard" href="#" data-page="Events — Welcome Table Café">
-        <span class="sthumb" aria-hidden="true"></span>
-        <span class="sdate">Tue 18 Aug<br>18 Southsea Rd</span>
+        <span class="sdate">Tue 18 Aug<span class="svenue">18 Southsea Rd</span></span>
         <b>STWC Welcome Table Café</b>
         <span class="sdesc">Affordable meals and good company at our warehouse café.</span>
       </a>
       <a class="sidecard" href="#" data-page="Events — Square 1 Café BBQ Special">
-        <span class="sthumb" aria-hidden="true"></span>
-        <span class="sdate">Sat 29 Aug<br>Kingston Environment Centre</span>
+        <span class="sdate">Sat 29 Aug<span class="svenue">Kingston Environment Centre</span></span>
         <b>Square 1 Café BBQ Special</b>
         <span class="sdesc">A summer BBQ at the free Saturday café in New Malden.</span>
       </a>
+      <a class="side-all" href="#" data-page="Events — all events">All events →</a>
     </div>
 
   </div>
 
 </div></section>
-
-
 
 <!-- ================= 3 · WHAT WE DO ================= -->
 <section class="wwd"><div class="wrap">
@@ -887,130 +808,159 @@
   <h2 class="wwd-title">What we offer</h2>
 
   <div class="tilegrid">
-
-    <div class="ogroup">
-      <h3 class="group-label">Our Hub</h3>
-      <p class="gdesc">Our <a class="gkey" href="#" data-page="Circulatory — landing page (SEO key phrase link)">Reuse &amp; Repair Hub in Kingston</a> is where we cut waste and support people.</p>
-      <div class="otiles">
-        <a class="tile t-blue c7" href="#" data-page="Charity Shop - The Circulatory">
-          <span class="tframe"><img class="tphoto" src="assets/tile-warehouse.jpg" alt="STWC warehouse building at 18 Southsea Road with branded van"></span>
-          <b>Charity Shop - The Circulatory</b>
-          <span class="tdesc">Donate goods, browse, and give items a second life.</span>
-        </a>
-        <a class="tile t-blue c5" href="#" data-page="Revive-all Repair Hub">
-          <span class="tframe"><img class="tphoto" src="assets/tile-repair.jpg" alt="Small electricals being repaired on the Revive-all workbench"></span>
-          <b>Revive-all Repair Hub</b>
-          <span class="tdesc">Free electrical repairs from our Revive-all team — you only pay for replacement parts.</span>
-        </a>
-        <!-- Hub rows unified 7+5 (left photos equal width) — user 09.09.2026 -->
-        <a class="tile t-blue c7" href="#" data-page="Prop Hire">
-          <span class="tframe"><img class="tphoto" src="assets/tile-prophire.jpg" alt="Inside the warehouse — props, furniture and curiosities"></span>
-          <b>Prop Hire</b>
-          <span class="tdesc">Rent items you don't want to buy — our library of things, from furniture to one-off finds.</span>
-        </a>
-        <a class="tile t-blue c5" href="#" data-page="Venue Hire">
-          <!-- tile-venue-hire.jpg = blog-archive workshop crop 04.09.2026, closes the Venue Hire
-               photo duplicate open since 14.08; identifiable faces — Hugh to confirm consent before launch -->
-          <span class="tframe"><img class="tphoto" src="assets/tile-venue-hire.jpg" alt="A community workshop in the hireable event space at the warehouse"></span>
-          <b>Venue Hire</b>
-          <span class="tdesc">Hire our kitchen, café and event space for your gathering, workshop or production.</span>
-        </a>
+    <div class="chapter">
+<div class="group-head">
+      <div class="ghead-text">
+        <div class="group-label"><span class="grow"><span class="gdot" style="background:var(--blue)"></span><span class="gtxt">Our Hub</span></span></div>
+        <p class="gdesc">Our <a class="gkey" href="#" data-page="Circulatory — landing page (SEO key phrase link)">Reuse &amp; Repair Hub in Kingston</a> is where we cut waste and support people.</p>
       </div>
+      <div class="ghead-photo" aria-hidden="true"></div>
     </div>
 
-    <div class="ogroup">
-      <h3 class="group-label">Food</h3>
-      <p class="gdesc">Our Food projects turn surplus into <a class="gkey" href="#" data-page="Food — landing page (SEO key phrase link)">Affordable and Free Food in Kingston</a>, shared through cafés, community fridges and cooking together.</p>
-      <div class="otiles">
-        <!-- Food: Community Fridge promoted to full-width lead tile — user 10.09.2026;
-             rows below stay 5+7; the deliberate empty half-row is gone (catering now
-             pairs with Square 1).
-             Photo = tile-fridge-lead.jpg (user photo, optimised 10.09.2026): crates of
-             fresh produce, no faces, so no consent question. Source is 1536×1024 against
-             a 1120×320 frame, so the earlier upscale/softness caveat is RESOLVED — no
-             re-export needed. Cropped with .tp-low (object-position 50% 55%) because the
-             crates sit below centre; the default centre crop clipped them.
-             The original upload community_fridge_banner1.jpg stays in assets untouched.
-             community_fridge_banner.jpg is unreferenced (retirable with its .png sibling);
-             tile-fridge.jpg is now used only as the 50px voices thumb. -->
-        <a class="tile t-green c12" href="#" data-page="Community Fridge">
-          <span class="tframe"><img class="tphoto tp-low" src="assets/tile-fridge-lead.jpg" alt="Crates of rescued fresh food ready for the community fridge"></span>
-          <b>Community Fridge</b>
-          <span class="tdesc">Fresh surplus food rescued nightly from local retailers — free for anyone who needs it.</span>
-        </a>
-        <a class="tile t-green c5" href="#" data-page="Welcome Table Café">
-          <span class="tframe"><img class="tphoto" src="assets/tile-wtc-food.jpg" alt="Freshly baked muffins at the Welcome Table Café"></span>
-          <b>Welcome Table Café</b>
-          <span class="tdesc">Our affordable charity café at the warehouse — every Tuesday 1–5pm, with all funds supporting our other projects.</span>
-        </a>
-        <a class="tile t-green c7" href="#" data-page="Community Kitchen">
-          <span class="tframe"><img class="tphoto" src="assets/tile-kitchen-interior.jpg" alt="The STWC community kitchen"></span>
-          <b>Community Kitchen</b>
-          <span class="tdesc">Our fully equipped 200&nbsp;sq&nbsp;ft kitchen hosts free cooking sessions like World on a Plate.</span>
-        </a>
-        <!-- Food rows unified 5+7 (mirror of Hub's 7+5) — user 09.09.2026 -->
-        <a class="tile t-green c5" href="#" data-page="Square 1 Café">
-          <span class="tframe"><img class="tphoto" src="assets/tile-square1-pies.jpg" alt="Home-baked apple tarts at Square 1 Café"></span>
-          <b>Square 1 Café</b>
-          <span class="tdesc">A free, welcoming Saturday café at Kingston Environment Centre, New Malden — a warm space where everyone is welcome.</span>
-        </a>
-        <a class="tile t-green c7" href="#" data-page="Surplus Food Event Catering (KICS)">
-          <!-- user-supplied photo (donut.avif → tile-kics-donuts.jpg) 07.09.2026 -->
-          <span class="tframe"><img class="tphoto" src="assets/tile-kics-donuts.jpg" alt="Glazed mini donuts with rainbow sprinkles by KICS catering"></span>
-          <b>Surplus Food Event Catering</b>
-          <span class="tdesc">By our KICS team (Kingston Intercultural Catering Service) — every booking funds our community food projects.</span>
-        </a>
-      </div>
+    <a class="tile t-blue" href="#" data-page="Charity Shop - The Circulatory">
+      <img class="tphoto" src="assets/tile-warehouse.jpg" alt="STWC warehouse building at 18 Southsea Road with branded van">
+      <span class="tbody">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 8v13h5v-8h10v8h5V8L12 3zm3 15h-2v3h2v-3zm-4 0H9v3h2v-3z"/></svg></span>
+      <span><b>Charity Shop - The Circulatory</b><span>Donate goods, browse, and give items a second life.</span></span>
+      <span class="go">→</span>
+      </span>
+    </a>
+    <a class="tile t-blue" href="#" data-page="Revive-all Repair Hub">
+      <img class="tphoto" src="assets/tile-repair.jpg" alt="Small electricals being repaired on the Revive-all workbench">
+      <span class="tbody">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.7 19 13.6 9.9c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1 .1-1.4z"/></svg></span>
+      <span><b>Revive-all Repair Hub</b><span>Free electrical repairs from our Revive-all team — you only pay for replacement parts.</span></span>
+      <span class="go">→</span>
+      </span>
+    </a>
+    <a class="tile t-blue" href="#" data-page="Prop Hire">
+      <img class="tphoto" src="assets/tile-prophire.jpg" alt="Inside the warehouse — props, furniture and curiosities">
+      <span class="tbody">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10V8a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2a3 3 0 0 1 1 5.6V20h-2v-2H6v2H4v-4.4A3 3 0 0 1 5 10zm2 0a3 3 0 0 1 2 2h6a3 3 0 0 1 2-2V8a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2z"/></svg></span>
+      <span><b>Prop Hire</b><span>Rent items you don't want to buy — our library of things, from furniture to one-off finds.</span></span>
+      <span class="go">→</span>
+      </span>
+    </a>
+    <a class="tile t-blue" href="#" data-page="Venue Hire">
+      <img class="tphoto" src="assets/tile-kitchen-interior.jpg" alt="The STWC kitchen and event space available for hire">
+      <span class="tbody">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 2a7.5 7.5 0 0 0-7.1 9.9L2 17.3V22h4.7l1.3-1.3v-2.2h2.2l1.6-1.6A7.5 7.5 0 1 0 14.5 2zm2.5 4a2 2 0 1 1-2 2 2 2 0 0 1 2-2z"/></svg></span>
+      <span><b>Venue Hire</b><span>Hire our kitchen, café and event space for your gathering, workshop or production.</span></span>
+      <span class="go">→</span>
+      </span>
+    </a>
     </div>
 
-    <div class="ogroup">
-      <h3 class="group-label">Environment</h3>
-      <p class="gdesc">Our Environment projects are all about <a class="gkey" href="#" data-page="Environment — landing page (SEO key phrase link)">Orchard and Gardening in Kingston</a>.<br>We grow food, skills and friendships.</p>
-      <div class="otiles">
-        <a class="tile t-green c6" href="#" data-page="Kingston Orchard">
-          <span class="tframe"><img class="tphoto" src="assets/tile-orchard.jpg" alt="Young trees and a spade at the Kingston Orchard"></span>
-          <b>Kingston Orchard</b>
-          <span class="tdesc">Learn to grow your own food at Knollmead Allotments — weekly sessions every Sunday.</span>
-        </a>
-        <a class="tile t-green c6" href="#" data-page="Gardening Projects">
-          <span class="tframe"><img class="tphoto" src="assets/tile-garden.jpg" alt="Allotment beds with seedlings, spade and wheelbarrow"></span>
-          <b>Gardening Projects</b>
-          <span class="tdesc">Chalice Garden sessions and our new Kingston Green Roots project — growing food, skills and friendships.</span>
-        </a>
+    <div class="chapter">
+<div class="group-head">
+      <div class="ghead-text">
+        <div class="group-label"><span class="grow"><span class="gdot" style="background:var(--green)"></span><span class="gtxt">Food</span></span></div>
+        <p class="gdesc">Our Food projects turn surplus into <a class="gkey" href="#" data-page="Food — landing page (SEO key phrase link)">Affordable and Free Food in Kingston</a>, shared through cafés, community fridges and cooking together.</p>
       </div>
+      <div class="ghead-photo" aria-hidden="true"></div>
     </div>
 
-    <div class="ogroup">
-      <h3 class="group-label">Art</h3>
-      <p class="gdesc">Our Art projects bring people together through <a class="gkey" href="#" data-page="Art — landing page (SEO key phrase link)">Arts &amp; Music in Kingston</a>, and everyone's welcome to join in.</p>
-      <div class="otiles">
-        <a class="tile t-blue c7" href="#" data-page="Community Mosaics">
-          <span class="tframe"><img class="tphoto" src="assets/tile-mosaic.jpg" alt="Fox community mosaic in Kingston"></span>
-          <b>Community Mosaics</b>
-          <span class="tdesc">300&nbsp;m² of community-made mosaics across Kingston — join a workshop or walk the mosaic trail.</span>
-        </a>
-        <a class="tile t-blue c5" href="#" data-page="Music Rehearsal Studio">
-          <!-- tile photo = hero-3-jam.jpg (uncropped landscape source, fits the 320px frame);
-               identifiable faces — Hugh to confirm consent before launch -->
-          <span class="tframe"><img class="tphoto" src="assets/hero-3-jam.jpg" alt="People playing guitars at the warehouse jam session"></span>
-          <b>Music Rehearsal Studio</b>
-          <span class="tdesc">An affordable rehearsal space for local musicians at the warehouse — bookings now live.</span>
-        </a>
+    <a class="tile t-green" href="#" data-page="Community Fridge">
+      <img class="tphoto" src="assets/community_fridge_banner1.jpg" alt="Crates of rescued fresh food ready for the community fridge">
+      <span class="tbody">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm1 2v5h8V4H8zm0 7v9h8v-9H8zm2 1h1.5v4H10v-4zm0-7h1.5v3H10V5z"/></svg></span>
+      <span><b>Community Fridge</b><span>Fresh surplus food rescued nightly from local retailers — free for anyone who needs it.</span></span>
+      <span class="go">→</span>
+      </span>
+    </a>
+    <a class="tile t-green" href="#" data-page="Community Kitchen">
+      <img class="tphoto" src="assets/tile-kitchen-interior.jpg" alt="The STWC community kitchen">
+      <span class="tbody">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a4 4 0 0 0-4 4H6a2 2 0 0 0 0 4v9a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-9a2 2 0 0 0 0-4h-2a4 4 0 0 0-4-4zm0 2a2 2 0 0 1 2 2h-4a2 2 0 0 1 2-2z"/></svg></span>
+      <span><b>Community Kitchen</b><span>Our fully equipped 200&nbsp;sq&nbsp;ft kitchen hosts free cooking sessions like World on a Plate.</span></span>
+      <span class="go">→</span>
+      </span>
+    </a>
+    <a class="tile t-green" href="#" data-page="Welcome Table Café">
+      <img class="tphoto" src="assets/tile-wtc-food.jpg" alt="Freshly baked muffins at the Welcome Table Café">
+      <span class="tbody">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8h2a2 2 0 0 1 2 2v2a4 4 0 0 1-4 4h-.4A6 6 0 0 1 12 20H8a6 6 0 0 1-6-6V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v1zm0 2v4a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1h-1zM4 21h14v2H4v-2z"/></svg></span>
+      <span><b>Welcome Table Café</b><span>Our affordable charity café at the warehouse — every Tuesday 1–5pm, with all funds supporting our other projects.</span></span>
+      <span class="go">→</span>
+      </span>
+    </a>
+    <a class="tile t-green" href="#" data-page="Square 1 Café">
+      <img class="tphoto" src="assets/tile-square1-pies.jpg" alt="Home-baked apple tarts at Square 1 Café">
+      <span class="tbody">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7 12 2l8 5v2H4V7zm1 4h14v8h2v2H3v-2h2v-8zm4 2v6h2v-6H9zm4 0v6h2v-6h-2z"/></svg></span>
+      <span><b>Square 1 Café</b><span>A free, welcoming Saturday café at Kingston Environment Centre, New Malden — a warm space where everyone is welcome.</span></span>
+      <span class="go">→</span>
+      </span>
+    </a>
+    <a class="tile t-green" href="#" data-page="Surplus Food Event Catering (KICS)">
+      <img class="tphoto" src="assets/tile-kics-food.jpg" alt="Savoury pastries by KICS catering">
+      <span class="tbody">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a1.5 1.5 0 0 1 1.5 1.5c3.9.7 6.9 3.9 7.4 7.5H3.1c.5-3.6 3.5-6.8 7.4-7.5A1.5 1.5 0 0 1 12 5zM2 16h20v2H2v-2z"/></svg></span>
+      <span><b>Surplus Food Event Catering</b><span>By our KICS team (Kingston Intercultural Catering Service) — every booking funds our community food projects.</span></span>
+      <span class="go">→</span>
+      </span>
+    </a>
+    </div>
+
+    <div class="chapter">
+<div class="group-head">
+      <div class="ghead-text">
+        <div class="group-label"><span class="grow"><span class="gdot" style="background:var(--green)"></span><span class="gtxt">Environment</span></span></div>
+        <p class="gdesc">Our Environment projects are all about <a class="gkey" href="#" data-page="Environment — landing page (SEO key phrase link)">Orchard and Gardening in Kingston</a>. We grow food, skills and friendships.</p>
       </div>
+      <div class="ghead-photo" aria-hidden="true"></div>
+    </div>
+
+    <a class="tile t-green" href="#" data-page="Kingston Orchard">
+      <img class="tphoto" src="assets/tile-orchard.jpg" alt="Young trees and a spade at the Kingston Orchard">
+      <span class="tbody">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22a1 1 0 0 1-1-1v-4.3l-3.9 1.6a1 1 0 0 1-.8-1.8L11 14V9.9L4.7 12.5a1 1 0 0 1-.8-1.8L11 7.7V3a1 1 0 0 1 2 0v4.7l7.1 3a1 1 0 0 1-.8 1.8L13 9.9V14l4.7 2.5a1 1 0 0 1-.8 1.8L13 16.7V21a1 1 0 0 1-1 1z" transform="rotate(180 12 12)"/></svg></span>
+      <span><b>Kingston Orchard</b><span>Learn to grow your own food at Knollmead Allotments — weekly sessions every Sunday.</span></span>
+      <span class="go">→</span>
+      </span>
+    </a>
+    <a class="tile t-green" href="#" data-page="Gardening Projects">
+      <img class="tphoto" src="assets/tile-garden.jpg" alt="Allotment beds with seedlings, spade and wheelbarrow">
+      <span class="tbody">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4C9 4 4.5 10 4.5 15.5c0 2.4 1.6 4.5 4 4.5C15 20 20 13 20 4zM6 21c1-3 3-6 7-9-5 2-8 5-9 8l2 1z"/></svg></span>
+      <span><b>Gardening Projects</b><span>Chalice Garden sessions and our new Kingston Green Roots project — growing food, skills and friendships.</span></span>
+      <span class="go">→</span>
+      </span>
+    </a>
+    </div>
+
+    <div class="chapter">
+<div class="group-head">
+      <div class="ghead-text">
+        <div class="group-label"><span class="grow"><span class="gdot" style="background:var(--blue)"></span><span class="gtxt">Art</span></span></div>
+        <p class="gdesc">Our Art projects bring people together through <a class="gkey" href="#" data-page="Art — landing page (SEO key phrase link)">Arts &amp; Music in Kingston</a>, and everyone's welcome to join in.</p>
+      </div>
+      <div class="ghead-photo" aria-hidden="true"></div>
+    </div>
+
+    <a class="tile t-blue" href="#" data-page="Community Mosaics">
+      <img class="tphoto" src="assets/tile-mosaic.jpg" alt="Fox community mosaic in Kingston">
+      <span class="tbody">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm13 0-3 8h8l-2-8h-3z"/></svg></span>
+      <span><b>Community Mosaics</b><span>300&nbsp;m² of community-made mosaics across Kingston — join a workshop or walk the mosaic trail.</span></span>
+      <span class="go">→</span>
+      </span>
+    </a>
+    <a class="tile t-blue" href="#" data-page="Music Rehearsal Studio">
+      <img class="tphoto" src="assets/event-studio.jpg" alt="Musical instruments in the rehearsal studio">
+      <span class="tbody">
+      <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg></span>
+      <span><b>Music Rehearsal Studio</b><span>An affordable rehearsal space for local musicians at the warehouse — bookings now live.</span></span>
+      <span class="go">→</span>
+      </span>
+    </a>
     </div>
 
   </div>
 </div></section>
 
-<!-- ================= 3b · IMPACT NUMBERS ================= -->
-<section class="stats" aria-label="Our impact in numbers"><div class="wrap">
-  <div class="statrow">
-    <div class="stat"><b>40+</b><span>years of community action in Kingston</span></div>
-    <div class="stat"><b>100+</b><span>winter hampers for people in need</span></div>
-    <div class="stat"><b>200+</b><span>cooking sessions in our community kitchen</span></div>
-    <div class="stat"><b>300&nbsp;m²</b><span>of community mosaics across the borough</span></div>
-  </div>
-</div></section>
+
+
 
 <!-- ================= 4a · FUNDERS ================= -->
 <section class="funders"><div class="wrap">
@@ -1024,7 +974,8 @@
 <!-- ================= 4b · PARTNERS ================= -->
 <section class="partners"><div class="wrap">
   <h2>Working in partnership with</h2>
-  <div class="logorow">
+  <div class="logoclip"><div class="logorail">
+<div class="logoset">
     <div class="plogo"><img src="assets/partner-power-centre.png" alt="Power Centre Church Mitcham"></div>
     <div class="plogo"><img src="assets/partner-shine-bright.png" alt="Shine Bright UK"></div>
     <div class="plogo"><img src="assets/partner-kec.png" alt="Kingston Environment Centre"></div>
@@ -1034,10 +985,32 @@
     <div class="plogo"><img src="assets/partner-crest.jpg" alt="CREST"></div>
     <div class="plogo"><img src="assets/partner-kca.jpg" alt="Kingston Churches Action"></div>
     <div class="plogo"><img src="assets/partner-aulaw.png" alt="AuLaw"></div>
-  </div>
+</div>
+<div class="logoset" aria-hidden="true">
+    <div class="plogo"><img src="assets/partner-power-centre.png" alt="Power Centre Church Mitcham"></div>
+    <div class="plogo"><img src="assets/partner-shine-bright.png" alt="Shine Bright UK"></div>
+    <div class="plogo"><img src="assets/partner-kec.png" alt="Kingston Environment Centre"></div>
+    <div class="plogo"><img src="assets/partner-rbkares.jpg" alt="RBKares"></div>
+    <div class="plogo"><img src="assets/partner-migrant-advocacy.jpg" alt="Migrant Advocacy Services"></div>
+    <div class="plogo"><img src="assets/partner-rak.png" alt="RAK"></div>
+    <div class="plogo"><img src="assets/partner-crest.jpg" alt="CREST"></div>
+    <div class="plogo"><img src="assets/partner-kca.jpg" alt="Kingston Churches Action"></div>
+    <div class="plogo"><img src="assets/partner-aulaw.png" alt="AuLaw"></div>
+</div>
+</div></div>
   <p class="becomewrap"><a class="becomelink" href="#" data-page="Become a partner">Become a partner →</a></p>
 </div></section>
 
+
+<!-- ================= 3b · IMPACT NUMBERS ================= -->
+<section class="stats" aria-label="Our impact in numbers"><div class="wrap">
+  <div class="statrow">
+    <div class="stat"><b>40+</b><span>years of community action in Kingston</span></div>
+    <div class="stat"><b>100+</b><span>winter hampers for people in need</span></div>
+    <div class="stat"><b>200+</b><span>cooking sessions in our community kitchen</span></div>
+    <div class="stat"><b>300&nbsp;m²</b><span>of community mosaics across the borough</span></div>
+  </div>
+</div></section>
 
 <!-- ================= 4c · VOICES / TESTIMONIALS =================
   PLACEHOLDER REVIEWS. Every name, quote and star rating below is written for the
@@ -1124,7 +1097,7 @@
               <span class="v-stars" aria-hidden="true"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></span>
               <span class="sr-only">Rated 5 out of 5</span>
             </span>
-            <img class="v-thumb" src="assets/tile-fridge.jpg" alt="Rescued fresh food in the community fridge" width="50" height="50">
+            <img class="v-thumb" src="assets/community_fridge_banner1.jpg" alt="Rescued fresh food in the community fridge" width="50" height="50">
           </div>
           <blockquote>The fridge got us through a hard few months. Nobody asks you anything — it is food that would otherwise have been thrown out, and the volunteers are careful to make that plain.</blockquote>
         </article>
@@ -1157,6 +1130,9 @@
 
       </div>
     </div>
+    <button class="v-nav v-prev" type="button" aria-label="Previous reviews">←</button>
+    <button class="v-nav v-next" type="button" aria-label="Next reviews">→</button>
+    <div class="v-dots" id="vDots" aria-hidden="true"></div>
 
   </div>
 </section>
@@ -1185,7 +1161,7 @@
         <li><a class="plain" href="#" data-page="Other support">Other support</a></li>
         <li><a class="plain" href="#" data-page="Contact us">Contact us</a></li>
         <li><a class="plain" href="#" data-page="The founder">The founder</a></li>
-        <li><a class="fdonate" href="#" data-page="Donate">Donate</a></li>
+        <li><a href="#" data-page="Donate">Donate</a></li>
       </ul>
     </div>
     <div>
@@ -1212,12 +1188,6 @@
   </div>
 </div></footer>
 
-<button class="totop" type="button" aria-label="Scroll to top" hidden>
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-    <path d="M12 19V6M6 12l6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
 <div id="toast" role="status"></div>
 
 <script>
@@ -1237,69 +1207,41 @@
   document.getElementById('nlform').addEventListener('submit', function(e){
     e.preventDefault(); show('Newsletter sign-up · mockup only');
   });
-
-  // ---- header search: icon expands the input; Enter reports the target page ----
-  var sBtn = document.querySelector('.hsearch-btn'), sIn = document.querySelector('.hsearch-input');
-  function sClose(){ sIn.hidden = true; sBtn.setAttribute('aria-expanded','false'); }
-  sBtn.addEventListener('mousedown', function(e){ if (!sIn.hidden) e.preventDefault(); });  // keep focus so the click can close
-  sBtn.addEventListener('click', function(){
-    if (sIn.hidden){ sIn.hidden = false; sBtn.setAttribute('aria-expanded','true'); sIn.focus(); }
-    else { sClose(); }
+  var srch = document.querySelector('.nav-search');
+  if (srch) srch.addEventListener('submit', function(e){
+    e.preventDefault(); show('→ Search results · page to be designed');
   });
-  sIn.addEventListener('keydown', function(e){
-    if (e.key === 'Escape'){ sIn.value = ''; sClose(); sBtn.focus(); }
-    if (e.key === 'Enter'){ e.preventDefault(); if (sIn.value.trim()) show('Search results page — Wix Site Search opens here'); }
-  });
-  sIn.addEventListener('blur', function(){ if (!sIn.value.trim()) sClose(); });
 })();
 
-// ---- testimonials rail: a measured drift, not a carousel ----
+// ---- testimonials: 3-up pager with arrows + dots (user 10.09) ----
 (function(){
-  var rail = document.getElementById('vRail'), track = document.getElementById('vTrack');
-  if (!rail || !track) return;
-
-  var SPEED = 38;                                   // pixels per second
-  var motionOK = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var originals = Array.prototype.slice.call(track.children);
-
-  function setWidth(){
-    var gap = parseFloat(getComputedStyle(track).columnGap) || 0, w = 0;
-    originals.forEach(function(c){ w += c.getBoundingClientRect().width + gap; });
-    return w;                                       // one gap per card: the distance to the next set
-  }
-
-  function build(){
-    track.querySelectorAll('[data-clone]').forEach(function(n){ n.remove(); });
-
-    if (motionOK.matches){ rail.classList.remove('is-rolling'); return; }
-
-    var set = setWidth();
-    if (!set) return;
-
-    // one set to shift by, one to stand in front of the reader, one more so the seam is never on screen
-    var need = rail.getBoundingClientRect().width + set * 2, total = set, guard = 0;
-    while (total < need && guard++ < 20){
-      originals.forEach(function(c){
-        var clone = c.cloneNode(true);
-        clone.setAttribute('data-clone','');
-        clone.setAttribute('aria-hidden','true');   // or a screen reader reads the same seven reviews four times
-        clone.querySelectorAll('img').forEach(function(i){ i.alt = ''; });
-        clone.querySelectorAll('a,button,input,select,textarea,[tabindex]').forEach(function(f){ f.setAttribute('tabindex','-1'); });
-        track.appendChild(clone);
-      });
-      total += set;
+  var rail = document.getElementById('vRail'), dots = document.getElementById('vDots');
+  var prev = document.querySelector('.v-prev'), next = document.querySelector('.v-next');
+  if (!rail || !dots || !prev || !next) return;
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function pageW(){ return rail.clientWidth; }
+  function pageCount(){ return Math.max(1, Math.ceil((rail.scrollWidth - rail.clientWidth) / pageW()) + 1); }
+  function current(){ var max = rail.scrollWidth - rail.clientWidth; return max && rail.scrollLeft >= max - 2 ? pageCount() - 1 : Math.round(rail.scrollLeft / pageW()); }
+  function goTo(i){ rail.scrollTo({left: i * pageW(), behavior: rm.matches ? 'auto' : 'smooth'}); }
+  prev.addEventListener('click', function(){ goTo(Math.max(0, current() - 1)); });
+  next.addEventListener('click', function(){ goTo(Math.min(pageCount() - 1, current() + 1)); });
+  function renderDots(){
+    var n = pageCount(), cur = current();
+    dots.innerHTML = '';
+    for (var i = 0; i < n; i++){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'v-dot' + (i === cur ? ' on' : '');
+      b.setAttribute('aria-label', 'Reviews page ' + (i + 1));
+      (function(i){ b.addEventListener('click', function(){ goTo(i); }); })(i);
+      dots.appendChild(b);
     }
-
-    track.style.setProperty('--roll', set + 'px');
-    track.style.setProperty('--roll-time', (set / SPEED) + 's');
-    rail.classList.add('is-rolling');
   }
-
   var t;
-  build();
-  window.addEventListener('load', build);           // re-measure once the photographs have landed
-  window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(build, 180); });
-  if (motionOK.addEventListener) motionOK.addEventListener('change', build);
+  rail.addEventListener('scroll', function(){ clearTimeout(t); t = setTimeout(renderDots, 80); });
+  window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(renderDots, 150); });
+  window.addEventListener('load', renderDots);
+  renderDots();
 })();
 
 // ---- donate widget: amount + frequency selection updates the impact text and CTA ----
@@ -1332,278 +1274,35 @@
   });
 })();
 
-// ---- scroll to top: shown once the hero sentinel (just below the sticky header)
-//      has left the viewport. An observer, not a scroll listener. ----
-(function(){
-  var btn = document.querySelector('.totop'),
-      sentinel = document.querySelector('.totop-sentinel');
-  if (!btn) return;
-
-  btn.addEventListener('click', function(){
-    window.scrollTo({ top: 0, left: 0 });   // html{scroll-behavior} decides smooth vs instant
-  });
-
-  // no observer (or no sentinel): leave the button hidden rather than show a
-  // control whose reveal logic cannot run
-  if (!sentinel || !('IntersectionObserver' in window)) return;
-
-  var hideTimer;
-  function reveal(on){
-    clearTimeout(hideTimer);
-    if (on){
-      btn.hidden = false;
-      requestAnimationFrame(function(){ btn.classList.add('show'); });
-    } else {
-      btn.classList.remove('show');
-      hideTimer = setTimeout(function(){ btn.hidden = true; }, 200);  // after the fade
-    }
-  }
-
-  new IntersectionObserver(function(entries){
-    reveal(!entries[0].isIntersecting);
-  }).observe(sentinel);
-})();
-
-// ---- headings: word-by-word rise ----
-//      Each word is wrapped in a mask and rises into place from below, 0.1s apart.
-//      SCOPE — headings only, and only where nothing else already animates them:
-//        · hero .fb-title — on load. It is above the fold and is deliberately outside
-//          the scroll-fade system, so there is nothing to double up with.
-//        · .wwd-intro h2, .wwd-title, .funders h2, .partners h2 — standalone section
-//          headings. They word-rise INSTEAD of the block fade: the splitter marks each
-//          one .wr and the fade pass below skips anything marked.
-//        · .ev-head and .v-head stay exactly as they were — those are rows (heading +
-//          "see all" link) and fade as one block, so their headings are NOT split.
-//      ≥900px ONLY for the four section headings: wrapping words in inline-blocks
-//      defeats text-wrap:balance, and "Working in partnership with" leans on balance to
-//      avoid a one-word last line in the 561–635px band. So the splitter reads
-//      matchMedia once, at init: narrower viewports never mark the headings .wr and
-//      they keep the plain block fade — nothing has to be added back. The hero has
-//      hard <br> line breaks doing that job and is split at every width.
-//      Progressive enhancement, same contract as the fade pass: the word markup and the
-//      low start state are created HERE and nowhere else, so with JS off, without
-//      IntersectionObserver, or under prefers-reduced-motion the headings are ordinary
-//      text — a heading can never be left hidden.
-//      WIX: word-by-word rise = custom (Velo/embed needed); native Wix approximation =
-//      the "Rise" text animation applied to the whole heading.
-(function(){
-  if (!('IntersectionObserver' in window)) return;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  var STEP = 0.1;   // seconds between one word and the next
-
-  // Splits TEXT NODES only. The hero heading holds hard <br>s (three of them, four
-  // lines); they — and any other element child — are left untouched in place, so the
-  // line breaks survive exactly as authored.
-  // Returns the number of words wrapped (0 = nothing to animate).
-  function split(el){
-    var kids = Array.prototype.slice.call(el.childNodes), n = 0;
-    kids.forEach(function(node){
-      if (node.nodeType !== 3) return;                       // not text: leave it alone
-      var frag = document.createDocumentFragment();
-      // the capturing split keeps the whitespace runs as real text nodes, so word
-      // spacing and the natural wrap points between the masks are unchanged
-      node.nodeValue.split(/(\s+)/).forEach(function(part){
-        if (!part) return;
-        if (!/\S/.test(part)){ frag.appendChild(document.createTextNode(part)); return; }
-        var mask = document.createElement('span');
-        mask.className = 'wr-word';
-        var word = document.createElement('span');
-        word.textContent = part;
-        word.style.animationDelay = (n * STEP).toFixed(2) + 's';
-        n++;
-        mask.appendChild(word);
-        frag.appendChild(mask);
-      });
-      node.parentNode.replaceChild(frag, node);
-    });
-    return n;
-  }
-
-  // hero: split and start in the same task, so the low state is never painted on its own
-  var hero = document.querySelector('.fb-title');
-  if (hero && split(hero)) hero.classList.add('wr', 'wr-run');
-
-  if (!window.matchMedia || !window.matchMedia('(min-width:900px)').matches) return;
-
-  var heads = document.querySelectorAll(
-    '.wwd-intro h2, .wwd-title, .funders h2, .partners h2'
-  );
-  if (!heads.length) return;
-
-  // Same trigger depth as the block fade below, so a heading and the blocks around it
-  // come in on the same line and read as one movement.
-  var io = new IntersectionObserver(function(entries, obs){
-    entries.forEach(function(entry){
-      if (!entry.isIntersecting) return;
-      obs.unobserve(entry.target);
-      entry.target.classList.add('wr-run');
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -120px 0px' });
-
-  Array.prototype.forEach.call(heads, function(h){
-    if (!split(h)) return;
-    h.classList.add('wr');   // words down, and the fade pass below now skips this one
-    io.observe(h);           // anything already in view fires on the first callback
-  });
-})();
-
-// ---- content reveal on scroll: blocks fade in as they come into view ----
-//      Scope is WHOLE CONTENT BLOCKS, so a unit fades as one piece — an offer tile
-//      brings its photo, title and description in together, an event row brings its
-//      thumb and text, the legacy feature brings its text column and photo.
-//      Left alone on purpose: the header/nav, the hero (above the fold — fading it is
-//      noise, not polish), the footer, the toast and back-to-top controls, and the
-//      voices rail, which runs its own marquee.
-//      Progressive enhancement: the hidden state (.rv) is added HERE and nowhere else,
-//      so with JS off — or without IntersectionObserver, or under prefers-reduced-motion
-//      — nothing is ever hidden and the page renders complete.
-//      WIX: = the native "Fade In" on-scroll animation, applied to the strip or to the
-//      individual element/box; the stagger below = Wix's built-in animation delay field.
-(function(){
-  if (!('IntersectionObserver' in window)) return;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  // Each selector is the OUTERMOST wrapper of its unit, never an inner photo:
-  // .tile (not .tframe) so the card's photo and text fade together, .sidecard (not
-  // .sthumb) for the whole event row, .wwd-note (not .lg-photo) for the legacy
-  // feature's text column and photo, .event-banner for the banner and its overlay.
-  // Every 42px section heading is in the list: .wwd-intro h2, .wwd-title, .ev-title (via
-  // its .ev-head row), .funders h2, .partners h2, .v-head h2 (via .v-head). The hero
-  // .fb-title and the footer headings stay out on purpose, and .lg-title rides along
-  // inside .wwd-note — so no heading is left behind while the block around it fades.
-  // The four standalone headings stay in the list, but the word-rise pass above claims
-  // them at ≥900px and marks them .wr; the filter then drops them here, so a heading
-  // either word-rises or block-fades, never both. Below 900px nothing is marked and the
-  // list is the original one.
-  var els = Array.prototype.filter.call(document.querySelectorAll(
-    '.tile, .event-banner, .sidecard, .ev-head, .wwd-intro h2, .wwd-sub, .wwd-note, ' +
-    '.wwd-title, .group-label, p.gdesc, .stat, .funders h2, .funderrow, ' +
-    '.partners h2, .logorow, .v-head'
-  ), function(el){ return !el.classList.contains('wr'); });
-  if (!els.length) return;
-
-  var STEP = 70, CAP = 350;   // ms between blocks that reveal together, and the ceiling
-
-  function clearDelay(el){ el.style.transitionDelay = ''; }
-
-  // Trigger depth — threshold 0.15 means 15% of the block is enough to start it, and
-  // rootMargin shrinks the root's BOTTOM edge by 120px, so a block only counts as "in
-  // view" once it is ~120px inside the viewport. At the previous -40px a short block —
-  // a section heading — crossed the line while still on the very bottom edge and had
-  // finished its .6s fade before the eye reached it: the animation ran, but was never
-  // seen. 120px ≈ one heading's worth of lead-in, enough to watch the fade play without
-  // holding the content back. Safe at the foot of the page: the deepest revealed blocks
-  // (.partners h2, .logorow, .v-head) still have the voices rail and the whole footer
-  // below them — far more than 120px of remaining scroll — so they always reach the
-  // shrunk root and can never be left hidden.
-  // WIX: = the "offset / start animation" depth field on the native Fade In animation.
-  var io = new IntersectionObserver(function(entries, obs){
-    // stagger only across the elements revealing in THIS callback, so a block that
-    // scrolls in on its own never waits
-    var i = 0;
-    entries.forEach(function(entry){
-      if (!entry.isIntersecting) return;
-      var el = entry.target;
-      obs.unobserve(el);
-      var delay = Math.min(i * STEP, CAP);
-      i++;
-      if (delay) el.style.transitionDelay = delay + 'ms';
-      el.classList.add('rv-in');
-      if (!delay) return;
-      el.addEventListener('transitionend', function h(e){
-        if (e.propertyName !== 'opacity') return;
-        el.removeEventListener('transitionend', h);
-        clearDelay(el);
-      });
-      setTimeout(function(){ clearDelay(el); }, delay + 900);   // if transitionend never fires
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -120px 0px' });
-
-  Array.prototype.forEach.call(els, function(el){
-    el.classList.add('rv');
-    io.observe(el);   // anything already in view intersects on the first callback, so
-                      // blocks in the first screen reveal immediately — no flash of hidden
-  });
-})();
-
-// ---- impact numbers: count up when the stats band scrolls into view ----
-//      Pure enhancement on top of the static markup. The four <b> elements already hold
-//      their final values ("40+", "300&nbsp;m²") and NOTHING is written to them until the
-//      band is actually in view: with JS off, without IntersectionObserver, or under
-//      prefers-reduced-motion the numbers are ordinary text and can never be left at 0.
-//      The first zero is written inside the first animation frame, never before.
-//      The .stat blocks are also in the fade pass above — the two are independent and
-//      simply overlap (fade .6s, count 1.4s).
-//      No reduced-motion CSS is needed: the whole effect is gated in JS here.
-//      WIX: count-up needs Velo (a few lines) or a marketplace "Number Counter" widget —
-//      there is no native Wix animation for text counting. No-JS fallback = the static
-//      numbers exactly as authored.
-(function(){
-  if (!('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  var row = document.querySelector('.statrow');
-  if (!row) return;
-
-  var DUR = 1400, STEP = 120;   // ms: length of one count, and the cascade between them
-
-  // Leading integer = the target, everything after it = a suffix carried verbatim
-  // ("+", " m²"). Each entry also keeps the ORIGINAL innerHTML: the closing frame
-  // restores that string instead of rebuilding it, so the end state is byte-identical to
-  // the authored markup — the NBSP in "300&nbsp;m²" included.
-  var items = [];
-  Array.prototype.forEach.call(row.querySelectorAll('.stat b'), function(el){
-    var m = /^(\d+)([\s\S]*)$/.exec(el.textContent);
-    if (!m) return;               // no leading integer: that one stays static
-    items.push({ el: el, target: +m[1], suffix: m[2], html: el.innerHTML, done: false });
-  });
-  if (!items.length) return;
-
-  function ease(t){ return 1 - Math.pow(1 - t, 3); }   // ease-out: fast start, soft landing
-
-  function run(){
-    var start = null;
-    items.forEach(function(it, i){
-      it.delay = i * STEP;
-      // Literata's figures are proportional, so a changing number would shuffle on its
-      // own centre line; lock the digits for the duration of the run only — the closing
-      // frame clears it again, leaving the static rendering untouched.
-      it.el.style.fontVariantNumeric = 'tabular-nums';
-    });
-    function frame(now){
-      if (start === null) start = now;
-      var live = false;
-      items.forEach(function(it){
-        if (it.done) return;
-        var t = (now - start - it.delay) / DUR;
-        if (t < 0){ live = true; return; }      // still waiting for its slot: untouched
-        if (t >= 1){
-          it.done = true;
-          it.el.innerHTML = it.html;            // exact original string back
-          it.el.removeAttribute('style');       // …and no leftover inline style
-          return;
-        }
-        live = true;
-        it.el.textContent = Math.round(ease(t) * it.target) + it.suffix;
-      });
-      if (live) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
-
-  // threshold .3 — a third of the band is on screen before the count starts, so it is
-  // watched rather than half-missed; unobserve keeps it a one-shot.
-  var io = new IntersectionObserver(function(entries, obs){
-    entries.forEach(function(entry){
-      if (!entry.isIntersecting) return;
-      obs.unobserve(entry.target);
-      run();
-    });
-  }, { threshold: 0.3 });
-  io.observe(row);
-})();
 </script>
 
+<script>
+/* Impact counters count up on first reveal (user 09.09). The markup ships the
+   FINAL values, so content never depends on this script: no-JS and
+   prefers-reduced-motion simply keep the numbers as written.
+   WIX: needs a counter app or Velo; the static numbers are the fallback. */
+(function(){
+  var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = [].slice.call(document.querySelectorAll('.stat b'));
+  if (rm || !('IntersectionObserver' in window) || !els.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (!en.isIntersecting) return;
+      io.unobserve(en.target);
+      var el = en.target, m = el.textContent.match(/^(\d+)([\s\S]*)$/);
+      if (!m) return;
+      var target = +m[1], suffix = m[2], t0 = null, dur = 1400;
+      el.textContent = '0' + suffix;
+      requestAnimationFrame(function step(ts){
+        if (t0 === null) t0 = ts;
+        var p = Math.min((ts - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * e) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      });
+    });
+  }, {threshold:.4});
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
 </body>
 </html>
