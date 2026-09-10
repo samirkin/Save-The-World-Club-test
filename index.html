@@ -365,9 +365,11 @@
   /* tone-on-tone card: same background as the band, 1px 10% border */
   /* white blocks matching the chapter head panels (user 09.09): photo full-bleed
      on top, caption padded inside the white like the head's text */
-  /* no container hover states: Classic Wix can't do them (10.09); the arrow
-     in the title and the cursor carry the affordance */
+  /* link titles highlight ultramarine on hover (user 10.09) — in Wix this is
+     the native text-link hover colour, no container states needed */
   .tile{display:flex;flex-direction:column;background:#fff;border:none;border-radius:0;overflow:hidden;color:var(--ink);position:relative;padding:0}
+  .tile:hover b,.tile:focus-visible b,
+  .sidecard:hover b,.sidecard:focus-visible b{color:var(--blue-link)}
     /* photo inset to align with the caption's text edge (user 09.09) */
     .tile .tphoto{width:calc(100% - 48px);margin:24px 24px 0;height:300px;object-fit:cover;display:block;border-radius:0}
   /* ---- four groups, four layout tempos (composition pass, 07.09) ----
@@ -385,7 +387,7 @@
   .tile .tbody{position:relative;flex:1;display:block;padding:18px 24px 40px;max-width:none}
   /* the reference has no icons — the markup keeps them, the skin hides them */
   .tile .tbody span.ico{display:none}
-  .tile b{display:block;font-family:var(--font-body);font-weight:700;font-size:20px;line-height:1.2;letter-spacing:-.03em;margin-bottom:8px;color:var(--ink)}
+  .tile b{display:block;font-family:var(--font-body);font-weight:700;font-size:20px;line-height:1.2;letter-spacing:-.03em;margin-bottom:8px;color:var(--ink);transition:color .15s}
   .tile b::after{content:" →" / "";font-weight:500}
     .tile .tbody span{font-size:15px;line-height:1.55;color:var(--muted);display:block}
   .tile .tbody span.go{display:none} /* arrow now docks to the title via ::after */
@@ -408,7 +410,8 @@
   /* all four counters in ONE row (user 10.09) */
   .statrow{display:flex;flex-wrap:nowrap;text-align:left;max-width:none}
   .stat{flex:1 1 0;border-left:1px dotted rgba(255,255,255,.4);padding-left:30px;padding-right:20px}
-  .stat b{display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(64px,7.5vw,116px);line-height:.92;letter-spacing:-.03em;color:#fff}
+  .stat:first-child{border-left:none;padding-left:0}
+  .stat b{display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(48px,5.2vw,88px);line-height:.92;letter-spacing:-.03em;color:#fff}
   .stat span{color:rgba(255,255,255,.85);display:block;max-width:240px;font-size:13px;line-height:1.5;margin:14px 0 0}
 
   /* ================= 4a · FUNDERS — LIGHT (multiply needs a light band) ====== */
@@ -662,7 +665,7 @@
     .stats{padding:72px 0}
         .statrow{gap:36px 0;max-width:none}
     .stat{flex:0 0 100%;padding-left:24px}
-    .stat b{font-size:60px}
+    .stat b{font-size:48px}
 
     /* mobile keeps air but not the desktop's 112px caverns */
     .wwd-intro,.events-hero,section.wwd,.stats,.funders,.partners{padding-top:72px;padding-bottom:72px}
