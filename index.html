@@ -54,7 +54,7 @@
      · Accent = brand blue, used sparingly: #0195FE for NON-TEXT markers and
        hovers only (nav underline, tile border on hover) — it measures 2.7:1 on
        the page and must never carry text; #005FA3 for blue TEXT on light;
-       #7CC7FF for blue text on the dark bands. Green #21BD52 appears only on
+       #67BFFE for blue text on the dark bands. Green #21BD52 appears only on
        the four group squares (set inline in the markup).
      · Secondary text #4A5252 on light, #9aa4a4 for labels on the dark bands,
        #cdd3d3 for body copy on the dark bands.
@@ -73,7 +73,7 @@
      · #cdd3d3 body copy on ink .................... 13.4:1
      · #d6dada banner copy over the photo gradient . 14.5:1 (≥12:1 at the caption)
      · #9aa4a4 11px labels + legal on ink .......... 7.8:1  (weight 500)
-     · #7CC7FF links on ink ........................ 10.9:1
+     · #67BFFE links on ink ........................ 10.9:1
      · #8b9a9c (inline colour in the markup) on ink  6.9:1
      · #9aa4a4 placeholder on the #101717 input .... 7.1:1
      · ink on amber #FFB020 ........................ 10.9:1
@@ -153,7 +153,7 @@
   /* ---- the two type extremes -------------------------------------------- */
   /* section headings: 36–44px, 700, UPPERCASE, tightly tracked */
   .wwd-intro h2,.funders h2,.partners h2,.ev-title,.wwd-title,.v-head h2{
-    font-family:var(--font-display);font-weight:700;font-size:clamp(30px,3.2vw,44px);
+    font-family:var(--font-display);font-weight:700;font-size:clamp(40px,5vw,64px);
     line-height:1.0;letter-spacing:-.04em;text-transform:uppercase}
   /* micro-labels: 11px UPPERCASE, TIGHT tracking — the signature, not spaced out */
   .sec-eyebrow,.nl-label,.stat span,.event-banner .chip,.sidecard .sdate,
@@ -186,8 +186,8 @@
   /* header site search — compact field with an inline magnifier icon */
   .nav-search{position:relative;display:flex;align-items:center;margin-left:6px}
   .nav-search input{width:150px;padding:11px 12px 11px 34px;border:1px solid var(--line-s);border-radius:3px;background:#fff;
-    font-family:var(--font-body);font-weight:500;font-size:12px;letter-spacing:-.01em;color:var(--ink)}
-  .nav-search input::placeholder{color:var(--muted);text-transform:uppercase;font-size:10px;letter-spacing:-.02em}
+    font-family:var(--font-body);font-weight:500;font-size:13px;letter-spacing:-.01em;color:var(--ink)}
+  .nav-search input::placeholder{color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:-.02em}
   .nav-search .ns-ico{position:absolute;left:10px;width:16px;height:16px;fill:var(--muted);pointer-events:none}
   .nav-search input:hover{border-color:#0195FE}
   .nav-search input:focus-visible{outline:3px solid var(--blue-link);outline-offset:1px}
@@ -205,6 +205,8 @@
      luminosity blend = the gradient tints the photo blue (transform9's own trick);
      the browsers-without-blend fallback is a plain low-opacity photo. */
   /* edge-duotone vignette: ink-green edges, natural centre — no flat scrim */
+  /* WIX: classic strips support only a SOLID colour overlay — bake this
+     left-edge gradient into the exported hero image (asset-prep step). */
   .fridgebanner::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
     background:linear-gradient(90deg,rgba(2,10,10,.48) 0%,rgba(2,10,10,.2) 36%,rgba(2,10,10,0) 60%),
       radial-gradient(130% 130% at 50% 42%,rgba(2,10,10,0) 52%,rgba(4,34,22,.62) 100%)}
@@ -231,13 +233,11 @@
      text can never be stranded invisible). Wix: whole-title "Rise" reveal is the
      native fallback; per-word needs Velo/manual spans. */
   .fb-title .w{display:inline-block;opacity:0;animation:heroLineL .7s cubic-bezier(.22,.61,.36,1) forwards}
-  .fb-title .w:nth-of-type(3),.fb-title .w:nth-of-type(4){animation-name:heroLineR}
-  .fb-title .w:nth-of-type(1){animation-delay:.05s}
-  .fb-title .w:nth-of-type(2){animation-delay:.15s}
-  .fb-title .w:nth-of-type(3){animation-delay:.25s}
-  .fb-title .w:nth-of-type(4){animation-delay:.35s}
-  .fb-title .w:nth-of-type(5){animation-delay:.45s}
-  .fb-title .w:nth-of-type(6){animation-delay:.55s}
+  /* LINE-level stagger (10.09): both words of a line share one delay, so the
+     motion equals three Wix text boxes with staggered Slide-In entrances */
+  .fb-title .w:nth-of-type(1),.fb-title .w:nth-of-type(2){animation-delay:.05s}
+  .fb-title .w:nth-of-type(3),.fb-title .w:nth-of-type(4){animation-delay:.22s}
+  .fb-title .w:nth-of-type(5),.fb-title .w:nth-of-type(6){animation-delay:.4s}
   .fb-sub,.fb-cta{opacity:0;animation:heroFade .7s ease-out forwards}
   .fb-sub{animation-delay:.75s}
   .fb-cta{animation-delay:.9s}
@@ -291,7 +291,7 @@
   .event-banner{grid-column:2;grid-row:1}
   .event-side{grid-column:1;grid-row:1;display:flex;flex-direction:column;gap:0;min-width:0}
   /* the banner stretches to the height of the event list beside it */
-  .event-banner{position:relative;width:480px;height:auto;min-height:460px;border-radius:0;overflow:hidden;background:#000;color:#fff;display:flex;align-items:flex-end}
+  .event-banner{position:relative;width:480px;height:auto;min-height:460px;border-radius:0;overflow:hidden;background:#1b1e24;color:#fff;display:flex;align-items:flex-end}
   .event-banner .eb-photo{position:absolute;inset:0;width:100%;height:100%;background:url("assets/event-studio.jpg") center/cover no-repeat}
   .event-banner .eb-photo::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,10,10,0) 35%,rgba(2,10,10,.92) 100%)}
   .eb-inner{position:relative;z-index:2;padding:0 30px 30px}
@@ -304,8 +304,7 @@
   .slide-link:focus-visible{outline:3px solid var(--blue-d);outline-offset:2px}
   /* side events: an editorial LIST — white hairline rows, 4:5 thumb, quiet date */
   /* photo inset from the block edge; hover = the shared soft shadow, nothing else (user 09.09) */
-  .sidecard{flex:1;display:grid;grid-template-columns:110px 1fr;grid-template-rows:1fr auto auto;column-gap:24px;background:#fff;border:none;border-radius:0;padding:22px 24px;color:var(--ink);transition:box-shadow .18s}
-  .sidecard:hover,.sidecard:focus-visible{box-shadow:0 1px 2px rgba(2,10,10,.05),0 10px 26px rgba(2,10,10,.12)}
+  .sidecard{flex:1;display:grid;grid-template-columns:110px 1fr;grid-template-rows:1fr auto auto;column-gap:24px;background:#fff;border:none;border-radius:0;padding:22px 24px;color:var(--ink)}
   .sidecard::before{content:"";grid-column:1;grid-row:1/4;align-self:center;width:110px;height:138px;border-radius:0;background:center/cover no-repeat}
   .event-side .sidecard:nth-of-type(1)::before{background-image:url("assets/ev-orchard.jpg")}
   .event-side .sidecard:nth-of-type(2)::before{background-image:url("assets/ev-wtc.jpg")}
@@ -325,12 +324,7 @@
   .tilegrid{display:block}
   /* one chapter = one continuous WHITE slab: head + tiles + all gutters (user 09.09) */
   /* the same soft shadow as the logo/voice cards — one shadow system (user 09.09) */
-  .chapter{background:#fff;display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:112px;box-shadow:0 1px 2px rgba(2,10,10,.05),0 10px 26px rgba(2,10,10,.12);
-    background-image:linear-gradient(90deg,#0195FE,#21BD52);background-size:100% 4px;
-    background-position:top;background-repeat:no-repeat;padding-top:4px}
-  /* blue->green gradient top stripe on every slab (user 10.09, replaces the
-     alternating solid stripes); drawn as a background layer so the 3px corner
-     radius still clips it cleanly */
+  .chapter{background:#fff;display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:112px;box-shadow:0 1px 2px rgba(2,10,10,.05),0 10px 26px rgba(2,10,10,.12)}
   .chapter:first-of-type{margin-top:24px}
   /* plain text group headers: square · name · hairline to the right edge.
      The negative bottom margins offset the 28px grid gap so the header stack
@@ -340,30 +334,27 @@
   /* min-height was sized for the photo-era heads; text-only heads hug content (user 09.09) */
 .group-head{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;margin:0;min-height:0}
   /* head text sits on the same 24px axis as the tile photos below */
-  .ghead-text{background:#fff;padding:48px 24px 0;display:flex;flex-direction:column;justify-content:center}
+  /* head copy stretched across the full slab (user 10.09) */
+  .ghead-text{grid-column:1/-1;background:#fff;padding:48px 24px 0;display:flex;flex-direction:column;justify-content:center}
   .chapter:nth-of-type(even) .ghead-text{order:2}
   .ghead-photo{min-height:360px;background:center/cover no-repeat}
   /* Our Hub head is text-only too (user 09.09) — also removes the former
      tile-warehouse duplication with the Charity Shop tile */
   .chapter:nth-of-type(1) .ghead-photo{display:none}
-  .chapter:nth-of-type(1) .group-head{grid-template-columns:1fr;min-height:0}
-    /* Food head text-only too (user 09.09) */
+      /* Food head text-only too (user 09.09) */
   .chapter:nth-of-type(2) .ghead-photo{display:none}
-  .chapter:nth-of-type(2) .group-head{grid-template-columns:1fr;min-height:0}
-  .chapter:nth-of-type(2) .ghead-text{order:0}
+    .chapter:nth-of-type(2) .ghead-text{order:0}
   /* Environment head is text-only (user 09.09): no photo cell */
   .chapter:nth-of-type(3) .ghead-photo{display:none}
-  .chapter:nth-of-type(3) .group-head{grid-template-columns:1fr;min-height:0}
-    /* Art head text-only as well — all four chapter heads are now uniform */
+      /* Art head text-only as well — all four chapter heads are now uniform */
   .chapter:nth-of-type(4) .ghead-photo{display:none}
-  .chapter:nth-of-type(4) .group-head{grid-template-columns:1fr;min-height:0}
-  .chapter:nth-of-type(4) .ghead-text{order:0}
+    .chapter:nth-of-type(4) .ghead-text{order:0}
   .group-label{display:block;margin:0;color:var(--ink);padding:0}
   .group-label .grow{display:flex;align-items:center;gap:14px}
-  .group-label .gtxt{font-family:var(--font-display);font-weight:700;font-size:clamp(28px,3vw,40px);line-height:1.04;letter-spacing:-.04em;text-transform:uppercase}
+  .group-label .gtxt{font-family:var(--font-display);font-weight:700;font-size:clamp(32px,3.8vw,52px);line-height:1.04;letter-spacing:-.04em;text-transform:uppercase}
   .group-label .gdot{display:none} /* removed per user 09.09 */
-  p/* full measure across the panel (user 09.09, was 520px) */
-  .gdesc{margin:16px 0 0;padding:0;font-size:16px;color:var(--muted);line-height:1.6;max-width:none}
+  /* the heading runs full width; the description caps at ~2 lines (user 10.09) */
+  p.gdesc{margin:16px 0 0;padding:0;font-size:16px;color:var(--muted);line-height:1.6;max-width:640px}
   .gkey{color:var(--blue-link);font-weight:500;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
   .gkey:hover{color:var(--ink)}
   /* .t-blue / .t-green stay in the markup but carry no styling in this skin.
@@ -374,6 +365,8 @@
   /* tone-on-tone card: same background as the band, 1px 10% border */
   /* white blocks matching the chapter head panels (user 09.09): photo full-bleed
      on top, caption padded inside the white like the head's text */
+  /* no container hover states: Classic Wix can't do them (10.09); the arrow
+     in the title and the cursor carry the affordance */
   .tile{display:flex;flex-direction:column;background:#fff;border:none;border-radius:0;overflow:hidden;color:var(--ink);position:relative;padding:0}
     /* photo inset to align with the caption's text edge (user 09.09) */
     .tile .tphoto{width:calc(100% - 48px);margin:24px 24px 0;height:300px;object-fit:cover;display:block;border-radius:0}
@@ -392,10 +385,9 @@
   .tile .tbody{position:relative;flex:1;display:block;padding:18px 24px 40px;max-width:none}
   /* the reference has no icons — the markup keeps them, the skin hides them */
   .tile .tbody span.ico{display:none}
-  .tile b{display:block;font-family:var(--font-body);font-weight:700;font-size:20px;line-height:1.2;letter-spacing:-.03em;margin-bottom:8px;color:var(--ink);transition:color .15s}
+  .tile b{display:block;font-family:var(--font-body);font-weight:700;font-size:20px;line-height:1.2;letter-spacing:-.03em;margin-bottom:8px;color:var(--ink)}
   .tile b::after{content:" →" / "";font-weight:500}
-  .tile:hover b,.tile:focus-visible b{color:var(--blue-link)}
-  .tile .tbody span{font-size:15px;line-height:1.55;color:var(--muted);display:block}
+    .tile .tbody span{font-size:15px;line-height:1.55;color:var(--muted);display:block}
   .tile .tbody span.go{display:none} /* arrow now docks to the title via ::after */
 
   /* ================= 3b · IMPACT NUMBERS — DARK BAND ================= */
@@ -406,28 +398,32 @@
      Wix: section background gradient + the globe SVG as a decorative image. */
   /* dark graphite band (user 10.09) — echoes the footer greys; white text,
      mint numerals, globe watermark re-tinted grey to sit in tone. */
-  .stats{position:relative;overflow:hidden;background:linear-gradient(115deg,#549fe3 0%,#2f86dd 50%,#1a6cc2 100%);color:var(--ink);padding:120px 0 126px}
-  .stats::before{content:"";position:absolute;top:50%;right:-140px;width:700px;height:700px;transform:translateY(-50%);background:url("assets/globe.svg") center/contain no-repeat;opacity:.22;pointer-events:none}
+  /* THE mid-page peak: the community mosaic behind the numbers (design pass
+     10.09). tile-mosaic.jpg is 600x400 — REPLACE with a hi-res mosaic photo
+     before hand-off (visual-assets task). */
+  .stats{position:relative;overflow:hidden;background:linear-gradient(rgba(2,10,10,.78),rgba(2,10,10,.78)),url("assets/tile-mosaic.jpg") center/cover no-repeat #0f1115;color:#fff;padding:128px 0}
   .stats .wrap{position:relative;z-index:1}
   /* asymmetric: numerals rank flush-left under the heading, not centred */
   /* 2×2 in the black zone left of the globe, dotted rules like the reference */
-  .statrow{display:flex;justify-content:flex-start;gap:56px 0;flex-wrap:wrap;text-align:left;max-width:660px}
-  .stat{flex:0 0 50%;border-left:1px dotted rgba(2,10,10,.4);padding-left:30px}
-  .stat b{display:block;font-family:var(--font-display);font-weight:900;font-size:clamp(38px,3.9vw,60px);line-height:.92;letter-spacing:-.03em;color:#fff}
-  .stat span{color:var(--ink);display:block;max-width:240px;font-size:14px;line-height:1.5;margin:14px 0 0}
+  /* all four counters in ONE row (user 10.09) */
+  .statrow{display:flex;flex-wrap:nowrap;text-align:left;max-width:none}
+  .stat{flex:1 1 0;border-left:1px dotted rgba(255,255,255,.4);padding-left:30px;padding-right:20px}
+  .stat b{display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(64px,7.5vw,116px);line-height:.92;letter-spacing:-.03em;color:#fff}
+  .stat span{color:rgba(255,255,255,.85);display:block;max-width:240px;font-size:13px;line-height:1.5;margin:14px 0 0}
 
   /* ================= 4a · FUNDERS — LIGHT (multiply needs a light band) ====== */
   /* funders: centred, on a pale azure band (user 09.09) — light enough for the
      logos' mix-blend multiply */
-  .funders{background:#fff;padding:104px 0 96px;text-align:center}
-  .funders h2{margin-bottom:44px}
+  .funders{background:#fff;padding:88px 0;text-align:center}
+  .funders h2{margin-bottom:18px}
+  .funders .fdesc{margin:0 auto 44px;max-width:560px;font-size:15px;line-height:1.6;color:var(--muted)}
   .funderrow{display:flex;gap:48px;justify-content:center;flex-wrap:wrap}
   .flogo-tile{background:#fff;border:none;padding:20px;width:150px;height:150px;display:flex;align-items:center;justify-content:center;
     box-shadow:0 1px 2px rgba(2,10,10,.05),0 10px 26px rgba(2,10,10,.12)}
   .flogo-tile img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 
   /* ================= 4b · PARTNERS — LIGHT (multiply needs a light band) ==== */
-  .partners{background:var(--paper);padding:100px 0 118px;color:var(--ink)}
+  .partners{background:var(--paper);padding:88px 0;color:var(--ink)}
   .partners h2{margin-bottom:44px;text-align:center}
   .partners a.becomelink{font-family:var(--font-body);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:-.02em;color:var(--blue-link);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
   .partners a.becomelink:hover{color:var(--ink)}
@@ -435,15 +431,13 @@
   /* partner logo marquee — drifts left, seamless via the duplicated aria-hidden set.
      WIX: needs Velo or a marquee app; native fallback = static wrapped row (the
      reduced-motion state below is exactly that). */
-  .logoclip{overflow:hidden;margin-inline:calc(50% - 50vw);
-    /* vertical padding so the card shadows aren't clipped by overflow:hidden */
-    padding-block:32px;margin-block:-32px;
-    -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-    mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-  .logorail{display:flex;width:max-content;gap:16px;animation:logoRoll 34s linear infinite}
-  .logoclip:hover .logorail{animation-play-state:paused}
-  .logoset{display:flex;flex-wrap:nowrap;gap:16px}
-  @keyframes logoRoll{to{transform:translateX(calc(-50% - 8px))}}
+  /* STATIC centred logo wall (10.09: 100% native Wix — the moving marquee
+     needed an app or Velo; this was its designed fallback state anyway).
+     Wix: plain rows of logo boxes, centered. */
+  .logoclip{overflow:visible}
+  .logorail{display:flex;width:auto;flex-wrap:wrap;justify-content:center;gap:16px}
+  .logoset{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+  .logoset[aria-hidden]{display:none}
   /* white cards with soft shadows (user 09.09). Wix: container box, white fill,
      radius 0, "soft" shadow preset. multiply blend needs the white fill. */
   .plogo{background:#fff;border:none;border-radius:0;padding:20px;width:150px;height:150px;display:flex;align-items:center;justify-content:center;
@@ -457,7 +451,7 @@
      Reference: centred heading, three plain quotes per view (no card boxes),
      round avatars, side arrows, dot pagination.
      Wix: native testimonial slider / repeater with arrows + dots. */
-  .voices{position:relative;isolation:isolate;overflow:hidden;padding:112px 0 118px;color:var(--ink);background:#fff}
+  .voices{position:relative;isolation:isolate;overflow:hidden;padding:112px 0;color:var(--ink);background:#fff}
   .voices .vbg{display:none}
   .voices .wrap{position:relative;z-index:1}
   .voices a:focus-visible,.voices button:focus-visible{outline-color:var(--blue-link)}
@@ -494,7 +488,8 @@
   /* white, not amber: amber is reserved for money actions */
   .v-stars{display:flex;gap:.16em;font-size:.82em;line-height:1;color:var(--ink)}
   .v-stars .v-off{color:rgba(2,10,10,.25)}
-  .v-thumb{width:3.1rem;height:3.1rem;flex-shrink:0;object-fit:cover;display:block;border-radius:0}
+  /* content thumbs retired (design pass 10.09): the quote is the hero of the card */
+  .v-thumb{display:none}
   .vcard blockquote{margin:0;font-size:15.5px;line-height:1.6;color:var(--muted)}
 
   /* ================= 5 · FOOTER — DARK BAND ================= */
@@ -512,8 +507,8 @@
   /* footer links are WHITE (user 10.09) except the two exceptions below:
      Donate = amber (money), the phone + contact links = light blue */
   footer.site a{color:#fff;font-weight:400;text-decoration:underline;text-underline-offset:3px}
-  footer.site a:hover{color:#7CC7FF}
-  footer.site a[href^="tel:"],footer.site a[data-page="Contact us"]{color:#7CC7FF}
+  footer.site a:hover{color:#67BFFE}
+  footer.site a[href^="tel:"],footer.site a[data-page="Contact us"]{color:#67BFFE}
   footer.site a[href^="tel:"]:hover,footer.site a[data-page="Contact us"]:hover{color:#fff}
   /* the money action is a full amber BUTTON in the footer (user 10.09) */
   footer.site a[data-page="Donate"]{display:inline-block;background:var(--amber);border:1px solid var(--amber);
@@ -521,7 +516,7 @@
     letter-spacing:-.02em;padding:12px 24px;margin-top:4px;text-decoration:none;border-radius:3px}
   footer.site a[data-page="Donate"]:hover{background:var(--amber-h);border-color:var(--amber-h);color:var(--ink)}
   footer.site a.plain{color:#fff;font-weight:400;text-decoration:none}
-  footer.site a.plain:hover{color:#7CC7FF;text-decoration:underline}
+  footer.site a.plain:hover{color:#67BFFE;text-decoration:underline}
   footer.site a:focus-visible,footer.site button:focus-visible,footer.site input:focus-visible{outline:3px solid var(--blue-d)}
   /* square social chips — no circles anywhere in this skin */
   .socials{display:flex;gap:10px;margin-top:20px}
@@ -539,28 +534,29 @@
   .btn-nl{background:#0195FE;border:1px solid #0195FE;color:var(--ink);padding:15px 30px}
   .btn-nl:hover{background:#45ABFE;border-color:#45ABFE;color:var(--ink)}
   footer.site p.nl-note{font-size:12.5px;color:var(--muted-d);margin:18px 0 0}
+  /* legal line: charity/founding facts LEFT, copyright RIGHT (user 10.09) */
   .legal{border-top:1px solid var(--line-d);padding:24px 0 28px;display:flex;flex-wrap:wrap;gap:8px 26px;font-size:12px;color:var(--muted-d);align-items:center}
-  /* the copyright rides the right edge (user 10.09) */
   .legal span:last-child{margin-left:auto}
 
   /* toast for mockup links — a rectangle like everything else */
-  #toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:14px 24px;border-radius:0;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:99;border:1px solid var(--line-ds)}
+  /* fixed square back-to-top, bottom-left, always visible (user 10.09) */
+  .to-top{position:fixed;right:20px;bottom:32px;z-index:60;width:46px;height:46px;
+    display:flex;align-items:center;justify-content:center;background:#fff;color:var(--ink);
+    font-size:20px;line-height:1;text-decoration:none;border:1px solid var(--line);
+    border-radius:3px;box-shadow:0 1px 2px rgba(2,10,10,.05),0 10px 26px rgba(2,10,10,.12)}
+  .to-top:hover{background:var(--ink);color:#fff}
+  #toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#1b1e24;color:#fff;padding:14px 24px;border-radius:0;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:99;border:1px solid var(--line-ds)}
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
   /* ===== photo hover zoom: slow scale-in on hover, back on leave.
      Tiles/banner clip via overflow:hidden + transform; sidecard thumbs are
      bare pseudo-elements (nothing to clip against), so they zoom via an
      animatable background-size instead. Wix: "zoom on hover" image effect. */
-  .tile .tphoto{transition:transform .6s cubic-bezier(.22,.61,.36,1)}
-  .tile:hover .tphoto,.tile:focus-visible .tphoto{transform:scale(1.05)}
-  .event-banner .eb-photo{transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+  .tile .tphoto,.event-banner .eb-photo{transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+  .tile:hover .tphoto,.tile:focus-visible .tphoto{transform:scale(1.03)}
   .event-banner:hover .eb-photo,.event-banner:focus-within .eb-photo{transform:scale(1.05)}
     
   @media (prefers-reduced-motion: reduce){
-    .logorail{animation:none;width:auto;flex-wrap:wrap;justify-content:center}
-    .logoset{flex-wrap:wrap;justify-content:center}
-    .logoset[aria-hidden]{display:none}
-    .logoclip{margin-inline:0;-webkit-mask-image:none;mask-image:none}
     .fb-title .w,.fb-sub,.fb-cta{animation:none;opacity:1;transform:none}
     .skip,.btn,.tile,.plogo,.sidecard,.sidecard b,.slide-link,.socials a,
     nav.main a:not(.btn-donate)::after,#toast,
@@ -610,7 +606,7 @@
     .ghead-photo{order:-1;min-height:240px}
     .chapter:nth-of-type(even) .ghead-text{order:0}
     .ghead-text{padding:28px 20px}
-    .group-label .gtxt{font-size:24px}
+    .group-label .gtxt{font-size:28px}
     .tile .tphoto{width:calc(100% - 40px);margin:20px 20px 0;height:260px}
     /* tempo variations collapse in the single column */
     .chapter:nth-of-type(2) > a.tile:first-of-type .tphoto{height:300px}
@@ -629,11 +625,12 @@
     header.site .wrap{gap:16px;min-height:0}
     .logo img{height:46px}
     nav.main{gap:0 14px}
-    nav.main a{font-size:10px}
-    nav.main a.btn-donate{font-size:10px;padding:12px 20px;margin-left:0}
+    nav.main a{font-size:11px}
+    nav.main a.btn-donate{font-size:11px;padding:12px 20px;margin-left:0}
     .nav-search{display:none}
+    .to-top{right:12px;bottom:16px;width:40px;height:40px}
 
-    .wwd-intro h2,.funders h2,.partners h2,.ev-title,.wwd-title,.v-head h2{font-size:28px}
+    .wwd-intro h2,.funders h2,.partners h2,.ev-title,.wwd-title,.v-head h2{font-size:32px}
 
     .fridgebanner{padding:36px 0 52px}
     .fb-title{font-size:clamp(34px,11.5vw,44px)}
@@ -662,20 +659,19 @@
     p.gdesc{font-size:15.5px}
 
     /* small screens: scrim the whole photo, stats go single column full width */
-    .stats{padding:72px 0 80px}
-    .stats::before{width:420px;height:420px;right:-160px}
-    .statrow{gap:36px 0;max-width:none}
+    .stats{padding:72px 0}
+        .statrow{gap:36px 0;max-width:none}
     .stat{flex:0 0 100%;padding-left:24px}
-    .stat b{font-size:46px}
+    .stat b{font-size:60px}
 
     /* mobile keeps air but not the desktop's 112px caverns */
-    .wwd-intro,.events-hero,section.wwd,.stats,.funders,.partners{padding-top:68px;padding-bottom:76px}
+    .wwd-intro,.events-hero,section.wwd,.stats,.funders,.partners{padding-top:72px;padding-bottom:72px}
     .chapter{margin-top:44px}
     .chapter:first-of-type{margin-top:20px}
     .ghead-photo{min-height:200px}
     .ghead-text{padding:24px 18px}
 
-    .voices{padding:68px 0 76px}
+    .voices{padding:72px 0}
     .vcard{flex:0 0 100%}
     .v-nav{display:none}
 
@@ -966,6 +962,8 @@
 <!-- ================= 4a · FUNDERS ================= -->
 <section class="funders"><div class="wrap">
   <h2>Projects funded by</h2>
+  <!-- DRAFT copy pending STWC sign-off -->
+  <p class="fdesc">Grants from these funders keep the warehouse, the cafés and our community projects running.</p>
   <div class="funderrow">
     <div class="flogo-tile"><img src="assets/funder-rbk.jpg" alt="Royal Borough of Kingston upon Thames"></div>
     <div class="flogo-tile"><img src="assets/funder-city-bridge.jpg" alt="City Bridge Foundation"></div>
@@ -1133,7 +1131,7 @@
     </div>
     <button class="v-nav v-prev" type="button" aria-label="Previous reviews">←</button>
     <button class="v-nav v-next" type="button" aria-label="Next reviews">→</button>
-    <div class="v-dots" id="vDots" aria-hidden="true"></div>
+    <div class="v-dots" id="vDots" role="group" aria-label="Reviews pages"></div>
 
   </div>
 </section>
@@ -1189,6 +1187,10 @@
   </div>
 </div></footer>
 
+<!-- back-to-top (user 10.09). Wix: a button "pinned to screen" bottom-left,
+     linked to an anchor at the top of the page — fully native. -->
+<a class="to-top" href="#" aria-label="Back to top">↑</a>
+
 <div id="toast" role="status"></div>
 
 <script>
@@ -1212,9 +1214,16 @@
   if (srch) srch.addEventListener('submit', function(e){
     e.preventDefault(); show('→ Search results · page to be designed');
   });
+  var toTop = document.querySelector('.to-top');
+  if (toTop) toTop.addEventListener('click', function(e){
+    e.preventDefault();
+    var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top: 0, behavior: rm ? 'auto' : 'smooth'});
+  });
 })();
 
-// ---- testimonials: 3-up pager with arrows + dots (user 10.09) ----
+// ---- testimonials pager: mockup stand-in for the NATIVE Wix Slideshow ----
+// (3 slides x 3 quote columns; arrows and dots come with the Wix widget)
 (function(){
   var rail = document.getElementById('vRail'), dots = document.getElementById('vDots');
   var prev = document.querySelector('.v-prev'), next = document.querySelector('.v-next');
@@ -1277,33 +1286,7 @@
 
 </script>
 
-<script>
-/* Impact counters count up on first reveal (user 09.09). The markup ships the
-   FINAL values, so content never depends on this script: no-JS and
-   prefers-reduced-motion simply keep the numbers as written.
-   WIX: needs a counter app or Velo; the static numbers are the fallback. */
-(function(){
-  var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var els = [].slice.call(document.querySelectorAll('.stat b'));
-  if (rm || !('IntersectionObserver' in window) || !els.length) return;
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if (!en.isIntersecting) return;
-      io.unobserve(en.target);
-      var el = en.target, m = el.textContent.match(/^(\d+)([\s\S]*)$/);
-      if (!m) return;
-      var target = +m[1], suffix = m[2], t0 = null, dur = 1400;
-      el.textContent = '0' + suffix;
-      requestAnimationFrame(function step(ts){
-        if (t0 === null) t0 = ts;
-        var p = Math.min((ts - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(target * e) + suffix;
-        if (p < 1) requestAnimationFrame(step);
-      });
-    });
-  }, {threshold:.4});
-  els.forEach(function(el){ io.observe(el); });
-})();
-</script>
+<!-- Impact counters are STATIC by design: a count-up needs an App Market
+     widget or Velo; the numbers carry the weight on their own (10.09). -->
 </body>
 </html>
