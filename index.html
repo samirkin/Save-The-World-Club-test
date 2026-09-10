@@ -314,6 +314,10 @@
      object-fit:cover re-crops, so the wide tiles simply take a wider slice of the same
      photo. WIX: set the image element height to 320px and fit mode to "Fill". */
   .tile .tphoto{width:100%;height:320px;object-fit:cover;border-radius:6px;display:block}
+  /* focal-point nudge for photos whose subject sits below centre (same pattern as the
+     retired .tp-face): shifts the 320px cover window down so the crates stay whole
+     instead of being cut by the frame. WIX: set the image focal point to 50% / 55%. */
+  .tile .tphoto.tp-low{object-position:50% 55%}
   /* hover zoom (03.09.2026) — same effect as the events banner: the photo scales
      inside a FIXED clipped frame, so the tile geometry never moves. An <img> can't
      clip its own transform, hence the .tframe wrapper. Radius moves to the frame. */
@@ -341,7 +345,7 @@
   .t-blue b::after{color:var(--blue)}
   .t-green b::after{color:var(--green)}
   .tile:is(:hover,:focus-visible) b::after{transform:translateX(4px)}
-  .c5{grid-column:span 5} .c6{grid-column:span 6} .c7{grid-column:span 7}
+  .c5{grid-column:span 5} .c6{grid-column:span 6} .c7{grid-column:span 7} .c12{grid-column:span 12}
 
   /* ================= STATS ================= */
   /* on the --page ground the old --beige band was LIGHTER than the page and inverted;
@@ -657,7 +661,7 @@
 
     /* offers: one tile per row — every group tempo collapses to a single column */
     .otiles{grid-template-columns:minmax(0,1fr);gap:30px}
-    .c5,.c6,.c7{grid-column:auto}
+    .c5,.c6,.c7,.c12{grid-column:auto}
     /* the c7 aspect reset that used to live here is gone with the aspect ratios
        (uniform 320px photo height, user 09.09.2026): the single column inherits the
        same 320px, which also fixes the old 558px-tall stacked photos. */
@@ -918,6 +922,22 @@
       <h3 class="group-label">Food</h3>
       <p class="gdesc">Our Food projects turn surplus into <a class="gkey" href="#" data-page="Food — landing page (SEO key phrase link)">Affordable and Free Food in Kingston</a>, shared through cafés, community fridges and cooking together.</p>
       <div class="otiles">
+        <!-- Food: Community Fridge promoted to full-width lead tile — user 10.09.2026;
+             rows below stay 5+7; the deliberate empty half-row is gone (catering now
+             pairs with Square 1).
+             Photo = tile-fridge-lead.jpg (user photo, optimised 10.09.2026): crates of
+             fresh produce, no faces, so no consent question. Source is 1536×1024 against
+             a 1120×320 frame, so the earlier upscale/softness caveat is RESOLVED — no
+             re-export needed. Cropped with .tp-low (object-position 50% 55%) because the
+             crates sit below centre; the default centre crop clipped them.
+             The original upload community_fridge_banner1.jpg stays in assets untouched.
+             community_fridge_banner.jpg is unreferenced (retirable with its .png sibling);
+             tile-fridge.jpg is now used only as the 50px voices thumb. -->
+        <a class="tile t-green c12" href="#" data-page="Community Fridge">
+          <span class="tframe"><img class="tphoto tp-low" src="assets/tile-fridge-lead.jpg" alt="Crates of rescued fresh food ready for the community fridge"></span>
+          <b>Community Fridge</b>
+          <span class="tdesc">Fresh surplus food rescued nightly from local retailers — free for anyone who needs it.</span>
+        </a>
         <a class="tile t-green c5" href="#" data-page="Welcome Table Café">
           <span class="tframe"><img class="tphoto" src="assets/tile-wtc-food.jpg" alt="Freshly baked muffins at the Welcome Table Café"></span>
           <b>Welcome Table Café</b>
@@ -929,18 +949,12 @@
           <span class="tdesc">Our fully equipped 200&nbsp;sq&nbsp;ft kitchen hosts free cooking sessions like World on a Plate.</span>
         </a>
         <!-- Food rows unified 5+7 (mirror of Hub's 7+5) — user 09.09.2026 -->
-        <a class="tile t-green c5" href="#" data-page="Community Fridge">
-          <span class="tframe"><img class="tphoto" src="assets/tile-fridge.jpg" alt="Crates of rescued fresh food ready for the community fridge"></span>
-          <b>Community Fridge</b>
-          <span class="tdesc">Fresh surplus food rescued nightly from local retailers — free for anyone who needs it.</span>
-        </a>
-        <a class="tile t-green c7" href="#" data-page="Square 1 Café">
+        <a class="tile t-green c5" href="#" data-page="Square 1 Café">
           <span class="tframe"><img class="tphoto" src="assets/tile-square1-pies.jpg" alt="Home-baked apple tarts at Square 1 Café"></span>
           <b>Square 1 Café</b>
           <span class="tdesc">A free, welcoming Saturday café at Kingston Environment Centre, New Malden — a warm space where everyone is welcome.</span>
         </a>
-        <!-- deliberate negative space: the right 6 columns of this last row stay empty -->
-        <a class="tile t-green c6" href="#" data-page="Surplus Food Event Catering (KICS)">
+        <a class="tile t-green c7" href="#" data-page="Surplus Food Event Catering (KICS)">
           <!-- user-supplied photo (donut.avif → tile-kics-donuts.jpg) 07.09.2026 -->
           <span class="tframe"><img class="tphoto" src="assets/tile-kics-donuts.jpg" alt="Glazed mini donuts with rainbow sprinkles by KICS catering"></span>
           <b>Surplus Food Event Catering</b>
